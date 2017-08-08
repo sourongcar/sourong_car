@@ -71,7 +71,7 @@
 	</div><!-- /.modal -->
 </div>
 <script src="${path}/resources/assets/js/jquery-3.2.1.min.js"></script>
-<script src="${path}/resources/assets/js/jquery.dataTables.min.js"></script>
+<script src="${path}/resources/assets/js/jquery.dataTables.js"></script>
 <script src="${path}/resources/assets/js/bootstrap.min.js"></script>
 <script src="${path}/resources/assets/js/dataTables.bootstrap.js"></script>
 <script type="text/javascript">
@@ -94,13 +94,14 @@ $(document).ready(function(){
 						"data" : function(pdata) {
 							pdata.searchColumns={"IsreplyEqualTo":${requestScope.isRead},"UsernameLike":$('#username').val()};
 							var data = JSON.stringify(pdata);
+							console.log(pdata);
 							return data;
 						},
 						dataType : "json",
 						processData : false,
 						contentType : 'application/json;charset=UTF-8',
 						error:function(data,e){
-							alert(data.responseText);
+							alert("请求数据失败");
 						}
 					},
 				   "columns" : [{"data" :null,"width": "5%","visible":true,"orderable":false},
@@ -113,7 +114,6 @@ $(document).ready(function(){
 									<c:if test="${isRead == 1}">
 										"visible":false
 									</c:if>},
-						
 								{"data" : "createtime","width": "20%"},
 								{"data" : "changetime","visible":false}],
 					"columnDefs" : [{
@@ -139,7 +139,7 @@ $(document).ready(function(){
 							}
 						},
 						"targets" : 9,
-						"width": "10%"
+						"width": "10%",
 					}],
 					"language" : {
 						"url" : "${path}/resources/assets/language/zh_CN.txt"
@@ -149,7 +149,7 @@ $(document).ready(function(){
 				mydatatables.ajax.reload();
 			});
 			
-			$("#xxx").keydown(function(e) {
+			$("#username").keydown(function(e) {
 				if(e.keyCode==13){
 					mydatatables.ajax.reload();
 				}
@@ -177,7 +177,7 @@ $(document).ready(function(){
 				"success":function(){
 					alert("操作成功");
 				}
-			}) 
+			}); 
 		}
 		function mark(obj){
 			var data = $('#mydatatables').DataTable().row($(obj).parent().parent()).data();

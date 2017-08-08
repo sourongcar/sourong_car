@@ -24,7 +24,6 @@ public class ConsultantController {
 	
 	@RequestMapping(value="/doEdit",method=RequestMethod.POST)
 	public @ResponseBody JsonResult doEdit(ConsultantVO entity){
-		System.out.println(entity);
 		JsonResult rs=new JsonResult();
 		int status = service.update(entity);
 		rs.setStatus(status);
@@ -43,7 +42,6 @@ public class ConsultantController {
 	
 	@RequestMapping("/list")
 	public String list(Model model,String isRead){
-		System.out.println(isRead);
 		model.addAttribute("isRead", isRead);
 		return "consultant/list";//跳转到分页查询页面
 	}
