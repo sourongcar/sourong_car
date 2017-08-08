@@ -253,7 +253,6 @@
 										},
 										{
 											"render" : function(data, type, row) {
-												data=data.substring(2);
 												return '<div class="btn btn-link" onclick="showImg(\''+data+'\')"><img class="img" src="'+data+'"></div>';
 											},
 											"targets" : 5

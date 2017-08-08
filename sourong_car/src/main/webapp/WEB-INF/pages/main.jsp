@@ -158,6 +158,14 @@
 							</li>
 						</ul>
 					</li>
+					<li>
+						<a href="#" class="dropdown-toggle"> <i class="icon-desktop"></i> <span class="menu-text">产品信息管理</span><b class="arrow icon-angle-down"></b></a>
+						<ul class="submenu">
+							<li>
+								<a href="${path }/product/list.action"target="contentframe"><i class="icon-double-angle-right"></i>产品信息管理</a>
+							</li>
+						</ul>
+					</li>
 				</ul>
 				<!-- /.nav-list -->
 
@@ -215,23 +223,20 @@
 			var ifm = document.getElementById("contentframe");
 			ifm.height = document.documentElement.clientHeight;
 		}
-
 		window.onresize = function() {
 			ifmresize();
 		}
-
 		$(function() {
-			$(".nav-list li:first").addClass("active");
+			$(".nav-list li:first").addClass("active").addClass('open');
 			$(".submenu li:first").addClass("active");
 			$(".nav-list>li").click(function() {
-				$(".nav-list>li[class='active']").removeAttr("class");
+				//$(".nav-list>li[class='active']").removeAttr("class");
 			});
-
 			$(".submenu li").click(function() {
-				$(".submenu li[class='active']").removeAttr("class");
-				$(this).addClass("active");
+				$(".submenu li.active").removeClass("active");
+				$(".nav-list>li.active").removeClass("active").removeClass('open');
+				$(this).addClass("active").parents('li').addClass("active").addClass('open');
 			});
-
 		});
 	</script>
 </body>
