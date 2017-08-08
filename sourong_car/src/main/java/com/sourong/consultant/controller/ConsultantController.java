@@ -21,13 +21,6 @@ public class ConsultantController {
 	@Autowired
 	private ConsultantService service;
 	
-	@RequestMapping("/edit")
-	public String edit(Integer id,ModelMap map){
-		if(id!=null){
-			map.addAttribute("entity",service.get(id));
-		}
-		return "consultant/edit";//跳转到编辑页面
-	}
 	
 	@RequestMapping(value="/doEdit",method=RequestMethod.POST)
 	public @ResponseBody JsonResult doEdit(ConsultantVO entity){
