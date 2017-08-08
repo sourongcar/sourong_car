@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sourong.carpicture.dao.CarpictureVOMapper" >
+  <resultMap id="BaseResultMap" type="com.sourong.carpicture.domain.CarpictureVO" >
+    <id column="carpictureid" property="carpictureid" jdbcType="INTEGER" />
+    <result column="productid" property="productid" jdbcType="INTEGER" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+    <result column="islooping" property="islooping" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="changetime" property="changetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    carpictureid, productid, picture, islooping, createtime, changetime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sourong.carpicture.domain.CarpictureVOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from s_carpicture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null" >
+      <if test="offset != null" >
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null" >
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from s_carpicture
+    where carpictureid = #{carpictureid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from s_carpicture
+    where carpictureid = #{carpictureid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sourong.carpicture.domain.CarpictureVOExample" >
+    delete from s_carpicture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sourong.carpicture.domain.CarpictureVO" useGeneratedKeys="true" keyProperty="id" >
+    insert into s_carpicture (carpictureid, productid, picture, 
+      islooping, createtime, changetime
+      )
+    values (#{carpictureid,jdbcType=INTEGER}, #{productid,jdbcType=INTEGER}, #{picture,jdbcType=VARCHAR}, 
+      #{islooping,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{changetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sourong.carpicture.domain.CarpictureVO" useGeneratedKeys="true" keyProperty="id" >
+    insert into s_carpicture
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="carpictureid != null" >
+        carpictureid,
+      </if>
+      <if test="productid != null" >
+        productid,
+      </if>
+      <if test="picture != null" >
+        picture,
+      </if>
+      <if test="islooping != null" >
+        islooping,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="changetime != null" >
+        changetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="carpictureid != null" >
+        #{carpictureid,jdbcType=INTEGER},
+      </if>
+      <if test="productid != null" >
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="islooping != null" >
+        #{islooping,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changetime != null" >
+        #{changetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sourong.carpicture.domain.CarpictureVOExample" resultType="java.lang.Integer" >
+    select count(*) from s_carpicture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update s_carpicture
+    <set >
+      <if test="record.carpictureid != null" >
+        carpictureid = #{record.carpictureid,jdbcType=INTEGER},
+      </if>
+      <if test="record.productid != null" >
+        productid = #{record.productid,jdbcType=INTEGER},
+      </if>
+      <if test="record.picture != null" >
+        picture = #{record.picture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.islooping != null" >
+        islooping = #{record.islooping,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.changetime != null" >
+        changetime = #{record.changetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update s_carpicture
+    set carpictureid = #{record.carpictureid,jdbcType=INTEGER},
+      productid = #{record.productid,jdbcType=INTEGER},
+      picture = #{record.picture,jdbcType=VARCHAR},
+      islooping = #{record.islooping,jdbcType=INTEGER},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      changetime = #{record.changetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sourong.carpicture.domain.CarpictureVO" >
+    update s_carpicture
+    <set >
+      <if test="productid != null" >
+        productid = #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="islooping != null" >
+        islooping = #{islooping,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changetime != null" >
+        changetime = #{changetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where carpictureid = #{carpictureid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sourong.carpicture.domain.CarpictureVO" >
+    update s_carpicture
+    set productid = #{productid,jdbcType=INTEGER},
+      picture = #{picture,jdbcType=VARCHAR},
+      islooping = #{islooping,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      changetime = #{changetime,jdbcType=TIMESTAMP}
+    where carpictureid = #{carpictureid,jdbcType=INTEGER}
+  </update>
+</mapper>

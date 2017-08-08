@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sourong.product.dao.ProductVOMapperExt" >
+    <update id="toggledisplay" parameterType="int">
+    	update s_product
+		set isdisplay=1-isdisplay
+		where productid=#{id}
+    </update>
+</mapper>

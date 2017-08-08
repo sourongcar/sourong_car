@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sourong.configuration.dao.ConfigurationVOMapper" >
+  <resultMap id="BaseResultMap" type="com.sourong.configuration.domain.ConfigurationVO" >
+    <id column="configurationid" property="configurationid" jdbcType="INTEGER" />
+    <result column="productid" property="productid" jdbcType="INTEGER" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="mainoilconsumption" property="mainoilconsumption" jdbcType="VARCHAR" />
+    <result column="comprehensiveoilconsumption" property="comprehensiveoilconsumption" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="VARCHAR" />
+    <result column="structure" property="structure" jdbcType="VARCHAR" />
+    <result column="warranty" property="warranty" jdbcType="VARCHAR" />
+    <result column="transmissioncase" property="transmissioncase" jdbcType="VARCHAR" />
+    <result column="engine" property="engine" jdbcType="VARCHAR" />
+    <result column="driverway" property="driverway" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="changetime" property="changetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    configurationid, productid, color, mainoilconsumption, comprehensiveoilconsumption, 
+    size, structure, warranty, transmissioncase, engine, driverway, createtime, changetime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sourong.configuration.domain.ConfigurationVOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from s_configuration
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null" >
+      <if test="offset != null" >
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null" >
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from s_configuration
+    where configurationid = #{configurationid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from s_configuration
+    where configurationid = #{configurationid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sourong.configuration.domain.ConfigurationVOExample" >
+    delete from s_configuration
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sourong.configuration.domain.ConfigurationVO" useGeneratedKeys="true" keyProperty="configurationid" >
+    insert into s_configuration (configurationid, productid, color, 
+      mainoilconsumption, comprehensiveoilconsumption, 
+      size, structure, warranty, 
+      transmissioncase, engine, driverway)
+    values (#{configurationid,jdbcType=INTEGER}, #{productid,jdbcType=INTEGER}, #{color,jdbcType=VARCHAR}, 
+      #{mainoilconsumption,jdbcType=VARCHAR}, #{comprehensiveoilconsumption,jdbcType=VARCHAR}, 
+      #{size,jdbcType=VARCHAR}, #{structure,jdbcType=VARCHAR}, #{warranty,jdbcType=VARCHAR}, 
+      #{transmissioncase,jdbcType=VARCHAR}, #{engine,jdbcType=VARCHAR}, #{driverway,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sourong.configuration.domain.ConfigurationVO" useGeneratedKeys="true" keyProperty="configurationid" >
+    insert into s_configuration
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="configurationid != null" >
+        configurationid,
+      </if>
+      <if test="productid != null" >
+        productid,
+      </if>
+      <if test="color != null" >
+        color,
+      </if>
+      <if test="mainoilconsumption != null" >
+        mainoilconsumption,
+      </if>
+      <if test="comprehensiveoilconsumption != null" >
+        comprehensiveoilconsumption,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="structure != null" >
+        structure,
+      </if>
+      <if test="warranty != null" >
+        warranty,
+      </if>
+      <if test="transmissioncase != null" >
+        transmissioncase,
+      </if>
+      <if test="engine != null" >
+        engine,
+      </if>
+      <if test="driverway != null" >
+        driverway,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="configurationid != null" >
+        #{configurationid,jdbcType=INTEGER},
+      </if>
+      <if test="productid != null" >
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="color != null" >
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="mainoilconsumption != null" >
+        #{mainoilconsumption,jdbcType=VARCHAR},
+      </if>
+      <if test="comprehensiveoilconsumption != null" >
+        #{comprehensiveoilconsumption,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="structure != null" >
+        #{structure,jdbcType=VARCHAR},
+      </if>
+      <if test="warranty != null" >
+        #{warranty,jdbcType=VARCHAR},
+      </if>
+      <if test="transmissioncase != null" >
+        #{transmissioncase,jdbcType=VARCHAR},
+      </if>
+      <if test="engine != null" >
+        #{engine,jdbcType=VARCHAR},
+      </if>
+      <if test="driverway != null" >
+        #{driverway,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sourong.configuration.domain.ConfigurationVOExample" resultType="java.lang.Integer" >
+    select count(*) from s_configuration
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update s_configuration
+    <set >
+      <if test="record.configurationid != null" >
+        configurationid = #{record.configurationid,jdbcType=INTEGER},
+      </if>
+      <if test="record.productid != null" >
+        productid = #{record.productid,jdbcType=INTEGER},
+      </if>
+      <if test="record.color != null" >
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainoilconsumption != null" >
+        mainoilconsumption = #{record.mainoilconsumption,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comprehensiveoilconsumption != null" >
+        comprehensiveoilconsumption = #{record.comprehensiveoilconsumption,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size != null" >
+        size = #{record.size,jdbcType=VARCHAR},
+      </if>
+      <if test="record.structure != null" >
+        structure = #{record.structure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.warranty != null" >
+        warranty = #{record.warranty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transmissioncase != null" >
+        transmissioncase = #{record.transmissioncase,jdbcType=VARCHAR},
+      </if>
+      <if test="record.engine != null" >
+        engine = #{record.engine,jdbcType=VARCHAR},
+      </if>
+      <if test="record.driverway != null" >
+        driverway = #{record.driverway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.changetime != null" >
+        changetime = #{record.changetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update s_configuration
+    set configurationid = #{record.configurationid,jdbcType=INTEGER},
+      productid = #{record.productid,jdbcType=INTEGER},
+      color = #{record.color,jdbcType=VARCHAR},
+      mainoilconsumption = #{record.mainoilconsumption,jdbcType=VARCHAR},
+      comprehensiveoilconsumption = #{record.comprehensiveoilconsumption,jdbcType=VARCHAR},
+      size = #{record.size,jdbcType=VARCHAR},
+      structure = #{record.structure,jdbcType=VARCHAR},
+      warranty = #{record.warranty,jdbcType=VARCHAR},
+      transmissioncase = #{record.transmissioncase,jdbcType=VARCHAR},
+      engine = #{record.engine,jdbcType=VARCHAR},
+      driverway = #{record.driverway,jdbcType=VARCHAR},
+      changetime = CURRENT_TIMESTAMP
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sourong.configuration.domain.ConfigurationVO" >
+    update s_configuration
+    <set >
+      <if test="productid != null" >
+        productid = #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="color != null" >
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="mainoilconsumption != null" >
+        mainoilconsumption = #{mainoilconsumption,jdbcType=VARCHAR},
+      </if>
+      <if test="comprehensiveoilconsumption != null" >
+        comprehensiveoilconsumption = #{comprehensiveoilconsumption,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="structure != null" >
+        structure = #{structure,jdbcType=VARCHAR},
+      </if>
+      <if test="warranty != null" >
+        warranty = #{warranty,jdbcType=VARCHAR},
+      </if>
+      <if test="transmissioncase != null" >
+        transmissioncase = #{transmissioncase,jdbcType=VARCHAR},
+      </if>
+      <if test="engine != null" >
+        engine = #{engine,jdbcType=VARCHAR},
+      </if>
+      <if test="driverway != null" >
+        driverway = #{driverway,jdbcType=VARCHAR},
+      </if>
+      <if test="true" >
+        changetime = CURRENT_TIMESTAMP,
+      </if>
+    </set>
+    where configurationid = #{configurationid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sourong.configuration.domain.ConfigurationVO" >
+    update s_configuration
+    set productid = #{productid,jdbcType=INTEGER},
+      color = #{color,jdbcType=VARCHAR},
+      mainoilconsumption = #{mainoilconsumption,jdbcType=VARCHAR},
+      comprehensiveoilconsumption = #{comprehensiveoilconsumption,jdbcType=VARCHAR},
+      size = #{size,jdbcType=VARCHAR},
+      structure = #{structure,jdbcType=VARCHAR},
+      warranty = #{warranty,jdbcType=VARCHAR},
+      transmissioncase = #{transmissioncase,jdbcType=VARCHAR},
+      engine = #{engine,jdbcType=VARCHAR},
+      driverway = #{driverway,jdbcType=VARCHAR},
+      changetime = CURRENT_TIMESTAMP
+    where configurationid = #{configurationid,jdbcType=INTEGER}
+  </update>
+</mapper>
