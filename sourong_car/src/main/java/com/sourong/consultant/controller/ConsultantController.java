@@ -14,7 +14,7 @@ import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
 import com.sourong.consultant.domain.ConsultantVO;
 import com.sourong.consultant.service.ConsultantService;
-
+    
 @Controller
 @RequestMapping("/consultant")
 public class ConsultantController {
