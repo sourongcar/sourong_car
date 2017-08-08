@@ -6,17 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.base.common.domain.CurrentUser;
 import com.base.common.domain.JsonResult;
 import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
 import com.sourong.consultant.domain.ConsultantVO;
 import com.sourong.consultant.service.ConsultantService;
-
-
-
 
 @Controller
 @RequestMapping("/consultant")
@@ -32,8 +29,9 @@ public class ConsultantController {
 		return "consultant/edit";//跳转到编辑页面
 	}
 	
-	@RequestMapping("/doEdit")
+	@RequestMapping(value="/doEdit",method=RequestMethod.POST)
 	public @ResponseBody JsonResult doEdit(ConsultantVO entity){
+		System.out.println(entity);
 		JsonResult rs=new JsonResult();
 		int status = service.update(entity);
 		rs.setStatus(status);

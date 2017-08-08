@@ -71,7 +71,7 @@
 	</div><!-- /.modal -->
 </div>
 <script src="${path}/resources/assets/js/jquery-3.2.1.min.js"></script>
-<script src="${path}/resources/assets/js/jquery.dataTables.js"></script>
+<script src="${path}/resources/assets/js/jquery.dataTables.min.js"></script>
 <script src="${path}/resources/assets/js/bootstrap.min.js"></script>
 <script src="${path}/resources/assets/js/dataTables.bootstrap.js"></script>
 <script type="text/javascript">
@@ -92,7 +92,7 @@ $(document).ready(function(){
 						"url" : "${path}/consultant/rest/doSearch.action",
 						"type" : "POST",
 						"data" : function(pdata) {
-							pdata.searchColumns={"IsreplyEqualTo":${requestScope.isRead}};
+							pdata.searchColumns={"IsreplyEqualTo":${requestScope.isRead},"UsernameLike":$('#username').val()};
 							var data = JSON.stringify(pdata);
 							return data;
 						},
@@ -160,15 +160,24 @@ $(document).ready(function(){
 			$('.modal-title').text('客户回复结果');
 			$('.modal-body').html(data.replyresult);
 		};
+		var data;
 		function recordContent(obj){
-			var data = $('#mydatatables').DataTable().row($(obj).parent().parent()).data();
+			data = $('#mydatatables').DataTable().row($(obj).parent().parent()).data();
 			$('.modal-title').text('填写客户咨询记录');
-			$('.modal-body').html('<textarea rows="6" cols="50" placeholder="在此填写记录" id="textArea"></textarea>')
+			$('.modal-body').html('<textarea rows="6" cols="50" placeholder="在此填写记录" id="textArea"> ' + data.replyresult + '</textarea>')
 			$('#submit').remove();
-			$('.modal-footer').append('<button id="submit" onclick="saveRecord()" type="button" class="btn btn-primary" data-dismiss="modal">提交</button>')
+			$('.modal-footer').append('<button id="submit" onclick="saveRecord(data)" type="button" class="btn btn-primary" data-dismiss="modal">提交</button>')
 		}
-		function saveRecord(){
-			console.log($('#textArea').val());
+		function saveRecord(obj){
+			 $.ajax({
+				"url":"doEdit.action",
+				"type":"POST",
+				"data":{"consultantid":obj.consultantid,"replyresult":$('#textArea').val()},
+				"dataType":"json",
+				"success":function(){
+					alert("操作成功");
+				}
+			}) 
 		}
 		function mark(obj){
 			var data = $('#mydatatables').DataTable().row($(obj).parent().parent()).data();
@@ -184,20 +193,9 @@ $(document).ready(function(){
 					}
 				},
 				"error":function(data){
-					alert(data);
+					alert("请求失败，请稍后再试");
 				}
 			}); 
-		}
-		function del(id){
-			if(window.confirm("你确定要删除？")){
-				$.getJSON("${path }/consultant/rest/doDelete.action?id="+id,
-							function(data){
-						alert(data.msg);
-						if(data.status==1){
-							mydatatables.ajax.reload();
-						}
-				});
-			}
 		}
 	</script>
 </body>

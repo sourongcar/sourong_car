@@ -10,8 +10,6 @@ import com.sourong.consultant.domain.ConsultantVO;
 import com.sourong.consultant.domain.ConsultantVOExample;
 
 
-
-
 @Service
 public class ConsultantServiceImp implements ConsultantService {
 	@Autowired
