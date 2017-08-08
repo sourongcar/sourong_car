@@ -27,10 +27,7 @@ public class ProductVO implements Serializable {
     @NotEmpty
     private String sourongprice;
 
-    private Date productiontime;
-
     private String coverpic;
-
     @Length(max=128)
     @NotEmpty
     private String picintroduction;
@@ -38,11 +35,9 @@ public class ProductVO implements Serializable {
     @Min(0)
     @NotNull
     private Integer isdisplay;
-
     @Length(max=36)
     @NotEmpty
     private String title;
-    
     @Max(2)
     @Min(0)
     @NotNull
@@ -100,14 +95,6 @@ public class ProductVO implements Serializable {
 
     public void setSourongprice(String sourongprice) {
         this.sourongprice = sourongprice == null ? null : sourongprice.trim();
-    }
-
-    public Date getProductiontime() {
-        return productiontime;
-    }
-
-    public void setProductiontime(Date productiontime) {
-        this.productiontime = productiontime;
     }
 
     public String getCoverpic() {
@@ -178,7 +165,6 @@ public class ProductVO implements Serializable {
         sb.append(", cartype=").append(cartype);
         sb.append(", marketprice=").append(marketprice);
         sb.append(", sourongprice=").append(sourongprice);
-        sb.append(", productiontime=").append(productiontime);
         sb.append(", coverpic=").append(coverpic);
         sb.append(", picintroduction=").append(picintroduction);
         sb.append(", isdisplay=").append(isdisplay);
@@ -209,7 +195,6 @@ public class ProductVO implements Serializable {
             && (this.getCartype() == null ? other.getCartype() == null : this.getCartype().equals(other.getCartype()))
             && (this.getMarketprice() == null ? other.getMarketprice() == null : this.getMarketprice().equals(other.getMarketprice()))
             && (this.getSourongprice() == null ? other.getSourongprice() == null : this.getSourongprice().equals(other.getSourongprice()))
-            && (this.getProductiontime() == null ? other.getProductiontime() == null : this.getProductiontime().equals(other.getProductiontime()))
             && (this.getCoverpic() == null ? other.getCoverpic() == null : this.getCoverpic().equals(other.getCoverpic()))
             && (this.getPicintroduction() == null ? other.getPicintroduction() == null : this.getPicintroduction().equals(other.getPicintroduction()))
             && (this.getIsdisplay() == null ? other.getIsdisplay() == null : this.getIsdisplay().equals(other.getIsdisplay()))
@@ -229,7 +214,6 @@ public class ProductVO implements Serializable {
         result = prime * result + ((getCartype() == null) ? 0 : getCartype().hashCode());
         result = prime * result + ((getMarketprice() == null) ? 0 : getMarketprice().hashCode());
         result = prime * result + ((getSourongprice() == null) ? 0 : getSourongprice().hashCode());
-        result = prime * result + ((getProductiontime() == null) ? 0 : getProductiontime().hashCode());
         result = prime * result + ((getCoverpic() == null) ? 0 : getCoverpic().hashCode());
         result = prime * result + ((getPicintroduction() == null) ? 0 : getPicintroduction().hashCode());
         result = prime * result + ((getIsdisplay() == null) ? 0 : getIsdisplay().hashCode());

@@ -16,8 +16,6 @@ public class CollectionVO implements Serializable {
 
     private String title;
 
-    private Date productiontime;
-
     private String coverpict;
 
     private Date createtime;
@@ -74,14 +72,6 @@ public class CollectionVO implements Serializable {
         this.title = title == null ? null : title.trim();
     }
 
-    public Date getProductiontime() {
-        return productiontime;
-    }
-
-    public void setProductiontime(Date productiontime) {
-        this.productiontime = productiontime;
-    }
-
     public String getCoverpict() {
         return coverpict;
     }
@@ -118,7 +108,6 @@ public class CollectionVO implements Serializable {
         sb.append(", marketprice=").append(marketprice);
         sb.append(", sourongprice=").append(sourongprice);
         sb.append(", title=").append(title);
-        sb.append(", productiontime=").append(productiontime);
         sb.append(", coverpict=").append(coverpict);
         sb.append(", createtime=").append(createtime);
         sb.append(", changetime=").append(changetime);
@@ -145,7 +134,6 @@ public class CollectionVO implements Serializable {
             && (this.getMarketprice() == null ? other.getMarketprice() == null : this.getMarketprice().equals(other.getMarketprice()))
             && (this.getSourongprice() == null ? other.getSourongprice() == null : this.getSourongprice().equals(other.getSourongprice()))
             && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
-            && (this.getProductiontime() == null ? other.getProductiontime() == null : this.getProductiontime().equals(other.getProductiontime()))
             && (this.getCoverpict() == null ? other.getCoverpict() == null : this.getCoverpict().equals(other.getCoverpict()))
             && (this.getCreatetime() == null ? other.getCreatetime() == null : this.getCreatetime().equals(other.getCreatetime()))
             && (this.getChangetime() == null ? other.getChangetime() == null : this.getChangetime().equals(other.getChangetime()));
@@ -161,7 +149,6 @@ public class CollectionVO implements Serializable {
         result = prime * result + ((getMarketprice() == null) ? 0 : getMarketprice().hashCode());
         result = prime * result + ((getSourongprice() == null) ? 0 : getSourongprice().hashCode());
         result = prime * result + ((getTitle() == null) ? 0 : getTitle().hashCode());
-        result = prime * result + ((getProductiontime() == null) ? 0 : getProductiontime().hashCode());
         result = prime * result + ((getCoverpict() == null) ? 0 : getCoverpict().hashCode());
         result = prime * result + ((getCreatetime() == null) ? 0 : getCreatetime().hashCode());
         result = prime * result + ((getChangetime() == null) ? 0 : getChangetime().hashCode());

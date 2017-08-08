@@ -516,66 +516,6 @@ public class CollectionVOExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andProductiontimeIsNull() {
-            addCriterion("productiontime is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andProductiontimeIsNotNull() {
-            addCriterion("productiontime is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andProductiontimeEqualTo(Date value) {
-            addCriterion("productiontime =", value, "productiontime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProductiontimeNotEqualTo(Date value) {
-            addCriterion("productiontime <>", value, "productiontime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProductiontimeGreaterThan(Date value) {
-            addCriterion("productiontime >", value, "productiontime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProductiontimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("productiontime >=", value, "productiontime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProductiontimeLessThan(Date value) {
-            addCriterion("productiontime <", value, "productiontime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProductiontimeLessThanOrEqualTo(Date value) {
-            addCriterion("productiontime <=", value, "productiontime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProductiontimeIn(List<Date> values) {
-            addCriterion("productiontime in", values, "productiontime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProductiontimeNotIn(List<Date> values) {
-            addCriterion("productiontime not in", values, "productiontime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProductiontimeBetween(Date value1, Date value2) {
-            addCriterion("productiontime between", value1, value2, "productiontime");
-            return (Criteria) this;
-        }
-
-        public Criteria andProductiontimeNotBetween(Date value1, Date value2) {
-            addCriterion("productiontime not between", value1, value2, "productiontime");
-            return (Criteria) this;
-        }
-
         public Criteria andCoverpictIsNull() {
             addCriterion("coverpict is null");
             return (Criteria) this;

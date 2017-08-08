@@ -1,10 +1,9 @@
 package com.sourong.product.dao;
 
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
-
 import com.sourong.product.domain.ProductVO;
 import com.sourong.product.domain.ProductVOExample;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface ProductVOMapper {
     int countByExample(ProductVOExample example);
