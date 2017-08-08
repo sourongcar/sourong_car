@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.base.common.domain.CurrentUser;
 import com.base.common.domain.JsonResult;
 import com.base.common.util.ConfigUtil;
 import com.base.common.util.IDUtil;
@@ -24,8 +23,8 @@ import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
 import com.sourong.brand.service.BrandService;
 import com.sourong.cartype.service.CartypeService;
-import com.sourong.configuration.service.ConfigurationService;
 import com.sourong.product.domain.ProductVO;
+import com.sourong.product.domain.ProductVOExample;
 import com.sourong.product.service.ProductService;
 
 
@@ -45,13 +44,23 @@ public class ProductController {
 		map.addAttribute("brands",brandNames);
 		if(id!=null){
 			ProductVO entity=service.get(id);
-			System.out.println(entity);
-			System.out.println(brandService.names());
-			System.out.println(cartypeService.of(entity.getBrandname()));
+			Integer hit=entity.getHit();
+			if(hit!=0&&service.countOfHit(0)>=4){//首页限制4个
+				map.addAttribute("headfull",true);
+			}
+			if(hit!=1&&service.countOfHit(1)>=6){//热门限制6个
+				map.addAttribute("hotfull",true);
+			}
 			map.addAttribute("cartypes",cartypeService.of(entity.getBrandname()));
 			map.addAttribute("entity",entity);
 		}
 		else{
+			if(service.countOfHit(0)>=4){//首页限制4个
+				map.addAttribute("headfull",true);
+			}
+			if(service.countOfHit(1)>=6){//热门限制6个
+				map.addAttribute("hotfull",true);
+			}
 			map.addAttribute("cartypes",cartypeService.of(brandNames.get(0)));
 		}
 		return "product/edit";//跳转到编辑页面

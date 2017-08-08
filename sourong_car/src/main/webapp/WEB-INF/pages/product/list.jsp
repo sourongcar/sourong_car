@@ -271,7 +271,7 @@
 										},
 										{
 											"render" : function(data, type, row) {
-												return data==0?'首页轮播':data==1?'展示':data==2?'不展示':'无';
+												return data==0?'首页轮播':data==1?'热门':data==2?'普通':'无';
 											},
 											"targets" : 9
 										},

@@ -1,17 +1,11 @@
 package com.sourong.product.service;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Set;
 
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.base.common.util.ConfigUtil;
-import com.base.common.util.IDUtil;
 import com.base.common.util.SearchConditionUtils;
 import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
@@ -39,7 +33,23 @@ public class ProductServiceImp implements ProductService {
 	 */
 	@Override
 	@Transactional
-	public int add(ProductVO entity) {
+	public synchronized int add(ProductVO entity) {
+		int hit=entity.getHit();
+		if(hit<2){
+			ProductVOExample example=new ProductVOExample();
+			if(hit==0){
+				example.createCriteria().andHitEqualTo(0);
+				if(mapper.countByExample(example)>=4){
+					return 0;
+				}
+			}
+			else{
+				example.createCriteria().andHitEqualTo(1);
+				if(mapper.countByExample(example)>=6){
+					return 0;
+				}
+			}
+		}
 		mapper.insertSelective(entity);
 		ConfigurationVO c=new ConfigurationVO();
 		c.setProductid(entity.getProductid());
@@ -70,7 +80,23 @@ public class ProductServiceImp implements ProductService {
 	 * @throws IllegalStateException 
 	 */
 	@Override
-	public int update(ProductVO entity) {
+	public synchronized int update(ProductVO entity) {
+		Integer hit=entity.getHit();
+		if(hit!=null&&hit<2){
+			ProductVOExample example=new ProductVOExample();
+			if(hit==0){
+				example.createCriteria().andHitEqualTo(0).andProductidNotEqualTo(entity.getProductid());
+				if(mapper.countByExample(example)>=4){
+					return 0;
+				}
+			}
+			else{
+				example.createCriteria().andHitEqualTo(1).andProductidNotEqualTo(entity.getProductid());
+				if(mapper.countByExample(example)>=6){
+					return 0;
+				}
+			}
+		}
 		return mapper.updateByPrimaryKeySelective(entity);
 	}
 	/**
@@ -95,9 +121,17 @@ public class ProductServiceImp implements ProductService {
 		return response;
 		
 	}
+	
 	@Override
 	public int changeVisibility(int id) {
 		return mapperExt.toggledisplay(id);
+	}
+	
+	@Override
+	public int countOfHit(int hit) {
+		ProductVOExample example = new ProductVOExample();
+		example.createCriteria().andHitEqualTo(hit);
+		return mapper.countByExample(example);
 	}
 
 }

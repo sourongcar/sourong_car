@@ -1,7 +1,5 @@
 package com.sourong.product.service;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
 import com.sourong.product.domain.ProductVO;
@@ -43,4 +41,6 @@ public interface ProductService {
 	 * 改变是否展示
 	 */
 	int changeVisibility(int id);
+	
+	int countOfHit(int hit);
 }

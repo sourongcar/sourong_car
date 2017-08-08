@@ -98,10 +98,14 @@ label.fileup input[type=file] {
 					<label for="hit" class="col-sm-2 control-label">热度</label>
 					<div class="col-sm-10">
 						<select type="text" class="form-control" id="hit" name="hit">
-							<option value="0"<c:if test="${entity.hit eq 0}"> selected</c:if>>首页轮播</option>	   
-							<option value="1"<c:if test="${entity.hit eq 1}"> selected</c:if>>展示</option>	   
-							<option value="2"<c:if test="${entity.hit eq 2}"> selected</c:if>>不展示</option>	   
+							<c:if test="${headfull ne true}"><option value="0"<c:if test="${entity.hit eq 0}"> selected</c:if>>首页轮播</option></c:if>	   
+							<c:if test="${hotfull ne true}"><option value="1"<c:if test="${entity.hit eq 1}"> selected</c:if>>热门</option></c:if>
+							<option value="2"<c:if test="${entity.hit eq 2}"> selected</c:if>>普通</option>	   
 						</select>
+						<ul class="red" style="list-style: none;margin: 0px;">
+						<c:if test="${headfull eq true}"><li>首页轮播已满</li></c:if>
+						<c:if test="${hotfull eq true}"><li>热门已满</li></c:if>
+						</ul>
 					</div>
 				</div>
 				
