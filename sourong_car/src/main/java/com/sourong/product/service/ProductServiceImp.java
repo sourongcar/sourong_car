@@ -9,12 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.base.common.util.SearchConditionUtils;
 import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
+import com.sourong.carpicture.dao.CarpictureVOMapper;
+import com.sourong.carpicture.domain.CarpictureVOExample;
 import com.sourong.collection.dao.CollectionVOMapper;
 import com.sourong.collection.domain.CollectionVO;
 import com.sourong.collection.domain.CollectionVOExample;
 import com.sourong.configuration.dao.ConfigurationVOMapper;
 import com.sourong.configuration.domain.ConfigurationVO;
 import com.sourong.configuration.domain.ConfigurationVOExample;
+import com.sourong.consultant.dao.ConsultantVOMapper;
+import com.sourong.consultant.domain.ConsultantVOExample;
 import com.sourong.product.dao.ProductVOMapper;
 import com.sourong.product.dao.ProductVOMapperExt;
 import com.sourong.product.domain.ProductVO;
@@ -31,6 +35,10 @@ public class ProductServiceImp implements ProductService {
 	private ConfigurationVOMapper configMapper;
 	@Autowired
 	private CollectionVOMapper collectionMapper;
+	@Autowired
+	private CarpictureVOMapper carpictureMapper;
+	@Autowired
+	private ConsultantVOMapper consultantMapper;
 	/**
 	 * 新增
 	 * @param entity
@@ -72,9 +80,18 @@ public class ProductServiceImp implements ProductService {
 	@Override
 	@Transactional
 	public int delete(Integer id) {
-		ConfigurationVOExample example=new ConfigurationVOExample();
-		example.createCriteria().andProductidEqualTo(id);
-		configMapper.deleteByExample(example);
+		ConfigurationVOExample configExample=new ConfigurationVOExample();
+		configExample.createCriteria().andProductidEqualTo(id);
+		configMapper.deleteByExample(configExample);
+		CarpictureVOExample carpictureExample=new CarpictureVOExample();
+		carpictureExample.createCriteria().andProductidEqualTo(id);
+		carpictureMapper.deleteByExample(carpictureExample);
+		CollectionVOExample collectionExample=new CollectionVOExample();
+		collectionExample.createCriteria().andProductidEqualTo(id);
+		collectionMapper.deleteByExample(collectionExample);
+		ConsultantVOExample consultantExample=new ConsultantVOExample();
+		consultantExample.createCriteria().andProductidEqualTo(id);
+		consultantMapper.deleteByExample(consultantExample);
 		return mapper.deleteByPrimaryKey(id);
 	}
 	/**
