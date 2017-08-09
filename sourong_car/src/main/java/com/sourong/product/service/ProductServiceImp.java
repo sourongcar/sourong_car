@@ -9,6 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.base.common.util.SearchConditionUtils;
 import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
+import com.sourong.collection.dao.CollectionVOMapper;
+import com.sourong.collection.domain.CollectionVO;
+import com.sourong.collection.domain.CollectionVOExample;
 import com.sourong.configuration.dao.ConfigurationVOMapper;
 import com.sourong.configuration.domain.ConfigurationVO;
 import com.sourong.configuration.domain.ConfigurationVOExample;
@@ -26,6 +29,8 @@ public class ProductServiceImp implements ProductService {
 	private ProductVOMapperExt mapperExt;
 	@Autowired
 	private ConfigurationVOMapper configMapper;
+	@Autowired
+	private CollectionVOMapper collectionMapper;
 	/**
 	 * 新增
 	 * @param entity
@@ -37,16 +42,16 @@ public class ProductServiceImp implements ProductService {
 		int hit=entity.getHit();
 		if(hit<2){
 			ProductVOExample example=new ProductVOExample();
-			if(hit==0){
+			if(hit==0){//检查首页轮播数量
 				example.createCriteria().andHitEqualTo(0);
 				if(mapper.countByExample(example)>=4){
-					return 0;
+					return HEAD_FULL;
 				}
 			}
-			else{
+			else{//检查热门数量
 				example.createCriteria().andHitEqualTo(1);
 				if(mapper.countByExample(example)>=6){
-					return 0;
+					return HOT_FULL;
 				}
 			}
 		}
@@ -80,23 +85,32 @@ public class ProductServiceImp implements ProductService {
 	 * @throws IllegalStateException 
 	 */
 	@Override
+	@Transactional
 	public synchronized int update(ProductVO entity) {
 		Integer hit=entity.getHit();
 		if(hit!=null&&hit<2){
 			ProductVOExample example=new ProductVOExample();
-			if(hit==0){
+			if(hit==0){//检查首页轮播数量
 				example.createCriteria().andHitEqualTo(0).andProductidNotEqualTo(entity.getProductid());
 				if(mapper.countByExample(example)>=4){
-					return 0;
+					return HEAD_FULL;
 				}
 			}
-			else{
+			else{//检查热门数量
 				example.createCriteria().andHitEqualTo(1).andProductidNotEqualTo(entity.getProductid());
 				if(mapper.countByExample(example)>=6){
-					return 0;
+					return HOT_FULL;
 				}
 			}
 		}
+		CollectionVOExample collectionExample=new CollectionVOExample();
+		collectionExample.createCriteria().andProductidEqualTo(entity.getProductid());
+		CollectionVO collection=new CollectionVO();
+		collection.setCoverpict(entity.getCoverpic());
+		collection.setMarketprice(entity.getMarketprice());
+		collection.setSourongprice(entity.getSourongprice());
+		collection.setTitle(entity.getTitle());
+		collectionMapper.updateByExampleSelective(collection, collectionExample);
 		return mapper.updateByPrimaryKeySelective(entity);
 	}
 	/**

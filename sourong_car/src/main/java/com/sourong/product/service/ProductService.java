@@ -5,6 +5,8 @@ import com.base.datatables.domain.DataTablesResponse;
 import com.sourong.product.domain.ProductVO;
 
 public interface ProductService {
+	public static final int HEAD_FULL=-1;
+	public static final int HOT_FULL=-2;
     /**
 	 * 新增
 	 * @param entity
