@@ -31,18 +31,14 @@
 						<value>application/json;charset=UTF-8</value>
 					</list>
 				</property>
+				<!-- 通用json日期转换， @JsonFormat 优先级更高 -->
 				<property name="objectMapper">
 					<bean class="com.fasterxml.jackson.databind.ObjectMapper">
-						<!-- 通用json日期转换， @JsonFormat 优先级更高 -->
 						<property name="dateFormat">
 							<bean class="java.text.SimpleDateFormat">
 								<constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />
 							</bean>
 						</property>
-						<!-- 为null字段时不显示 -->
-                        <property name="serializationInclusion">
-                            <value type="com.fasterxml.jackson.annotation.JsonInclude.Include">NON_NULL</value>
-                        </property> 
 					</bean>
 				</property>
 			</bean>
@@ -68,6 +64,7 @@
 					<value>getSalt.action</value>
 					<value>doLogin.action</value>
 					<value>register.action</value>
+					<value>forMoreInformation.action</value>
 				</list>
 			</property>
 		</bean>

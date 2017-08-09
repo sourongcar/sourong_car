@@ -1,5 +1,13 @@
 package com.sourong.consultant.service;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
+
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.base.common.util.SearchConditionUtils;
@@ -63,13 +71,35 @@ public class ConsultantServiceImp implements ConsultantService {
 		return response;
 		
 	}
+	
+	
 	@Override
 	public int markRead(String consultantId) {
 		ConsultantVOExample example = new ConsultantVOExample();
 		example.createCriteria().andConsultantidEqualTo(Integer.valueOf(consultantId));
 		ConsultantVO vo = new ConsultantVO();
-		vo.setIsreply(0);
+		vo.setIsreply(1);
 		return mapper.updateByExampleSelective(vo,example);
 	}
-
+	
+	
+	@Override
+	public boolean canConsultAgain(Integer userId, Integer carId,Date date) {
+		ConsultantVOExample example = new ConsultantVOExample();
+		example.setOrderByClause("createtime desc");
+		example.setLimit(1);
+		example.createCriteria().andUseridEqualTo(userId).andProductidEqualTo(carId);
+		List<ConsultantVO> list = mapper.selectByExample(example);
+		if(list.size() > 0){
+			Instant createtime = list.get(0).getCreatetime().toInstant();
+			Duration duration = Duration.between(createtime, Instant.now());
+			if(Math.abs(duration.toDays()) > 1){
+				return true;
+			}else{			
+				return false;
+			}
+		}else{
+			return true;
+		}
+	}
 }

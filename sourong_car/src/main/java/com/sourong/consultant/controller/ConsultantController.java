@@ -1,5 +1,9 @@
 package com.sourong.consultant.controller;
 
+import java.util.Date;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,20 +16,29 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.base.common.domain.JsonResult;
 import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
+import com.sourong.collection.domain.CollectionVO;
+import com.sourong.collection.domain.CollectionVOExample;
 import com.sourong.consultant.domain.ConsultantVO;
 import com.sourong.consultant.service.ConsultantService;
+import com.sourong.product.domain.ProductVO;
+import com.sourong.product.service.ProductService;
+import com.sourong.souronguser.domain.SouronguserVO;
+import com.sourong.souronguser.service.SouronguserService;
     
 @Controller
 @RequestMapping("/consultant")
 public class ConsultantController {
 	@Autowired
-	private ConsultantService service;
-	
+	private ConsultantService  consultantService;
+	@Autowired
+	private SouronguserService userService;
+	@Autowired
+	private ProductService productServce;
 	
 	@RequestMapping(value="/doEdit",method=RequestMethod.POST)
 	public @ResponseBody JsonResult doEdit(ConsultantVO entity){
 		JsonResult rs=new JsonResult();
-		int status = service.update(entity);
+		int status = consultantService.update(entity);
 		rs.setStatus(status);
 		rs.setMsg("添加成功");
 		return rs;
@@ -34,7 +47,7 @@ public class ConsultantController {
 	@RequestMapping("/rest/doDelete")
 	public @ResponseBody JsonResult doDelete(Integer id){
 		JsonResult rs=new JsonResult();
-		service.delete(id);
+		consultantService.delete(id);
 		rs.setStatus(1);
 		rs.setMsg("删除成功！");
 		return rs;
@@ -54,15 +67,56 @@ public class ConsultantController {
 	@RequestMapping("/rest/doSearch")
 	public @ResponseBody DataTablesResponse<ConsultantVO> pageSearch(
 			@RequestBody DataTablesRequest request) throws Throwable{
-		return service.listByPage(request);
+		return consultantService.listByPage(request);
 	}
 	
 	@RequestMapping("/markRead")
 	public @ResponseBody JsonResult markRead(@RequestParam String consultantId){
-		int status = service.markRead(consultantId);
+		int status = consultantService.markRead(consultantId);
 		JsonResult result = new JsonResult();
 		result.setMsg("标记成功");
 		result.setStatus(status);
 		return result;
 	}
+	
+	/**
+	 * ==================================================
+	 * |												|
+	 * |												|
+	 * |					前端交互						|	
+	 * |												|
+	 * |												|
+	 * ==================================================
+	 */
+	
+	@RequestMapping(value="/forMoreInformation",method=RequestMethod.POST)
+	public @ResponseBody JsonResult forMoreInformation(@RequestParam(required=true) Integer carId,
+			Integer userId,HttpServletResponse response){
+		response.setHeader("Access-Control-Allow-Origin", "http://localhost:63342");
+		JsonResult result = new JsonResult();
+		if("".equals(userId) || userId == null){
+			result.setMsg("当前没有用户登陆");
+			result.setStatus(0);
+		}else{
+			ProductVO productVO = productServce.get(carId);
+			if(consultantService.canConsultAgain(userId, carId,new Date())){
+				SouronguserVO souronguserVO = userService.get(userId);
+				ConsultantVO consultantVO = new ConsultantVO();
+				consultantVO.setUserid(userId);
+				consultantVO.setUserphone(souronguserVO.getUserphone());
+				consultantVO.setUsername(souronguserVO.getUsername());
+				consultantVO.setProductid(carId);
+				consultantVO.setIsreply(0);
+				consultantVO.setChangetime(new Date());
+				consultantService.add(consultantVO);
+				result.setMsg("当前用户：" + souronguserVO.getUsername() + "咨询登记成功");
+				result.setStatus(1);
+			}else{
+				result.setMsg("您已于今日咨询" + productVO.getTitle() + ",请勿频繁操作");
+				result.setStatus(-1);
+			}
+		}
+		return result;
+	}	
+	
 }
