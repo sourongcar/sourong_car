@@ -253,7 +253,7 @@
 										},
 										{
 											"render" : function(data, type, row) {
-												return '<div class="btn btn-link" onclick="showImg(\''+data+'\')"><img class="img" src="'+data+'"></div>';
+												return '<div class="btn btn-link" onclick="showImg(\''+(data&&('/images/'+data))+'\')"><img class="img" src="'+(data&&('/images/'+data))+'"></div>';
 											},
 											"targets" : 5
 										},
@@ -277,10 +277,10 @@
 										},
 										{
 											"render" : function(data, type, row) {
-												return '<a href="${path }/product/edit.action?id='+data+'" class="tooltip-success" data-rel="tooltip" title="修改"><span class="green"><i class="icon-edit bigger-120"></i>修改</span></a>&nbsp;'
-												+'<a href="javascript:void(0)" onclick="del(\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="删除"><span class="red"><i class="icon-trash bigger-120"></i>删除</span></a>&nbsp;'
-												+'<a href="javascript:void(0)" onclick="toggleshow(this,\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="是否展示"><span class="blue"><i class="icon-eye-'+(row.isdisplay?'open':'close')+' bigger-120"></i><span>'+(row.isdisplay?'取消展示':'设为展示')+'</span></span></a>&nbsp;'//
-												+'<a href="${path}/carpicture/list.action" class="tooltip-error" data-rel="tooltip" title="展示图片"><span class="grey"><i class="icon-picture bigger-120"></i>展示图片</span></a>';
+												return '<a href="${path }/product/edit.action?id='+data+'" class="tooltip-success" data-rel="tooltip" title="修改"><span class="green"><i class="icon-edit bigger-120"></i></span></a>&nbsp;'
+												+'<a href="javascript:void(0)" onclick="del(\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="删除"><span class="red"><i class="icon-trash bigger-120"></i></span></a>&nbsp;'
+												+'<a href="javascript:void(0)" onclick="toggleshow(this,\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="是否展示"><span class="blue"><i class="icon-eye-'+(row.isdisplay?'open':'close')+' bigger-120"></i></span></a>&nbsp;'//
+												+'<a href="${path}/carpicture/list.action" class="tooltip-error" data-rel="tooltip" title="展示图片"><span class="grey"><i class="icon-picture bigger-120"></i></span></a>';
 											},
 											"targets" : 10
 										} ],
@@ -379,7 +379,6 @@
 						}else{
 							i.removeClass("icon-eye-close").addClass("icon-eye-open");
 						}
-						span.text(span.text()=="设为展示"?"取消展示":"设为展示");
 					}
 				});
 		}

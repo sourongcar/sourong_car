@@ -116,7 +116,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.sourong.product.domain.ProductVO" useGeneratedKeys="true" keyProperty="id" >
+  <insert id="insert" parameterType="com.sourong.product.domain.ProductVO" useGeneratedKeys="true" keyProperty="productid" >
     insert into s_product (productid, configurationid, brandname, 
       cartype, marketprice, sourongprice, 
       coverpic, picintroduction, isdisplay, 
@@ -128,7 +128,7 @@
       #{title,jdbcType=VARCHAR}, #{hit,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
       #{changetime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.sourong.product.domain.ProductVO" useGeneratedKeys="true" keyProperty="id" >
+  <insert id="insertSelective" parameterType="com.sourong.product.domain.ProductVO" useGeneratedKeys="true" keyProperty="productid" >
     insert into s_product
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="productid != null" >
