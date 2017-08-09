@@ -43,13 +43,20 @@ public class ProductController {
 		if (id != null) {
 			ProductVO entity = service.get(id);
 			Integer hit = entity.getHit();
+			if(hit==null){
+				hit=-1;
+			}
 			if (hit != 0 && service.countOfHit(0) >= 4) {// 首页限制4个
 				map.addAttribute("headfull", true);
 			}
 			if (hit != 1 && service.countOfHit(1) >= 6) {// 热门限制6个
 				map.addAttribute("hotfull", true);
 			}
-			map.addAttribute("cartypes", cartypeService.of(entity.getBrandname()));
+			String brandname=entity.getBrandname();
+			if(!brandNames.contains(brandname)){
+				brandname=brandNames.get(0);
+			}
+			map.addAttribute("cartypes", cartypeService.of(brandname));
 			map.addAttribute("entity", entity);
 		} else {
 			if (service.countOfHit(0) >= 4) {// 首页限制4个
@@ -82,7 +89,7 @@ public class ProductController {
 				default:
 					throw new IllegalArgumentException("图片类型错误");
 				}
-				String desName = IDUtil.uuid() + '.' + FilenameUtils.getExtension(cover.getOriginalFilename());
+				String desName = "product/" + IDUtil.uuid() + '.' + FilenameUtils.getExtension(cover.getOriginalFilename());
 				cover.transferTo(new File(ConfigUtil.getValue("saveImage") + desName));
 				entity.setCoverpic(desName);
 			}
