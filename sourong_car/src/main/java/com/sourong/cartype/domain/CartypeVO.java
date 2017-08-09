@@ -6,8 +6,6 @@ import java.util.Date;
 public class CartypeVO implements Serializable {
     private Integer cartypeid;
 
-    private Integer sBBrandid;
-
     private Integer brandid;
 
     private String cartypename;
@@ -17,8 +15,9 @@ public class CartypeVO implements Serializable {
     private Date createtime;
 
     private Date changetime;
+    
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
     public Integer getCartypeid() {
         return cartypeid;
@@ -26,14 +25,6 @@ public class CartypeVO implements Serializable {
 
     public void setCartypeid(Integer cartypeid) {
         this.cartypeid = cartypeid;
-    }
-
-    public Integer getsBBrandid() {
-        return sBBrandid;
-    }
-
-    public void setsBBrandid(Integer sBBrandid) {
-        this.sBBrandid = sBBrandid;
     }
 
     public Integer getBrandid() {
@@ -83,7 +74,6 @@ public class CartypeVO implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", cartypeid=").append(cartypeid);
-        sb.append(", sBBrandid=").append(sBBrandid);
         sb.append(", brandid=").append(brandid);
         sb.append(", cartypename=").append(cartypename);
         sb.append(", orderby=").append(orderby);
@@ -107,7 +97,6 @@ public class CartypeVO implements Serializable {
         }
         CartypeVO other = (CartypeVO) that;
         return (this.getCartypeid() == null ? other.getCartypeid() == null : this.getCartypeid().equals(other.getCartypeid()))
-            && (this.getsBBrandid() == null ? other.getsBBrandid() == null : this.getsBBrandid().equals(other.getsBBrandid()))
             && (this.getBrandid() == null ? other.getBrandid() == null : this.getBrandid().equals(other.getBrandid()))
             && (this.getCartypename() == null ? other.getCartypename() == null : this.getCartypename().equals(other.getCartypename()))
             && (this.getOrderby() == null ? other.getOrderby() == null : this.getOrderby().equals(other.getOrderby()))
@@ -120,7 +109,6 @@ public class CartypeVO implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getCartypeid() == null) ? 0 : getCartypeid().hashCode());
-        result = prime * result + ((getsBBrandid() == null) ? 0 : getsBBrandid().hashCode());
         result = prime * result + ((getBrandid() == null) ? 0 : getBrandid().hashCode());
         result = prime * result + ((getCartypename() == null) ? 0 : getCartypename().hashCode());
         result = prime * result + ((getOrderby() == null) ? 0 : getOrderby().hashCode());

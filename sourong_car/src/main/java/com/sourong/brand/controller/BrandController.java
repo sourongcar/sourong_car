@@ -14,6 +14,7 @@ import java.util.UUID;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -71,11 +72,11 @@ public class BrandController {
 			BrandVO br=service.get(brandid);
 			String picname=br.getBrandpic();
 			if(picname!=null){
-				new File("F:/client/images/"+picname).delete();//删除原先的图片
+				new File("E:/image/"+picname).delete();//删除原先的图片
 			}			
 			String orgname=file.getOriginalFilename();
 			String savename=UUID.randomUUID()+orgname.substring(orgname.lastIndexOf("."));//保存图片的名字唯一
-			String savepath="F:/client/images/"+savename;
+			String savepath="E:/image/"+savename;
 			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(savepath));//图片存放位置
 			file.transferTo(new File(savepath));
              brandVO.setBrandpic(savename);
@@ -85,7 +86,7 @@ public class BrandController {
 			brandVO.setChangetime(new Date());//最后修改时间（取当前系统时间）
 			String orgname=file.getOriginalFilename();
 			String savename=UUID.randomUUID()+orgname.substring(orgname.lastIndexOf("."));//保存图片的名字唯一
-			String savepath="F:/client/images/"+savename;
+			String savepath="E:/image/"+savename;
 			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(savepath));//图片存放位置
 			file.transferTo(new File(savepath));
              brandVO.setBrandpic(savename);
@@ -95,13 +96,21 @@ public class BrandController {
 		return "redirect:/brand/list.action";//跳转到列表页面
 	}
 	
+	/* 删除品牌
+	 * 同时删除文件夹下的图片
+	 * 和将其对应的所有车型删除*/
 	@RequestMapping("/rest/doDelete")
-	public @ResponseBody JsonResult doDelete(Integer brandid){
+	public @ResponseBody JsonResult doDelete(Integer brandid) throws Throwable{
 		JsonResult rs=new JsonResult();
 		BrandVO brandVO=service.get(brandid);
 		String picname=brandVO.getBrandpic();	
-		new File("F:/client/images/"+picname).delete();//删除文件夹下的图片
+		new File("E:/image/"+picname).delete();
 		service.delete(brandid);
+		List<CartypeVO> list=carservice.getByBrandid(brandid);
+		for(CartypeVO cartype:list){
+			int id=cartype.getBrandid();
+			carservice.deleteType(id);
+		}
 		rs.setStatus(1);
 		rs.setMsg("删除成功！");
 		return rs;
@@ -131,12 +140,19 @@ public class BrandController {
 	}
 	
 	/*
-	 * 通过品牌编号brandid查找查找相应的车型
+	 * 通过品牌编号brandid查找查找品牌和相应的车型
 	 * */
 	@RequestMapping("/getCartype")
 	public String getCartype(Integer brandid,ModelMap map){
-		map.addAttribute("brandid", brandid);
+		BrandVO brandVO=service.get(brandid);
+		map.addAttribute("brandVO", brandVO);
 		return "brand/cartypelist";//跳转到相应的车型分页查询页面
 	}
 	
+	
+	@RequestMapping("/weblist")
+	public @ResponseBody List<BrandVO> getlist(HttpServletResponse response) throws Throwable{
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		return service.list();
+	}
 }

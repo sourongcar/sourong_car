@@ -28,7 +28,7 @@
 					<thead>
 						<tr>
 						    
-							<th>编号</th>
+							<!-- <th>编号</th> -->
 							<th>品牌编号</th>
 							<th>车型名</th>
 							<th>操作</th>
@@ -58,8 +58,15 @@
 			<div class="form-group">
 				<label for="brandid" class="col-sm-2 control-label">品牌编号</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="brandid" name="brandid" value="${cartypeVO.brandid}"
-						   placeholder="请输入品牌编号" required="请输入品牌编号">
+					<input type="text" class="form-control" id="brandid" name="brandid" value="${brandVO.brandid}"
+						   placeholder="请输入品牌编号" readonly="品牌编号">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="brandid" class="col-sm-2 control-label">品牌名</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="brandname" name="brandid" value="${brandVO.brandname}"
+						   placeholder="请输入品牌名" readonly="品牌名">
 				</div>
 			</div>
 			<div class="form-group">
@@ -106,7 +113,7 @@
 									"data" : function(pdata) {
 										
 										pdata.searchColumns={
-												"BrandidEqualTo":${brandid},
+												"BrandidEqualTo":${brandVO.brandid},
 												"CartypenameLike":$("#cartypename").val()
 										}
 										var data = JSON.stringify(pdata);
@@ -122,9 +129,9 @@
 								}, 
 								  "columns" : [ 
 							     
-								{
+								/* {
 									"data" : "cartypeid"
-								},
+								}, */
 								{
 									"data" : "brandid"
 								},
@@ -145,7 +152,7 @@
 												return '<p:permission privilege="com.sourong.cartype.controller.CartypeController:doEdit"><a href="${path }/cartype/edit.action?cartypeid='+row.cartypeid+'" class="tooltip-success" data-rel="tooltip" title="修改"><span class="green"><i class="icon-edit bigger-120"></i></a></p:permission>&nbsp;&nbsp;'
 												+'<p:permission privilege="com.sourong.cartype.controller.CartypeController:doDelete"><a href="javascript:void(0)" onclick="del(\''+row.cartypeid+'\')" class="tooltip-error" data-rel="tooltip" title="删除"><span class="red"><i class="icon-trash bigger-120"></i></a></p:permission>';
 											},
-											"targets" : 3
+											"targets" : 2
 										} ],
 
 								"language" : {

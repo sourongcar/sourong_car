@@ -48,4 +48,6 @@ public interface CartypeService {
 	
 	List<String> of(String brandName);
 	
+	/*根据品牌id删除*/
+	public int deleteType(Integer brandid)throws Throwable;
 }

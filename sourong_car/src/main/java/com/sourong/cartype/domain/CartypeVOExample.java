@@ -186,66 +186,6 @@ public class CartypeVOExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andSBBrandidIsNull() {
-            addCriterion("S_b_brandid is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSBBrandidIsNotNull() {
-            addCriterion("S_b_brandid is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSBBrandidEqualTo(Integer value) {
-            addCriterion("S_b_brandid =", value, "sBBrandid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSBBrandidNotEqualTo(Integer value) {
-            addCriterion("S_b_brandid <>", value, "sBBrandid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSBBrandidGreaterThan(Integer value) {
-            addCriterion("S_b_brandid >", value, "sBBrandid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSBBrandidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("S_b_brandid >=", value, "sBBrandid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSBBrandidLessThan(Integer value) {
-            addCriterion("S_b_brandid <", value, "sBBrandid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSBBrandidLessThanOrEqualTo(Integer value) {
-            addCriterion("S_b_brandid <=", value, "sBBrandid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSBBrandidIn(List<Integer> values) {
-            addCriterion("S_b_brandid in", values, "sBBrandid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSBBrandidNotIn(List<Integer> values) {
-            addCriterion("S_b_brandid not in", values, "sBBrandid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSBBrandidBetween(Integer value1, Integer value2) {
-            addCriterion("S_b_brandid between", value1, value2, "sBBrandid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSBBrandidNotBetween(Integer value1, Integer value2) {
-            addCriterion("S_b_brandid not between", value1, value2, "sBBrandid");
-            return (Criteria) this;
-        }
-
         public Criteria andBrandidIsNull() {
             addCriterion("brandid is null");
             return (Criteria) this;

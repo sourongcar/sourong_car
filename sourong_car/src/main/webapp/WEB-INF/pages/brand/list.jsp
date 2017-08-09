@@ -60,8 +60,8 @@
 			</div>
 			<div class="form-group">
 				<label for="brandpic" class="col-sm-2 control-label">品牌图标</label>
-				<div class="col-sm-10">
-					<input type="file" name="pic" id="pic" onchange="previewFile()"/> 
+				<div class="col-sm-10" >
+					<input type="file" name="pic" id="pic" onchange="previewFile()" /> 
 				</div>
 				<div class="col-sm-10" style="margin-top: 30px">
 					<img src=""  id="modelimg" style="max-width: 300px;max-height: 500px"  alt="Image preview..." />   		
@@ -179,7 +179,7 @@
 											"render" : function(data, type, row) {
 												return '<p:permission privilege="com.sourong.brand.controller.BrandController:doEdit"><a href="${path }/brand/edit.action?brandid='+row.brandid+'" class="tooltip-success" data-rel="tooltip" title="修改"><span class="green"><i class="icon-edit bigger-150"></i></a></p:permission>&nbsp;&nbsp&nbsp;&nbsp'
 												+'<p:permission privilege="com.sourong.brand.controller.BrandController:doDelete"><a href="javascript:void(0)" onclick="del(\''+row.brandid+'\')" class="tooltip-error" data-rel="tooltip" title="删除"><span class="red"><i class="icon-trash bigger-150"></i></a></p:permission>&nbsp;&nbsp&nbsp;&nbsp'
-												+'<p:permission privilege="com.sourong.brand.controller.BrandController:getCartype"><a href="${path }/brand/getCartype.action?brandid='+row.brandid+'" class="tooltip-success" data-rel="tooltip" title="修改"><span class="green">more</a></p:permission>&nbsp;&nbsp&nbsp;&nbsp;';
+												+'<p:permission privilege="com.sourong.brand.controller.BrandController:getCartype"><a href="${path }/brand/getCartype.action?brandid='+row.brandid+'" class="tooltip-success" data-rel="tooltip" title="车型"><span class="green">more</a></p:permission>&nbsp;&nbsp&nbsp;&nbsp;';
 											},
 											"targets" : 3
 										},

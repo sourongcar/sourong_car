@@ -76,6 +76,12 @@ public class BrandServiceImp implements BrandService {
 	public List<String> names() {
 		return mapperExt.names();
 	}
+	@Override
+	public List<BrandVO> list() throws Throwable {
+		BrandVOExample example=new BrandVOExample();
+		example.createCriteria();
+		return mapper.selectByExample(example);
+	}
 	
 	
 

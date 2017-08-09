@@ -3,7 +3,6 @@
 <mapper namespace="com.sourong.cartype.dao.CartypeVOMapper" >
   <resultMap id="BaseResultMap" type="com.sourong.cartype.domain.CartypeVO" >
     <id column="cartypeid" property="cartypeid" jdbcType="INTEGER" />
-    <result column="S_b_brandid" property="sBBrandid" jdbcType="INTEGER" />
     <result column="brandid" property="brandid" jdbcType="INTEGER" />
     <result column="cartypename" property="cartypename" jdbcType="VARCHAR" />
     <result column="orderby" property="orderby" jdbcType="INTEGER" />
@@ -69,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    cartypeid, S_b_brandid, brandid, cartypename, orderby, createtime, changetime
+    cartypeid, brandid, cartypename, orderby, createtime, changetime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sourong.cartype.domain.CartypeVOExample" >
     select
@@ -110,21 +109,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.sourong.cartype.domain.CartypeVO" useGeneratedKeys="true" keyProperty="id" >
-    insert into s_cartype (cartypeid, S_b_brandid, brandid, 
-      cartypename, orderby, createtime, 
-      changetime)
-    values (#{cartypeid,jdbcType=INTEGER}, #{sBBrandid,jdbcType=INTEGER}, #{brandid,jdbcType=INTEGER}, 
-      #{cartypename,jdbcType=VARCHAR}, #{orderby,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{changetime,jdbcType=TIMESTAMP})
+    insert into s_cartype (cartypeid, brandid, cartypename, 
+      orderby, createtime, changetime
+      )
+    values (#{cartypeid,jdbcType=INTEGER}, #{brandid,jdbcType=INTEGER}, #{cartypename,jdbcType=VARCHAR}, 
+      #{orderby,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{changetime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.sourong.cartype.domain.CartypeVO" useGeneratedKeys="true" keyProperty="id" >
     insert into s_cartype
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="cartypeid != null" >
         cartypeid,
-      </if>
-      <if test="sBBrandid != null" >
-        S_b_brandid,
       </if>
       <if test="brandid != null" >
         brandid,
@@ -145,9 +141,6 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="cartypeid != null" >
         #{cartypeid,jdbcType=INTEGER},
-      </if>
-      <if test="sBBrandid != null" >
-        #{sBBrandid,jdbcType=INTEGER},
       </if>
       <if test="brandid != null" >
         #{brandid,jdbcType=INTEGER},
@@ -178,9 +171,6 @@
       <if test="record.cartypeid != null" >
         cartypeid = #{record.cartypeid,jdbcType=INTEGER},
       </if>
-      <if test="record.sBBrandid != null" >
-        S_b_brandid = #{record.sBBrandid,jdbcType=INTEGER},
-      </if>
       <if test="record.brandid != null" >
         brandid = #{record.brandid,jdbcType=INTEGER},
       </if>
@@ -204,7 +194,6 @@
   <update id="updateByExample" parameterType="map" >
     update s_cartype
     set cartypeid = #{record.cartypeid,jdbcType=INTEGER},
-      S_b_brandid = #{record.sBBrandid,jdbcType=INTEGER},
       brandid = #{record.brandid,jdbcType=INTEGER},
       cartypename = #{record.cartypename,jdbcType=VARCHAR},
       orderby = #{record.orderby,jdbcType=INTEGER},
@@ -217,9 +206,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.sourong.cartype.domain.CartypeVO" >
     update s_cartype
     <set >
-      <if test="sBBrandid != null" >
-        S_b_brandid = #{sBBrandid,jdbcType=INTEGER},
-      </if>
       <if test="brandid != null" >
         brandid = #{brandid,jdbcType=INTEGER},
       </if>
@@ -240,8 +226,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.sourong.cartype.domain.CartypeVO" >
     update s_cartype
-    set S_b_brandid = #{sBBrandid,jdbcType=INTEGER},
-      brandid = #{brandid,jdbcType=INTEGER},
+    set brandid = #{brandid,jdbcType=INTEGER},
       cartypename = #{cartypename,jdbcType=VARCHAR},
       orderby = #{orderby,jdbcType=INTEGER},
       createtime = #{createtime,jdbcType=TIMESTAMP},
