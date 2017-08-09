@@ -6,4 +6,8 @@
 		set isdisplay=1-isdisplay
 		where productid=#{id}
     </update>
+    <select id="listLoopingCar" resultType="com.sourong.product.domain.ProductVO">
+    	SELECT productid,marketprice,sourongprice,coverpic,picintroduction
+		FROM s_product WHERE hit=0
+    </select>
 </mapper>

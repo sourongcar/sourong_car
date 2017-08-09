@@ -1,5 +1,7 @@
 package com.sourong.product.service;
 
+import java.util.List;
+
 import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
 import com.sourong.product.domain.ProductVO;
@@ -45,4 +47,9 @@ public interface ProductService {
 	int changeVisibility(int id);
 	
 	int countOfHit(int hit);
+	
+	/**
+	 * 首页轮播车信息
+	 */
+	List<ProductVO> listLoopingCar();
 }

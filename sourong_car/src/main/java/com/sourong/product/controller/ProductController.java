@@ -143,5 +143,9 @@ public class ProductController {
 		}
 		return "fail";
 	}
-
+	
+	@RequestMapping("/rest/loopingcar")
+	public @ResponseBody List<ProductVO> listLoopingCar() {
+		return service.listLoopingCar();
+	}
 }

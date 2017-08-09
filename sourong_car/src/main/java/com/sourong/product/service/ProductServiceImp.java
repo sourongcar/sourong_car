@@ -194,4 +194,9 @@ public class ProductServiceImp implements ProductService {
 		return mapper.countByExample(example);
 	}
 
+	@Override
+	public List<ProductVO> listLoopingCar() {
+		return mapperExt.listLoopingCar();
+	}
+
 }
