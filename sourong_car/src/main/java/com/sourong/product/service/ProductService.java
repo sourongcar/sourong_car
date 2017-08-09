@@ -51,5 +51,9 @@ public interface ProductService {
 	/**
 	 * 首页轮播车信息
 	 */
-	List<ProductVO> listLoopingCar();
+	List<ProductVO> listLooping();
+	/**
+	 * 首页展示车信息
+	 */
+	List<ProductVO> listDisplay(int displayedCount);
 }

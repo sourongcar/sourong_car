@@ -144,8 +144,13 @@ public class ProductController {
 		return "fail";
 	}
 	
-	@RequestMapping("/rest/loopingcar")
+	@RequestMapping("/rest/looping")
 	public @ResponseBody List<ProductVO> listLoopingCar() {
-		return service.listLoopingCar();
+		return service.listLooping();
+	}
+	
+	@RequestMapping("/rest/display")
+	public @ResponseBody List<ProductVO> listDisplay(int offset) {
+		return service.listDisplay(offset);
 	}
 }

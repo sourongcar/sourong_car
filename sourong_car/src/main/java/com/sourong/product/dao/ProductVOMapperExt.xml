@@ -6,8 +6,15 @@
 		set isdisplay=1-isdisplay
 		where productid=#{id}
     </update>
-    <select id="listLoopingCar" resultType="com.sourong.product.domain.ProductVO">
+    <select id="listLooping" resultType="com.sourong.product.domain.ProductVO">
     	SELECT productid,marketprice,sourongprice,coverpic,picintroduction
-		FROM s_product WHERE hit=0
+		FROM s_product WHERE hit=0 AND isdisplay=0
+    </select>
+    <select id="listDisplay" resultType="com.sourong.product.domain.ProductVO">
+    	SELECT productid,marketprice,sourongprice,coverpic
+		FROM s_product WHERE
+		hit &gt; 0
+		AND isdisplay=0
+		ORDER BY hit ASC,productid DESC limit ${param1},${param2}
     </select>
 </mapper>

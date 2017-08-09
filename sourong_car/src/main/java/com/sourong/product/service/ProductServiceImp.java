@@ -195,8 +195,15 @@ public class ProductServiceImp implements ProductService {
 	}
 
 	@Override
-	public List<ProductVO> listLoopingCar() {
-		return mapperExt.listLoopingCar();
+	public List<ProductVO> listLooping() {
+		return mapperExt.listLooping();
+	}
+
+	@Override
+	public List<ProductVO> listDisplay(int displayedCount) {
+		int offset=displayedCount-6,limit=displayedCount>0?3:6;
+		offset=offset<0?0:offset;
+		return mapperExt.listDisplay(offset,limit);
 	}
 
 }
