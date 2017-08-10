@@ -1,11 +1,11 @@
-package com.sourong.cartype.domain;
+package com.sourong.article.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CartypeVOExample implements Serializable {
+public class ArticleVOExample implements Serializable {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -16,7 +16,7 @@ public class CartypeVOExample implements Serializable {
 
     private Integer offset;
 
-    public CartypeVOExample() {
+    public ArticleVOExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -126,253 +126,263 @@ public class CartypeVOExample implements Serializable {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andCartypeidIsNull() {
-            addCriterion("cartypeid is null");
+        public Criteria andArticleidIsNull() {
+            addCriterion("articleid is null");
             return (Criteria) this;
         }
 
-        public Criteria andCartypeidIsNotNull() {
-            addCriterion("cartypeid is not null");
+        public Criteria andArticleidIsNotNull() {
+            addCriterion("articleid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCartypeidEqualTo(Integer value) {
-            addCriterion("cartypeid =", value, "cartypeid");
+        public Criteria andArticleidEqualTo(Integer value) {
+            addCriterion("articleid =", value, "articleid");
             return (Criteria) this;
         }
 
-        public Criteria andCartypeidNotEqualTo(Integer value) {
-            addCriterion("cartypeid <>", value, "cartypeid");
+        public Criteria andArticleidNotEqualTo(Integer value) {
+            addCriterion("articleid <>", value, "articleid");
             return (Criteria) this;
         }
 
-        public Criteria andCartypeidGreaterThan(Integer value) {
-            addCriterion("cartypeid >", value, "cartypeid");
+        public Criteria andArticleidGreaterThan(Integer value) {
+            addCriterion("articleid >", value, "articleid");
             return (Criteria) this;
         }
 
-        public Criteria andCartypeidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("cartypeid >=", value, "cartypeid");
+        public Criteria andArticleidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("articleid >=", value, "articleid");
             return (Criteria) this;
         }
 
-        public Criteria andCartypeidLessThan(Integer value) {
-            addCriterion("cartypeid <", value, "cartypeid");
+        public Criteria andArticleidLessThan(Integer value) {
+            addCriterion("articleid <", value, "articleid");
             return (Criteria) this;
         }
 
-        public Criteria andCartypeidLessThanOrEqualTo(Integer value) {
-            addCriterion("cartypeid <=", value, "cartypeid");
+        public Criteria andArticleidLessThanOrEqualTo(Integer value) {
+            addCriterion("articleid <=", value, "articleid");
             return (Criteria) this;
         }
 
-        public Criteria andCartypeidIn(List<Integer> values) {
-            addCriterion("cartypeid in", values, "cartypeid");
+        public Criteria andArticleidIn(List<Integer> values) {
+            addCriterion("articleid in", values, "articleid");
             return (Criteria) this;
         }
 
-        public Criteria andCartypeidNotIn(List<Integer> values) {
-            addCriterion("cartypeid not in", values, "cartypeid");
+        public Criteria andArticleidNotIn(List<Integer> values) {
+            addCriterion("articleid not in", values, "articleid");
             return (Criteria) this;
         }
 
-        public Criteria andCartypeidBetween(Integer value1, Integer value2) {
-            addCriterion("cartypeid between", value1, value2, "cartypeid");
+        public Criteria andArticleidBetween(Integer value1, Integer value2) {
+            addCriterion("articleid between", value1, value2, "articleid");
             return (Criteria) this;
         }
 
-        public Criteria andCartypeidNotBetween(Integer value1, Integer value2) {
-            addCriterion("cartypeid not between", value1, value2, "cartypeid");
+        public Criteria andArticleidNotBetween(Integer value1, Integer value2) {
+            addCriterion("articleid not between", value1, value2, "articleid");
             return (Criteria) this;
         }
 
-        public Criteria andBrandidIsNull() {
-            addCriterion("brandid is null");
+        public Criteria andTitleIsNull() {
+            addCriterion("title is null");
             return (Criteria) this;
         }
 
-        public Criteria andBrandidIsNotNull() {
-            addCriterion("brandid is not null");
+        public Criteria andTitleIsNotNull() {
+            addCriterion("title is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBrandidEqualTo(Integer value) {
-            addCriterion("brandid =", value, "brandid");
+        public Criteria andTitleEqualTo(String value) {
+            addCriterion("title =", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andBrandidNotEqualTo(Integer value) {
-            addCriterion("brandid <>", value, "brandid");
+        public Criteria andTitleNotEqualTo(String value) {
+            addCriterion("title <>", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andBrandidGreaterThan(Integer value) {
-            addCriterion("brandid >", value, "brandid");
+        public Criteria andTitleGreaterThan(String value) {
+            addCriterion("title >", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andBrandidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("brandid >=", value, "brandid");
+        public Criteria andTitleGreaterThanOrEqualTo(String value) {
+            addCriterion("title >=", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andBrandidLessThan(Integer value) {
-            addCriterion("brandid <", value, "brandid");
+        public Criteria andTitleLessThan(String value) {
+            addCriterion("title <", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andBrandidLessThanOrEqualTo(Integer value) {
-            addCriterion("brandid <=", value, "brandid");
+        public Criteria andTitleLessThanOrEqualTo(String value) {
+            addCriterion("title <=", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andBrandidIn(List<Integer> values) {
-            addCriterion("brandid in", values, "brandid");
+        public Criteria andTitleLike(String value) {
+            addCriterion("title like", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andBrandidNotIn(List<Integer> values) {
-            addCriterion("brandid not in", values, "brandid");
+        public Criteria andTitleNotLike(String value) {
+            addCriterion("title not like", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andBrandidBetween(Integer value1, Integer value2) {
-            addCriterion("brandid between", value1, value2, "brandid");
+        public Criteria andTitleIn(List<String> values) {
+            addCriterion("title in", values, "title");
             return (Criteria) this;
         }
 
-        public Criteria andBrandidNotBetween(Integer value1, Integer value2) {
-            addCriterion("brandid not between", value1, value2, "brandid");
+        public Criteria andTitleNotIn(List<String> values) {
+            addCriterion("title not in", values, "title");
             return (Criteria) this;
         }
 
-        public Criteria andCartypenameIsNull() {
-            addCriterion("cartypename is null");
+        public Criteria andTitleBetween(String value1, String value2) {
+            addCriterion("title between", value1, value2, "title");
             return (Criteria) this;
         }
 
-        public Criteria andCartypenameIsNotNull() {
-            addCriterion("cartypename is not null");
+        public Criteria andTitleNotBetween(String value1, String value2) {
+            addCriterion("title not between", value1, value2, "title");
             return (Criteria) this;
         }
 
-        public Criteria andCartypenameEqualTo(String value) {
-            addCriterion("cartypename =", value, "cartypename");
+        public Criteria andTypeIsNull() {
+            addCriterion("type is null");
             return (Criteria) this;
         }
 
-        public Criteria andCartypenameNotEqualTo(String value) {
-            addCriterion("cartypename <>", value, "cartypename");
+        public Criteria andTypeIsNotNull() {
+            addCriterion("type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCartypenameGreaterThan(String value) {
-            addCriterion("cartypename >", value, "cartypename");
+        public Criteria andTypeEqualTo(Integer value) {
+            addCriterion("type =", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andCartypenameGreaterThanOrEqualTo(String value) {
-            addCriterion("cartypename >=", value, "cartypename");
+        public Criteria andTypeNotEqualTo(Integer value) {
+            addCriterion("type <>", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andCartypenameLessThan(String value) {
-            addCriterion("cartypename <", value, "cartypename");
+        public Criteria andTypeGreaterThan(Integer value) {
+            addCriterion("type >", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andCartypenameLessThanOrEqualTo(String value) {
-            addCriterion("cartypename <=", value, "cartypename");
+        public Criteria andTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("type >=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andCartypenameLike(String value) {
-            addCriterion("cartypename like", value, "cartypename");
+        public Criteria andTypeLessThan(Integer value) {
+            addCriterion("type <", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andCartypenameNotLike(String value) {
-            addCriterion("cartypename not like", value, "cartypename");
+        public Criteria andTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("type <=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andCartypenameIn(List<String> values) {
-            addCriterion("cartypename in", values, "cartypename");
+        public Criteria andTypeIn(List<Integer> values) {
+            addCriterion("type in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andCartypenameNotIn(List<String> values) {
-            addCriterion("cartypename not in", values, "cartypename");
+        public Criteria andTypeNotIn(List<Integer> values) {
+            addCriterion("type not in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andCartypenameBetween(String value1, String value2) {
-            addCriterion("cartypename between", value1, value2, "cartypename");
+        public Criteria andTypeBetween(Integer value1, Integer value2) {
+            addCriterion("type between", value1, value2, "type");
             return (Criteria) this;
         }
 
-        public Criteria andCartypenameNotBetween(String value1, String value2) {
-            addCriterion("cartypename not between", value1, value2, "cartypename");
+        public Criteria andTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }
 
-        public Criteria andOrderbyIsNull() {
-            addCriterion("orderby is null");
+        public Criteria andContentIsNull() {
+            addCriterion("content is null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderbyIsNotNull() {
-            addCriterion("orderby is not null");
+        public Criteria andContentIsNotNull() {
+            addCriterion("content is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderbyEqualTo(Integer value) {
-            addCriterion("orderby =", value, "orderby");
+        public Criteria andContentEqualTo(String value) {
+            addCriterion("content =", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andOrderbyNotEqualTo(Integer value) {
-            addCriterion("orderby <>", value, "orderby");
+        public Criteria andContentNotEqualTo(String value) {
+            addCriterion("content <>", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andOrderbyGreaterThan(Integer value) {
-            addCriterion("orderby >", value, "orderby");
+        public Criteria andContentGreaterThan(String value) {
+            addCriterion("content >", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andOrderbyGreaterThanOrEqualTo(Integer value) {
-            addCriterion("orderby >=", value, "orderby");
+        public Criteria andContentGreaterThanOrEqualTo(String value) {
+            addCriterion("content >=", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andOrderbyLessThan(Integer value) {
-            addCriterion("orderby <", value, "orderby");
+        public Criteria andContentLessThan(String value) {
+            addCriterion("content <", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andOrderbyLessThanOrEqualTo(Integer value) {
-            addCriterion("orderby <=", value, "orderby");
+        public Criteria andContentLessThanOrEqualTo(String value) {
+            addCriterion("content <=", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andOrderbyIn(List<Integer> values) {
-            addCriterion("orderby in", values, "orderby");
+        public Criteria andContentLike(String value) {
+            addCriterion("content like", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andOrderbyNotIn(List<Integer> values) {
-            addCriterion("orderby not in", values, "orderby");
+        public Criteria andContentNotLike(String value) {
+            addCriterion("content not like", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andOrderbyBetween(Integer value1, Integer value2) {
-            addCriterion("orderby between", value1, value2, "orderby");
+        public Criteria andContentIn(List<String> values) {
+            addCriterion("content in", values, "content");
             return (Criteria) this;
         }
 
-        public Criteria andOrderbyNotBetween(Integer value1, Integer value2) {
-            addCriterion("orderby not between", value1, value2, "orderby");
+        public Criteria andContentNotIn(List<String> values) {
+            addCriterion("content not in", values, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentBetween(String value1, String value2) {
+            addCriterion("content between", value1, value2, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNotBetween(String value1, String value2) {
+            addCriterion("content not between", value1, value2, "content");
             return (Criteria) this;
         }
 

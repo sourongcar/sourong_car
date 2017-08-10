@@ -111,7 +111,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.sourong.souronguser.domain.SouronguserVO" useGeneratedKeys="true" keyProperty="id" >
+  <insert id="insert" parameterType="com.sourong.souronguser.domain.SouronguserVO" useGeneratedKeys="true" keyProperty="userid" >
     insert into s_souronguser (userid, username, userphone, 
       salt, password, openid, 
       islogout, createtime, changetime
@@ -121,7 +121,7 @@
       #{islogout,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{changetime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.sourong.souronguser.domain.SouronguserVO" useGeneratedKeys="true" keyProperty="id" >
+  <insert id="insertSelective" parameterType="com.sourong.souronguser.domain.SouronguserVO" useGeneratedKeys="true" keyProperty="userid" >
     insert into s_souronguser
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userid != null" >

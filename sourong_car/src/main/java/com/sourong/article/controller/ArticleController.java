@@ -1,6 +1,4 @@
-package com.sourong.collection.controller;
-
-import java.util.List;
+package com.sourong.article.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,51 +10,55 @@ import com.base.common.domain.CurrentUser;
 import com.base.common.domain.JsonResult;
 import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
-import com.sourong.collection.domain.CollectionVO;
-import com.sourong.collection.service.CollectionService;
+import com.sourong.article.domain.ArticleVO;
+import com.sourong.article.service.ArticleService;
 
 
 @Controller
-@RequestMapping("/collection")
-public class CollectionController {
+@RequestMapping("/article")
+public class ArticleController {
 	@Autowired
-	private CollectionService service;
+	private ArticleService service;
 	
-	/*@RequestMapping("/edit")
+	@RequestMapping("/edit")
 	public String edit(Integer id,ModelMap map){
 		if(id!=null){
 			map.addAttribute("entity",service.get(id));
 		}
-		return "collection/edit";//跳转到编辑页面
+		return "article/edit";//跳转到编辑页面
 	}
-	*/
+	
+	@RequestMapping("/getContent")
+	public  @ResponseBody String getContent(Integer articleid){
+		System.out.println(service.getContent(articleid));
+		return service.getContent(articleid);//单独获取内容
+	}
+	
 	@RequestMapping("/doEdit")
-	public String doEdit(CollectionVO entity){
-	/*	CurrentUser user = CurrentUser.getInstance();
+	public String doEdit(ArticleVO entity){
+		CurrentUser user = CurrentUser.getInstance();
 		//entity.setCreatorUserId(user.getUserId());//创建者id
-		if(entity.getUserid()!=null){//修改
+		System.out.println(entity.getContent());
+		if(entity.getArticleid()!=null){//修改
 			service.update(entity);
 		}else{//新增
 			service.add(entity);
 		}
-		*/
-		service.add(entity);
-		return "收藏成功";//跳转到列表页面
+		return "redirect:/article/list.action";//跳转到列表页面
 	}
 	
-	//取消收藏
 	@RequestMapping("/rest/doDelete")
 	public @ResponseBody JsonResult doDelete(Integer id){
 		JsonResult rs=new JsonResult();
 		service.delete(id);
 		rs.setStatus(1);
-		rs.setMsg("取消成功！");
+		rs.setMsg("删除成功！");
 		return rs;
 	}
 	
 	@RequestMapping("/list")
 	public String list(){
-		return "collection/list";//跳转到分页查询页面
+		return "article/list";//跳转到分页查询页面
 	}
 	/**
 	 * datatable分页查询接口
@@ -65,14 +67,8 @@ public class CollectionController {
 	 * @throws Throwable
 	 */
 	@RequestMapping("/rest/doSearch")
-	public @ResponseBody DataTablesResponse<CollectionVO> pageSearch(
+	public @ResponseBody DataTablesResponse<ArticleVO> pageSearch(
 			@RequestBody DataTablesRequest request) throws Throwable{
 		return service.listByPage(request);
-	}
-	
-	
-	@RequestMapping("/getDisplayList")
-	public @ResponseBody List<CollectionVO> getDisplayList(Integer userid) {
-		return service.getDisplayList(userid);
 	}
 }

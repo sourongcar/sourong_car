@@ -1,10 +1,15 @@
 package com.sourong.product.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
 import com.sourong.product.domain.ProductVO;
 
 public interface ProductService {
+	public static final int HEAD_FULL=-1;
+	public static final int HOT_FULL=-2;
     /**
 	 * 新增
 	 * @param entity
@@ -43,4 +48,13 @@ public interface ProductService {
 	int changeVisibility(int id);
 	
 	int countOfHit(int hit);
+	
+	/**
+	 * 首页轮播车信息
+	 */
+	List<ProductVO> listLooping();
+	/**
+	 * 首页展示车信息
+	 */
+	Map<String,Object> listDisplay(int displayedCount);
 }

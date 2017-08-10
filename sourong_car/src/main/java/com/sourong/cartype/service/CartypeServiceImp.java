@@ -85,5 +85,11 @@ public class CartypeServiceImp implements CartypeService {
 	public List<String> of(String brandName) {
 		return mapperExt.ofBrandName(brandName);
 	}
+	@Override
+	public int deleteType(Integer brandid) throws Throwable {
+		CartypeVOExample example=new CartypeVOExample();
+		example.createCriteria().andBrandidEqualTo(brandid);
+		return mapper.deleteByExample(example);
+	}
 
 }

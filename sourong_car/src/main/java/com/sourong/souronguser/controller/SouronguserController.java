@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,7 +25,8 @@ public class SouronguserController {
 
 	
 	@RequestMapping("/getUUID")
-	public @ResponseBody JsonResult getUUID() {
+	public @ResponseBody JsonResult getUUID(HttpServletResponse res) {
+		res.setHeader("Access-Control-Allow-Origin", "*");
 		JsonResult rs = new JsonResult();
 		rs.setStatus(1);
 		rs.setMsg(IDUtil.uuid());
@@ -69,11 +71,28 @@ public class SouronguserController {
 		rs.setMsg("lose");
 		return rs;
 	}
+	@RequestMapping(value="/register")
+	public @ResponseBody JsonResult register(SouronguserVO souronguser,HttpServletResponse res){
+		res.setHeader("Access-Control-Allow-Origin",  "*");
+		JsonResult rs = new JsonResult() ;
+		SouronguserVO user = service.getUserFormPhone(souronguser.getUserphone());
+		if(user==null){
+			service.add(souronguser) ;
+			System.out.println(souronguser.getUserid());
+			rs.setStatus(souronguser.getUserid());
+			rs.setMsg("注册成功");
+			return rs ;
+		}else{		
+			rs.setStatus(0);
+			rs.setMsg("您已经注册");
+			return rs;
+		}
+	}
 
 	public static void main(String[] args) throws Exception {
-		String uuid = IDUtil.uuid();
-		System.out.println(uuid);
-		System.out.println(MD5Util.md5("123" + uuid));
+		/*String uuid = IDUtil.uuid();
+		System.out.println(uuid);*/
+		System.out.println(MD5Util.md5("123"+"86aa7869ca07421898acfd69c7732e89"));
 	}
 	
 }

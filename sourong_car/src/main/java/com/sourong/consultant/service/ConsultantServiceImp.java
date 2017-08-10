@@ -1,7 +1,13 @@
 package com.sourong.consultant.service;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.base.common.util.SearchConditionUtils;
 import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
@@ -63,13 +69,37 @@ public class ConsultantServiceImp implements ConsultantService {
 		return response;
 		
 	}
+	
+	
 	@Override
 	public int markRead(String consultantId) {
 		ConsultantVOExample example = new ConsultantVOExample();
 		example.createCriteria().andConsultantidEqualTo(Integer.valueOf(consultantId));
 		ConsultantVO vo = new ConsultantVO();
-		vo.setIsreply(0);
+		vo.setIsreply(1);
 		return mapper.updateByExampleSelective(vo,example);
 	}
-
+	
+	
+	@Override
+	public boolean canConsultAgain(Integer userId, Integer carId) {
+		ConsultantVOExample example = new ConsultantVOExample();
+		example.setOrderByClause("createtime desc");
+		example.setLimit(1);
+		example.createCriteria().andUseridEqualTo(userId).andProductidEqualTo(carId);
+		List<ConsultantVO> consultantList = mapper.selectByExample(example);
+		System.out.println(consultantList);
+		if(consultantList.size() > 0){
+			Instant createtime = consultantList.get(0).getCreatetime().toInstant();
+			Duration duration = Duration.between(createtime, Instant.now());
+			System.out.println(duration.toDays());
+			if(Math.abs(duration.toDays()) >= 1){
+				return true;
+			}else{			
+				return false;
+			}
+		}else{
+			return true;
+		}
+	}
 }

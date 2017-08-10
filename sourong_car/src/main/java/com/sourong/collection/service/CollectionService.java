@@ -1,5 +1,7 @@
 package com.sourong.collection.service;
 
+import java.util.List;
+
 import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
 import com.sourong.collection.domain.CollectionVO;
@@ -36,6 +38,16 @@ public interface CollectionService {
 	 * @return
 	 */
 	public DataTablesResponse<CollectionVO> listByPage(DataTablesRequest request) throws Throwable;
+	
+	
+	/**
+	 * 获取收藏列表
+	 * @return
+	 */
+	
+	public List<CollectionVO> getDisplayList(Integer userId);
+	
+	
 	
 	
 }

@@ -1,35 +1,26 @@
-package com.sourong.brand.service;
-
-import java.util.List;
+package com.sourong.article.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.base.common.util.SearchConditionUtils;
 import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
-import com.sourong.brand.dao.BrandVOMapper;
-import com.sourong.brand.dao.BrandVOMapperExt;
-import com.sourong.brand.domain.BrandVO;
-import com.sourong.brand.domain.BrandVOExample;
-import com.sourong.cartype.domain.CartypeVO;
-import com.sourong.cartype.domain.CartypeVOExample;
+import com.sourong.article.dao.ArticleVOMapper;
+import com.sourong.article.domain.ArticleVO;
+import com.sourong.article.domain.ArticleVOExample;
 
 
 @Service
-public class BrandServiceImp implements BrandService {
+public class ArticleServiceImp implements ArticleService {
 	@Autowired
-	private BrandVOMapper mapper;
-	@Autowired
-	private BrandVOMapperExt mapperExt;
-	
+	private ArticleVOMapper mapper;
 	/**
 	 * 新增
 	 * @param entity
 	 * @return
 	 */
 	@Override
-	public int add(BrandVO entity) {
+	public int add(ArticleVO entity) {
 		return mapper.insertSelective(entity);
 	}
 	/**
@@ -47,7 +38,7 @@ public class BrandServiceImp implements BrandService {
 	 * @return
 	 */
 	@Override
-	public int update(BrandVO entity) {
+	public int update(ArticleVO entity) {
 		return mapper.updateByPrimaryKeySelective(entity);
 	}
 	/**
@@ -56,15 +47,15 @@ public class BrandServiceImp implements BrandService {
 	 * @return
 	 */
 	@Override
-	public BrandVO get(Integer id) {
+	public ArticleVO get(Integer id) {
 		return mapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public DataTablesResponse<BrandVO> listByPage(DataTablesRequest request)
+	public DataTablesResponse<ArticleVO> listByPage(DataTablesRequest request)
 			throws Throwable {
-		BrandVOExample example = new BrandVOExample();
-		DataTablesResponse<BrandVO> response = new DataTablesResponse<BrandVO>();
+		ArticleVOExample example = new ArticleVOExample();
+		DataTablesResponse<ArticleVO> response = new DataTablesResponse<ArticleVO>();
 		SearchConditionUtils.wrapperAndCondition(example, request);// 封装查询条件
 		response.setDraw(request.getDraw());
 		response.setRecordsTotal(mapper.countByExample(example));
@@ -73,16 +64,9 @@ public class BrandServiceImp implements BrandService {
 		
 	}
 	@Override
-	public List<String> names() {
-		return mapperExt.names();
+	public String getContent(Integer id) {
+		
+		return mapper.selectByPrimaryKey(id).getContent();
 	}
-	@Override
-	public List<BrandVO> list() throws Throwable {
-		BrandVOExample example=new BrandVOExample();
-		example.createCriteria();
-		return mapper.selectByExample(example);
-	}
-	
-	
 
 }

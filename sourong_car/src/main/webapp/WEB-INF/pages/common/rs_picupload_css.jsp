@@ -5,5 +5,5 @@
 <!-- picupload styles -->
 <%-- <link rel="stylesheet" href="${path}/resources/assets/css/picupload/bootstrap.css" /> --%>
 <link rel="stylesheet" href="${path}/resources/assets/css/picupload/bootstrap.min.css" />
-<link rel="stylesheet" href="${path}/resources/assets/css/picupload/fileinput.css" />
-<link rel="stylesheet" href="${path}/resources/assets/css/picupload/font-awesome.min.css" />
+<link rel="stylesheet" href="${path}/resources/assets/css/picupload/common.css" />
+<link rel="stylesheet" href="${path}/resources/assets/css/picupload/index.css" />

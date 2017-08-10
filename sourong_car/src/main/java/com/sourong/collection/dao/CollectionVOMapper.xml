@@ -112,7 +112,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.sourong.collection.domain.CollectionVO" useGeneratedKeys="true" keyProperty="id" >
+  <insert id="insert" parameterType="com.sourong.collection.domain.CollectionVO" useGeneratedKeys="true" keyProperty="collectionid" >
     insert into s_collection (collectionid, userid, productid, 
       marketprice, sourongprice, title, 
       coverpict, createtime, changetime
@@ -122,7 +122,7 @@
       #{coverpict,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{changetime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.sourong.collection.domain.CollectionVO" useGeneratedKeys="true" keyProperty="id" >
+  <insert id="insertSelective" parameterType="com.sourong.collection.domain.CollectionVO" useGeneratedKeys="true" keyProperty="collectionid" >
     insert into s_collection
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="collectionid != null" >
