@@ -50,7 +50,7 @@
 		</div>
 	</div>
 <!-- 模态框（Modal） -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" style="z-index:15" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="left:0px;;height:600px">
         <div class="modal-content" style="height:600px" >
            <div class="modal-body" style="height:600px">
@@ -80,7 +80,7 @@
 			}else if("${entity.type}"==1){
 				$('#typename').text("产品介绍");
 			}else if("${entity.type}"==2){
-				$('#typename').text("合作伙伴");
+				$('#typename').text("合作车行");
 			}			
 	});
 		 $.ajax({  
