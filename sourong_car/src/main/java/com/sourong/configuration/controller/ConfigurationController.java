@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -56,7 +57,8 @@ public class ConfigurationController {
 	public String list(){
 		return "configuration/list";//跳转到分页查询页面
 	}
-	@RequestMapping("/get")
+	
+	@RequestMapping("/rest/get")
 	public @ResponseBody ConfigurationVO get(Integer id){
 		return service.get(id);//跳转到分页查询页面
 	}

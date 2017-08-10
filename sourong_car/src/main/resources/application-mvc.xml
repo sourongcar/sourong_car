@@ -72,6 +72,7 @@
 					<value>getDisplayList.action</value>
 					<value>product/rest/looping</value>
 					<value>product/rest/display</value>
+					<value>configuration/rest/get</value>
 				</list>
 			</property>
 		</bean>
