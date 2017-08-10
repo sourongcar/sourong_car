@@ -5,7 +5,10 @@
 
 <!-- 图片上传插件 -->
 
-<link rel="stylesheet" href="${path}/resources/assets/css/bootstrap.min.css" />
-<link rel="stylesheet" href="${path}/resources/assets/css/ssi-uploader.css" />
-<link rel="stylesheet" href="${path}/resources/assets/css/ssi-uploader.min.css" />
-<link rel="stylesheet" href="${path}/resources/assets/css/style.css" /> 
+<link rel="stylesheet" href="${path}/resources/assets/css/common.css" /> 
+<link rel="stylesheet" href="${path}/resources/assets/css/index.css" />
+
+
+<!-- 多图片上传插件 --> 
+<link rel="stylesheet" href="${path}/resources/assets/css/fileUpload.css" />
+<link rel="stylesheet" href="${path}/resources/assets/css/iconfont.css" />

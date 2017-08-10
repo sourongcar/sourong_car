@@ -9,11 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.base.common.domain.CurrentUser;
 import com.base.common.domain.JsonResult;
+import com.base.common.util.ConfigUtil;
 import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
 import com.sourong.carpicture.domain.CarpictureVO;
@@ -34,56 +37,95 @@ public class CarpictureController {
 		}
 		return "carpicture/edit";//跳转到编辑页面
 	}
+	//轮播判断
+	@RequestMapping("/islooping")
+	public @ResponseBody String islooping(CarpictureVO entity,String carpictureid,String islooping){
+		System.out.println("进入代码块");
+        System.out.println(carpictureid);
+        System.out.println(islooping);
+        
+		if(carpictureid!=null){
+			System.out.println("第一步");
+			
+			if("0".equals(islooping)){
+				System.out.println("第二步");
+	
+				entity.setIslooping(1);
+				service.update(entity);
+				System.out.println("第三步");
+				
+			}else if("1".equals(islooping)){
+					System.out.println("第四步");
+			
+					entity.setIslooping(0);
+					service.update(entity);
+					System.out.println("执行成功第五步");
+					}
+				}
+		 
+		return service.get(Integer.parseInt(carpictureid)).getIslooping().toString();//跳转到列表页面
+		}
 	
 
-	
-	@RequestMapping("/doEdit")
-	
-	//id
-	public String doEdit(CarpictureVO entity){
-		//CurrentUser user = CurrentUser.getInstance();
-		//entity.setCreatorUserId(user.getUserId());//创建者id
-		
+	//上传图片并提交数据到数据库
+	@RequestMapping(value = "/doEdit",method=RequestMethod.POST,consumes={"multipart/form-data"})
+	public String doEdit(@RequestParam("pictures") MultipartFile[] pictures,CarpictureVO entity){
+
+		System.out.println("进入程序");
+
+		//图片上传
+		if(pictures!=null){
+			//判断原来的picture是否为空
+			if(entity.getPicture()!=null||entity.getPicture()!=""){
+				//为空则进行删除
+				System.out.println("获取原来图片信息进行删除");
+				File deletefile = new File(ConfigUtil.getValue("saveImage")+entity.getPicture());		 
+				deletefile.delete();
+				System.out.println("删除成功"); 
+			}
+			//把进来的图片进行循环读取
+			for(int i=0;i<pictures.length; i++){
+				
+				String fileName=pictures[i].getOriginalFilename();
+				//打印信息
+				System.out.println("图片大小"+pictures[i].getSize());
+				System.out.println("图片名字"+fileName);
+				
+				String savename=UUID.randomUUID()+fileName.substring(fileName.lastIndexOf("."));
+				String savenpath=ConfigUtil.getValue("saveImage")+savename;
+					System.out.println("成功储存");
+                
+                
+				try {
+					pictures[i].transferTo(new File(savenpath));
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				//把读取到的图片路径存进数据库
+					entity.setPicture(savename);
+				System.out.println("把图片地址写进entity了");
+				
+				//提交数据库，修改，新增			
+				if(entity.getCarpictureid()!=null){//修改
+					service.update(entity);		
+				}else{//新增
+					service.add(entity);
+				}
+				System.out.println("提交数据库");
+			}
+		}else{
 		if(entity.getCarpictureid()!=null){//修改
-			service.update(entity);
+			service.update(entity);		
 		}else{//新增
 			service.add(entity);
 		}
-		return "redirect:/carpicture/list.action";//跳转到列表页面
-	}
-	
-	
-	public String doUpload(MultipartFile  picture) throws IllegalStateException, IOException{
-		String orgname=picture.getOriginalFilename();
-		String savename=UUID.randomUUID()+orgname.substring(orgname.lastIndexOf("."));
-		String savepath="d:/apps/"+savename;
-		picture.transferTo(new File(savepath));
-		
-		return "redirect:http://localhost:8080/images/"+savename;
-		
-	}
-	
-	/*
-	//图片id
-	public String dozp(CarpictureVO entity){
-		if(entity.getProductid()!=null){
-			service.update(entity);
-		}else{
-			service.add(entity);
 		}
+		System.out.println("提交数据库");
 		return "redirect:/carpicture/list.action";//跳转到列表页面
-	}
-	//图片地址
-	public String dourl(CarpictureVO entity){
-		if(entity.getPicture()!=null){
-			service.update(entity);
-			
-		}else{
-			service.add(entity);
-		}
-		return "redirect:/carpicture/list.action";//跳转到列表页面
-	}*/
-	
+		
+	}	
 	//删除(根据id)
 	@RequestMapping("/rest/doDelete")
 	public @ResponseBody JsonResult doDelete(Integer id){
@@ -95,7 +137,9 @@ public class CarpictureController {
 	}
 	
 	@RequestMapping("/list")
-	public String list(){
+	public String list(ModelMap map,@RequestParam(value="productid",required=false) Integer productid){
+		System.out.println("##############" + productid);
+		map.addAttribute("productid", productid);
 		return "carpicture/list";//跳转到分页查询页面
 	}
 	/**
