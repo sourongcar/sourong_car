@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +29,7 @@
 					<thead>
 						<tr>
 						    
-							<th>编号</th>
+						    <th >编号</th>
 							<th>品牌编号</th>
 							<th>车型名</th>
 							<th>操作</th>
@@ -55,13 +56,23 @@
             </div>
             <div class="modal-body">
 			<input type="hidden" name="cartypeid" value="${cartypeVO.cartypeid}">
-			<div class="form-group">
+			 <%-- <div class="form-group">
 				<label for="brandid" class="col-sm-2 control-label">品牌编号</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="brandid" name="brandid" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" value="${cartypeVO.brandid}"
 						   placeholder="请输入品牌编号" required="请输入品牌编号" >
 				</div>
-			</div>
+			</div> --%>
+			<div class="form-group">
+					<label for="brandname" class="col-sm-2 control-label">品牌名</label>
+					<div class="col-sm-10">
+						<select type="text" class="form-control" id="brandname" name="brandname">
+							<c:forEach items="${list}" var="b">
+							<option  value="${b.brandid}">${b.brandname}</option>
+							</c:forEach>
+						</select>
+					</div>
+				</div>
 			<div class="form-group">
 				<label for="cartypename" class="col-sm-2 control-label">车型名</label>
 				<div class="col-sm-10">
@@ -105,10 +116,12 @@
 									"data" : function(pdata) {
 										
 										pdata.searchColumns={
+								
 												"CartypenameLike":$("#cartypename").val()
 										}
 										var data = JSON.stringify(pdata);
 										//JSON.parse();
+										console.log(data);
 										return data;
 									},
 									dataType : "json",
@@ -144,7 +157,9 @@
 												+'<p:permission privilege="com.sourong.cartype.controller.CartypeController:doDelete"><a href="javascript:void(0)" onclick="del(\''+row.cartypeid+'\')" class="tooltip-error" data-rel="tooltip" title="删除"><span class="red"><i class="icon-trash bigger-120"></i></a></p:permission>';
 											},
 											"targets" : 3
-										} ],
+										}
+									
+										],
 
 								"language" : {
 									"url" : "${path }/resources/assets/language/zh_CN.txt"

@@ -32,6 +32,7 @@
 				<label for="brandpic" class="col-sm-2 control-label">品牌图标</label>
 				<div class="col-sm-10">
 					<input type="file" name="pic" id="pic" onchange="previewFile()"/> 
+					
 				</div>
 				<div class="col-sm-10" style="margin-top: 30px">
 					<img src="/images/${brandVO.brandpic}"  class="img-thumbnail" style="max-width: 300px;max-height: 500px"  alt="Image preview..."/>   
