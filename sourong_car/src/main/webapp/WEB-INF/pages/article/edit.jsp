@@ -99,7 +99,7 @@
 	$("#checkeditor").click(function(){
 		 UE.getEditor('editor').setHeight(350);
 		//将数据库的content内容获取到编辑器中		
-		 UE.getEditor('editor').setContent( $("#content").val(),false);
+		 UE.getEditor('editor').setContent( $("#content").val());
 	})    
     $("#savecontent").click(function(){
     	$("#content").val(UE.getEditor('editor').getContent()); 	

@@ -14,7 +14,7 @@ if(window !=top){
 </script>
 </head>
 
-<body class="login-layout">
+<body class="login-layout" style="background:url(${path}/resources/assets/images/backgroundimage2.jpg) no-repeat 40%;background-size:130% 100% ">
 	<div class="main-container">
 		<div class="main-content">
 			<div class="row">
@@ -25,7 +25,7 @@ if(window !=top){
 								<i class="icon-leaf green"></i> <span class="red">MS</span> <span
 									class="white">后台管理系统</span>
 							</h1>
-							<h4 class="blue">&copy; 码神软件</h4>
+							<h4 class="blue">&copy; 搜融到家</h4>
 						</div>
 
 						<div class="space-6"></div>
@@ -80,7 +80,7 @@ if(window !=top){
 											<a href="#" class="user-signup-link"> </a>
 										</div>
 
-										<div>
+										<div style="display:none">
 											<a href="#" onclick="show_box('signup-box'); return false;"
 												class="forgot-password-link"> 找回密码 <i
 												class="icon-arrow-right"></i>
