@@ -73,6 +73,8 @@
 					<value>product/rest/looping</value>
 					<value>product/rest/display</value>
 					<value>configuration/rest/get</value>
+					<value>doAdd.action</value>
+					<value>doDelete.action</value>
 				</list>
 			</property>
 		</bean>
