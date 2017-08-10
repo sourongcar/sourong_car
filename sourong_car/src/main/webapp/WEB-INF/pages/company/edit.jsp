@@ -4,31 +4,22 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>xx编辑页面</title>
+<title>公司信息编辑页面</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <%-- <%@ include file="/WEB-INF/pages/common/rs_css.jsp"%> --%>
 <%@ include file="/WEB-INF/pages/common/rs_picupload_css.jsp"%>
 <body>
-<h3>公司信息管理</h3>
-<div class="container">
+<h2 style="text-align:center;margin-top:5%">公司信息管理</h2>
+<div class="container" style="margin-top:5%">
 		<div class="row clearfix">
 			<div class="col-md-12 column">
-	<form class="form-horizontal" role="form" action="${path }/company/doEdit.action" method="post">
+	<form class="form-horizontal" role="form" action="${path }/company/doEdit.action" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="companyid" value="${entity.companyid }">
 	<div class="form-group">
 		<label for="companyname" class="col-sm-2 control-label">公司名称</label>
 		<div class="col-sm-10">
 			<input type="text" class="form-control" id="companyname" name="companyname" value="${entity.companyname}"
 				   placeholder="请输入公司名称">
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="companylogo" class="col-sm-2 control-label">公司logo</label>
-		<div class="col-sm-10">
-		<div style="width:200px;height:200px;border: 1px solid #ccc"></div>
-			<input type="text" class="form-control" id="companylogo" name="companylogo" value="${entity.companylogo}"
-				   placeholder="请输入公司logo" style="display:none">
-		<button type="button" style="margin-top:4px" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">重新上传图片</button>
 		</div>
 	</div>
 	<div class="form-group">
@@ -40,9 +31,18 @@
 	</div>
 	<div class="form-group">
 		<label for="companyqr" class="col-sm-2 control-label">公司二维码</label>
-		<div class="col-sm-10">
+		<div class="col-sm-5">
 			<input type="text" class="form-control" id="companyqr" name="companyqr" value="${entity.companyqr}"
-				   placeholder="请输入公司二维码">
+				   placeholder="请输入公司二维码" style="display:none">				 
+			<section class=" img-section">
+				<p class="up-p"><span class="up-span">点击可更换二维码图片</span></p>
+				<div class="z_photo upimg-div clear" >
+		               	 <section class="z_file fl">
+		               	 	<img src="${path}/resources/assets/images/picupload/a11.png" class="add-img">
+		               	 	<input type="file" name="file" id="file" class="file" value="" accept="image/jpg,image/jpeg,image/png,image/bmp" multiple />
+		               	 </section>
+		         </div>
+			 </section>
 		</div>
 	</div>
 	<div class="form-group">
@@ -64,30 +64,14 @@
 		</div>
               
 	</div>
+<!--提示框  -->
+<aside class="mask works-mask">
+			<div class="mask-content">
+				<p class="del-p">您确定要删除作品图片吗？</p>
+				<p class="check-p"><span class="del-com wsdel-ok">确定</span><span class="wsdel-no">取消</span></p>
+			</div>
+</aside>
 
-<!-- 公司logo模态框（Modal） -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="left:0px">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">公司logo</h4>
-            </div>
-            <div class="modal-body">
-					<table>
-						<tr>
-							<td><input name="tImage" type="hidden" class="input-image"
-								style="width: 500px; height: 265px;"></td>
-						</tr>
-					</table>
-				</div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-<!--                 <button type="button" class="btn btn-primary">提交更改</button> -->
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-</div>
 <%-- 	<%@ include file="/WEB-INF/pages/common/rs_js.jsp"%> --%>
 </body>
 	<%@ include file="/WEB-INF/pages/common/rs_picupload_js.jsp"%>

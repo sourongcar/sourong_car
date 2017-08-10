@@ -137,6 +137,9 @@
 							<li>
 								<a href="${path }/company/list.action"target="contentframe"><i class="icon-double-angle-right"></i>公司信息列表</a>
 							</li>
+							<li>
+								<a href="${path }/article/list.action"target="contentframe"><i class="icon-double-angle-right"></i>介绍页面列表</a>
+							</li>
 						</ul>
 					</li>
 					<li>
