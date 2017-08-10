@@ -65,6 +65,7 @@
 					<value>doLogin.action</value>
 					<value>register.action</value>
 					<value>forMoreInformation.action</value>
+					<value>getDisplayList.action</value>
 				</list>
 			</property>
 		</bean>

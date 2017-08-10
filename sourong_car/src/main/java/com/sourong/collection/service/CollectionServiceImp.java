@@ -1,5 +1,7 @@
 package com.sourong.collection.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.base.common.util.SearchConditionUtils;
@@ -62,6 +64,13 @@ public class CollectionServiceImp implements CollectionService {
 		response.setData(mapper.selectByExample(example));
 		return response;
 		
+	}
+	@Override
+	public List<CollectionVO> getDisplayList(Integer userId) {
+		CollectionVOExample example = new CollectionVOExample();
+		example.createCriteria().andUseridEqualTo(userId);
+		List<CollectionVO> displayList = mapper.selectByExample(example);
+		return displayList;
 	}
 
 }
