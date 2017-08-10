@@ -326,6 +326,76 @@ public class CompanyVOExample implements Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andServicetimeIsNull() {
+            addCriterion("servicetime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServicetimeIsNotNull() {
+            addCriterion("servicetime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServicetimeEqualTo(String value) {
+            addCriterion("servicetime =", value, "servicetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andServicetimeNotEqualTo(String value) {
+            addCriterion("servicetime <>", value, "servicetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andServicetimeGreaterThan(String value) {
+            addCriterion("servicetime >", value, "servicetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andServicetimeGreaterThanOrEqualTo(String value) {
+            addCriterion("servicetime >=", value, "servicetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andServicetimeLessThan(String value) {
+            addCriterion("servicetime <", value, "servicetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andServicetimeLessThanOrEqualTo(String value) {
+            addCriterion("servicetime <=", value, "servicetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andServicetimeLike(String value) {
+            addCriterion("servicetime like", value, "servicetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andServicetimeNotLike(String value) {
+            addCriterion("servicetime not like", value, "servicetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andServicetimeIn(List<String> values) {
+            addCriterion("servicetime in", values, "servicetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andServicetimeNotIn(List<String> values) {
+            addCriterion("servicetime not in", values, "servicetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andServicetimeBetween(String value1, String value2) {
+            addCriterion("servicetime between", value1, value2, "servicetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andServicetimeNotBetween(String value1, String value2) {
+            addCriterion("servicetime not between", value1, value2, "servicetime");
+            return (Criteria) this;
+        }
+
         public Criteria andCompanyphoneIsNull() {
             addCriterion("companyphone is null");
             return (Criteria) this;

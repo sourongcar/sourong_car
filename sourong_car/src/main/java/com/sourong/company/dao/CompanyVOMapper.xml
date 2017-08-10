@@ -5,6 +5,7 @@
     <id column="companyid" property="companyid" jdbcType="INTEGER" />
     <result column="companyname" property="companyname" jdbcType="VARCHAR" />
     <result column="companylogo" property="companylogo" jdbcType="VARCHAR" />
+    <result column="servicetime" property="servicetime" jdbcType="VARCHAR" />
     <result column="companyphone" property="companyphone" jdbcType="VARCHAR" />
     <result column="companyQR" property="companyqr" jdbcType="VARCHAR" />
     <result column="companyadress" property="companyadress" jdbcType="VARCHAR" />
@@ -70,8 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    companyid, companyname, companylogo, companyphone, companyQR, companyadress, createtime, 
-    changetime
+    companyid, companyname, companylogo, servicetime, companyphone, companyQR, companyadress, 
+    createtime, changetime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sourong.company.domain.CompanyVOExample" >
     select
@@ -113,11 +114,13 @@
   </delete>
   <insert id="insert" parameterType="com.sourong.company.domain.CompanyVO" useGeneratedKeys="true" keyProperty="id" >
     insert into s_company (companyid, companyname, companylogo, 
-      companyphone, companyQR, companyadress, 
-      createtime, changetime)
+      servicetime, companyphone, companyQR, 
+      companyadress, createtime, changetime
+      )
     values (#{companyid,jdbcType=INTEGER}, #{companyname,jdbcType=VARCHAR}, #{companylogo,jdbcType=VARCHAR}, 
-      #{companyphone,jdbcType=VARCHAR}, #{companyqr,jdbcType=VARCHAR}, #{companyadress,jdbcType=VARCHAR}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{changetime,jdbcType=TIMESTAMP})
+      #{servicetime,jdbcType=VARCHAR}, #{companyphone,jdbcType=VARCHAR}, #{companyqr,jdbcType=VARCHAR}, 
+      #{companyadress,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{changetime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.sourong.company.domain.CompanyVO" useGeneratedKeys="true" keyProperty="id" >
     insert into s_company
@@ -130,6 +133,9 @@
       </if>
       <if test="companylogo != null" >
         companylogo,
+      </if>
+      <if test="servicetime != null" >
+        servicetime,
       </if>
       <if test="companyphone != null" >
         companyphone,
@@ -156,6 +162,9 @@
       </if>
       <if test="companylogo != null" >
         #{companylogo,jdbcType=VARCHAR},
+      </if>
+      <if test="servicetime != null" >
+        #{servicetime,jdbcType=VARCHAR},
       </if>
       <if test="companyphone != null" >
         #{companyphone,jdbcType=VARCHAR},
@@ -192,6 +201,9 @@
       <if test="record.companylogo != null" >
         companylogo = #{record.companylogo,jdbcType=VARCHAR},
       </if>
+      <if test="record.servicetime != null" >
+        servicetime = #{record.servicetime,jdbcType=VARCHAR},
+      </if>
       <if test="record.companyphone != null" >
         companyphone = #{record.companyphone,jdbcType=VARCHAR},
       </if>
@@ -217,6 +229,7 @@
     set companyid = #{record.companyid,jdbcType=INTEGER},
       companyname = #{record.companyname,jdbcType=VARCHAR},
       companylogo = #{record.companylogo,jdbcType=VARCHAR},
+      servicetime = #{record.servicetime,jdbcType=VARCHAR},
       companyphone = #{record.companyphone,jdbcType=VARCHAR},
       companyQR = #{record.companyqr,jdbcType=VARCHAR},
       companyadress = #{record.companyadress,jdbcType=VARCHAR},
@@ -234,6 +247,9 @@
       </if>
       <if test="companylogo != null" >
         companylogo = #{companylogo,jdbcType=VARCHAR},
+      </if>
+      <if test="servicetime != null" >
+        servicetime = #{servicetime,jdbcType=VARCHAR},
       </if>
       <if test="companyphone != null" >
         companyphone = #{companyphone,jdbcType=VARCHAR},
@@ -257,6 +273,7 @@
     update s_company
     set companyname = #{companyname,jdbcType=VARCHAR},
       companylogo = #{companylogo,jdbcType=VARCHAR},
+      servicetime = #{servicetime,jdbcType=VARCHAR},
       companyphone = #{companyphone,jdbcType=VARCHAR},
       companyQR = #{companyqr,jdbcType=VARCHAR},
       companyadress = #{companyadress,jdbcType=VARCHAR},
