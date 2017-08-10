@@ -1,6 +1,7 @@
 package com.sourong.product.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
@@ -55,5 +56,5 @@ public interface ProductService {
 	/**
 	 * 首页展示车信息
 	 */
-	List<ProductVO> listDisplay(int displayedCount);
+	Map<String,Object> listDisplay(int displayedCount);
 }

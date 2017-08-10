@@ -3,6 +3,8 @@ package com.sourong.product.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -200,10 +202,14 @@ public class ProductServiceImp implements ProductService {
 	}
 
 	@Override
-	public List<ProductVO> listDisplay(int displayedCount) {
-		int offset=displayedCount-6,limit=displayedCount>0?3:6;
-		offset=offset<0?0:offset;
-		return mapperExt.listDisplay(offset,limit);
+	public Map<String,Object> listDisplay(int displayedCount) {
+		int offset=displayedCount<0?0:displayedCount,limit=displayedCount>0?3:6;
+		ProductVOExample example = new ProductVOExample();
+		example.createCriteria().andHitGreaterThan(0).andIsdisplayEqualTo(0);
+		Map<String,Object> result=new TreeMap<String,Object>();
+		result.put("list", mapperExt.listDisplay(offset,limit));
+		result.put("end", (mapper.countByExample(example)<=displayedCount+limit));
+		return result;
 	}
 
 }

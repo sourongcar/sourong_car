@@ -2,6 +2,7 @@ package com.sourong.product.controller;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -150,7 +151,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/rest/display")
-	public @ResponseBody List<ProductVO> listDisplay(int offset) {
+	public @ResponseBody Map<String,Object> listDisplay(int offset) {
 		return service.listDisplay(offset);
 	}
 }

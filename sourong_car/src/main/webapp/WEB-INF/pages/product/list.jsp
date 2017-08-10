@@ -279,7 +279,7 @@
 											"render" : function(data, type, row) {
 												return '<a href="${path }/product/edit.action?id='+data+'" class="tooltip-success" data-rel="tooltip" title="修改"><span class="green"><i class="icon-edit bigger-120"></i></span></a>&nbsp;'
 												+'<a href="javascript:void(0)" onclick="del(\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="删除"><span class="red"><i class="icon-trash bigger-120"></i></span></a>&nbsp;'
-												+'<a href="javascript:void(0)" onclick="toggleshow(this,\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="是否展示"><span class="blue"><i class="icon-eye-'+(row.isdisplay?'open':'close')+' bigger-120"></i></span></a>&nbsp;'//
+												+'<a href="javascript:void(0)" onclick="toggleshow(this,\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="是否展示"><span class="blue"><i class="icon-eye-'+(row.isdisplay==0?'open':'close')+' bigger-120"></i></span></a>&nbsp;'//
 												+'<a href="${path}/carpicture/list.action" class="tooltip-error" data-rel="tooltip" title="展示图片"><span class="grey"><i class="icon-picture bigger-120"></i></span></a>';
 											},
 											"targets" : 10
