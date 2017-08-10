@@ -54,5 +54,5 @@ public interface ConsultantService {
 	 * @param carId
 	 * @return
 	 */
-	public boolean canConsultAgain(Integer userId,Integer carId,Date date);
+	public boolean canConsultAgain(Integer userId,Integer carId);
 }

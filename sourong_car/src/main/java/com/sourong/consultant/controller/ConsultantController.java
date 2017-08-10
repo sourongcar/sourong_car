@@ -92,15 +92,16 @@ public class ConsultantController {
 	@RequestMapping(value="/forMoreInformation",method=RequestMethod.POST)
 	public @ResponseBody JsonResult forMoreInformation(@RequestParam(required=true) Integer carId,
 			Integer userId,HttpServletResponse response){
-		response.setHeader("Access-Control-Allow-Origin", "http://localhost:63342");
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		JsonResult result = new JsonResult();
 		if("".equals(userId) || userId == null){
 			result.setMsg("当前没有用户登陆");
 			result.setStatus(0);
 		}else{
 			ProductVO productVO = productServce.get(carId);
-			if(consultantService.canConsultAgain(userId, carId,new Date())){
+			if(consultantService.canConsultAgain(userId, carId)){
 				SouronguserVO souronguserVO = userService.get(userId);
+				System.out.println(souronguserVO);
 				ConsultantVO consultantVO = new ConsultantVO();
 				consultantVO.setUserid(userId);
 				consultantVO.setUserphone(souronguserVO.getUserphone());
@@ -112,7 +113,7 @@ public class ConsultantController {
 				result.setMsg("当前用户：" + souronguserVO.getUsername() + "咨询登记成功");
 				result.setStatus(1);
 			}else{
-				result.setMsg("您已于今日咨询" + productVO.getTitle() + ",请勿频繁操作");
+				result.setMsg("您于24小时内咨询 此车,请勿频繁操作");
 				result.setStatus(-1);
 			}
 		}
