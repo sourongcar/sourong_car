@@ -23,6 +23,7 @@
 						    <th></th>
 							<th>公司名称</th>
 							<th>服务热线</th>
+							<th>服务时间</th>
 							<th>公司二维码</th>
 							<th>公司地址</th>
 							<th>操作</th>
@@ -86,6 +87,9 @@
 									"data" : "companyphone"
 								},
 								{
+									"data" : "servicetime"
+								},
+								{
 									"data" : "companyqr"
 								},
 								{
@@ -101,13 +105,13 @@
 											"render" : function(data, type, row) {
 												return '<a href="${path }/company/edit.action?id='+data+'" class="tooltip-success" data-rel="tooltip" title="修改"><span class="green"><i class="icon-edit bigger-120"></i></a>&nbsp;&nbsp;';
 											},
-											"targets" :5
+											"targets" :6
 										   },
 											{
 												"render" : function(data, type, row) {
 													return '<button class="btn btn-primary btn-sm" onclick="dobutton(this)" value='+data+' data-toggle="modal" data-target="#myModal">查看二维码</button>';
 												},
-												"targets" :3
+												"targets" :4
 										} ],
 
 								"language" : {

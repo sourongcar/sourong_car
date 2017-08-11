@@ -30,6 +30,13 @@
 		</div>
 	</div>
 	<div class="form-group">
+		<label for="companyphone" class="col-sm-2 control-label">服务时间</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" id="servicetime" name="servicetime" value="${entity.servicetime}"
+				   placeholder="请输入服务时间">
+		</div>
+	</div>
+	<div class="form-group">
 		<label for="companyqr" class="col-sm-2 control-label">公司二维码</label>
 		<div class="col-sm-5">
 			<input type="text" class="form-control" id="companyqr" name="companyqr" value="${entity.companyqr}"
