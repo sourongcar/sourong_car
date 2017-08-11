@@ -22,29 +22,7 @@ public class CollectionController {
 	@Autowired
 	private CollectionService service;
 
-	/**
-	 * 用户的添加收藏功能
-	 */
-	@RequestMapping(value = "/doAdd",method = RequestMethod.POST)
-	public @ResponseBody JsonResult doAdd(Integer userId,Integer productId,HttpServletResponse response) {
-		response.setHeader("Access-Control-Allow-Origin", "*");
-		int status = service.insertCollectionItem(userId,productId);
-		JsonResult result = new JsonResult();
-		result.setStatus(status);
-		result.setMsg("收藏成功");
-		return result;
-	}
-
-	/*
-	 * 用户的取消收藏功能
-	 **/
-	@RequestMapping("/doDelete")
-	public @ResponseBody String doDelete(@RequestParam(required=true) Integer id,HttpServletResponse response) {
-		response.setHeader("Access-Control-Allow-Origin", "*");
-		service.delete(id);
-		System.out.println("取消成功");
-		return "删除成功";
-	}
+	
 	/**
 	 * 用户的查看“我的收藏”功能
 	 **/
@@ -62,10 +40,8 @@ public class CollectionController {
 	
 	
 	@RequestMapping("/operateUserCollection")
-	public @ResponseBody CollectionVO operateUserCollectionOnIndex(Integer userid,Integer productid,HttpServletResponse response){
+	public @ResponseBody CollectionVO operateUserCollection(@RequestParam(required=true)Integer userid,@RequestParam(required=true)Integer productid,HttpServletResponse response){
 		response.setHeader("Access-Control-Allow-Origin", "*");
-		System.out.println(userid);
-		System.out.println(productid);
 		return service.operateUserCollectionOnIndex(userid,productid);
 	}
 }

@@ -57,4 +57,6 @@ public interface ProductService {
 	 * 首页展示车信息
 	 */
 	Map<String,Object> listDisplay(int displayedCount);
+	
+	List<ProductVO> ofCartype(String name);
 }

@@ -104,7 +104,6 @@ public class CollectionServiceImp implements CollectionService {
 		CollectionVOExample example = new CollectionVOExample();
 		example.createCriteria().andUseridEqualTo(userid).andProductidEqualTo(productid);
 		List<CollectionVO> collectionVOList = cMapper.selectByExample(example);
-		System.out.println("----------------------------");
 		if(collectionVOList.size() != 0){
 			//如果数据库中存在记录则删除
 			cMapper.deleteByExample(example);
