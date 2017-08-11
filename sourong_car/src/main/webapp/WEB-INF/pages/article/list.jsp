@@ -107,7 +107,7 @@
 												}else if(row.type==1){
 													return "产品介绍";
 												}else if(row.type==2){
-													return "合作伙伴";
+													return "合作车行";
 												}									
 												},
 											"targets" : 3

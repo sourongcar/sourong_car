@@ -1,10 +1,14 @@
 package com.sourong.article.controller;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.base.common.domain.CurrentUser;
 import com.base.common.domain.JsonResult;
@@ -68,7 +72,22 @@ public class ArticleController {
 	 */
 	@RequestMapping("/rest/doSearch")
 	public @ResponseBody DataTablesResponse<ArticleVO> pageSearch(
-			@RequestBody DataTablesRequest request) throws Throwable{
+			@RequestBody DataTablesRequest request,HttpServletResponse response) throws Throwable{
+		
 		return service.listByPage(request);
 	}
+	/**
+	 * 获取介绍页文章
+	 * @param articleid
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/getArticle")
+	public @ResponseBody ArticleVO forMoreInformation(@RequestParam(required=true) Integer articleid,
+			HttpServletResponse response){
+		    response.setHeader("Access-Control-Allow-Origin", "*");
+		return service.get(articleid) ;
+	}
+	
+	
 }

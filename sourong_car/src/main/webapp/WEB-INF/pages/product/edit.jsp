@@ -31,7 +31,7 @@ label.fileup input[type=file] {
 					<label for="brandname" class="col-sm-2 control-label">品牌名</label>
 					<div class="col-sm-10">
 						<select type="text" class="form-control" id="brandname" name="brandname">
-							<c:forEach items="${brands }" var="b">
+							<c:forEach items="${brands}" var="b">
 							<option value="${b}"<c:if test="${entity.brandname eq b}"> selected</c:if>>${b}</option>
 							</c:forEach>
 						</select>

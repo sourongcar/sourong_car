@@ -48,14 +48,14 @@
    <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            	<form class="form-horizontal" role="form" action="${path }/cartype/doEdit.action" method="post" enctype="multipart/form-data">
+            	<form class="form-horizontal" role="form" action="${path }/cartype/docarEdit.action" method="post" enctype="multipart/form-data">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" id="myModalLabel">新增</h4>
             </div>
             <div class="modal-body">
 			<input type="hidden" name="cartypeid" value="${cartypeVO.cartypeid}">
-			<div class="form-group">
+			<div class="form-group" style="display: none">
 				<label for="brandid" class="col-sm-2 control-label">品牌编号</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="brandid" name="brandid" value="${brandVO.brandid}"

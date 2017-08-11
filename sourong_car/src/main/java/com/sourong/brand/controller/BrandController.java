@@ -135,7 +135,8 @@ public class BrandController {
 	}
     
 	@RequestMapping("/getList")
-	public @ResponseBody List<CartypeVO> getList(Integer brandid){	
+	public @ResponseBody List<CartypeVO> getList(Integer brandid,HttpServletResponse response){	
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		return carservice.getByBrandid(brandid);
 	}
 	

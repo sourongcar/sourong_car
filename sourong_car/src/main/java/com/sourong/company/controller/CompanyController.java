@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -89,5 +90,12 @@ public class CompanyController {
 	public @ResponseBody DataTablesResponse<CompanyVO> pageSearch(
 			@RequestBody DataTablesRequest request) throws Throwable{
 		return service.listByPage(request);
+	}
+	
+	
+	@RequestMapping("/getCompanyinformation")
+	public @ResponseBody CompanyVO getCompany(HttpServletResponse response){
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		return service.get(1);//跳转到分页查询页面
 	}
 }

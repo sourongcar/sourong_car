@@ -10,6 +10,8 @@ public class CompanyVO implements Serializable {
 
     private String companylogo;
 
+    private String servicetime;
+
     private String companyphone;
 
     private String companyqr;
@@ -44,6 +46,14 @@ public class CompanyVO implements Serializable {
 
     public void setCompanylogo(String companylogo) {
         this.companylogo = companylogo == null ? null : companylogo.trim();
+    }
+
+    public String getServicetime() {
+        return servicetime;
+    }
+
+    public void setServicetime(String servicetime) {
+        this.servicetime = servicetime == null ? null : servicetime.trim();
     }
 
     public String getCompanyphone() {
@@ -95,6 +105,7 @@ public class CompanyVO implements Serializable {
         sb.append(", companyid=").append(companyid);
         sb.append(", companyname=").append(companyname);
         sb.append(", companylogo=").append(companylogo);
+        sb.append(", servicetime=").append(servicetime);
         sb.append(", companyphone=").append(companyphone);
         sb.append(", companyqr=").append(companyqr);
         sb.append(", companyadress=").append(companyadress);
@@ -120,6 +131,7 @@ public class CompanyVO implements Serializable {
         return (this.getCompanyid() == null ? other.getCompanyid() == null : this.getCompanyid().equals(other.getCompanyid()))
             && (this.getCompanyname() == null ? other.getCompanyname() == null : this.getCompanyname().equals(other.getCompanyname()))
             && (this.getCompanylogo() == null ? other.getCompanylogo() == null : this.getCompanylogo().equals(other.getCompanylogo()))
+            && (this.getServicetime() == null ? other.getServicetime() == null : this.getServicetime().equals(other.getServicetime()))
             && (this.getCompanyphone() == null ? other.getCompanyphone() == null : this.getCompanyphone().equals(other.getCompanyphone()))
             && (this.getCompanyqr() == null ? other.getCompanyqr() == null : this.getCompanyqr().equals(other.getCompanyqr()))
             && (this.getCompanyadress() == null ? other.getCompanyadress() == null : this.getCompanyadress().equals(other.getCompanyadress()))
@@ -134,6 +146,7 @@ public class CompanyVO implements Serializable {
         result = prime * result + ((getCompanyid() == null) ? 0 : getCompanyid().hashCode());
         result = prime * result + ((getCompanyname() == null) ? 0 : getCompanyname().hashCode());
         result = prime * result + ((getCompanylogo() == null) ? 0 : getCompanylogo().hashCode());
+        result = prime * result + ((getServicetime() == null) ? 0 : getServicetime().hashCode());
         result = prime * result + ((getCompanyphone() == null) ? 0 : getCompanyphone().hashCode());
         result = prime * result + ((getCompanyqr() == null) ? 0 : getCompanyqr().hashCode());
         result = prime * result + ((getCompanyadress() == null) ? 0 : getCompanyadress().hashCode());
