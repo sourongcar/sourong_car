@@ -27,7 +27,7 @@ public class CollectionController {
 	private CollectionService service;
 
 	/**
-	 * 用户的添加收藏功能
+	 * 用户的添加收藏功能,详情页和主页都行
 	 */
 	@RequestMapping("/doAdd")
 	public @ResponseBody JsonResult doAdd(Integer userId,Integer productId,HttpServletResponse response) {
