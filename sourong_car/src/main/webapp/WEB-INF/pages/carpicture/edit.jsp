@@ -11,7 +11,7 @@
 
 
 <body>
-	<div class="container">
+	<div class="container" style="margin-top:10%">
 		<div class="row clearfix">
 			<div class="col-md-12 column">
 
@@ -24,26 +24,26 @@
 				
 					
 					<!--产品ID-->
-					<div class="form-group">
+					<div class="form-group" style="display:none">
 						<label for="productid" class="col-sm-2 control-label">图片ID</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="productid"
 								name="productid" value="${entity.productid}"
 								placeholder="请输入产品ID">
 						</div>
-					</div>
+					</div >
 					
 					
 					<!-- 图片上传2 -->
 					<div class="form-group">
-						<label for="picture" class="col-sm-2 control-label">图片上传</label>
+						<label for="pictures" class="col-sm-2 control-label"><h2>图片上传</h2></label>
 						<section class=" img-section">
 							<div class="z_photo upimg-div clear">
 							<input type="text" class="form-control" id="picture"
 								name="picture" value="${entity.picture}" style="display:none">
 								<section class="z_file fl">
-									<img src="${path}/resources/assets/images/img/a11.png" class="add-img">
-									 <input type="file" name="pictures" id="picture" class="file"
+									<img src="${path}/resources/assets/images/picupload/a11.png" class="add-img">
+									 <input type="file" name="file" id="file" class="file"
 										accept="image/jpg,image/jpeg,image/png,image/bmp"  multiple="multiple" />
 								</section>
 							</div>
@@ -72,35 +72,25 @@
 	</div>
 
 
-	<%@ include file="/WEB-INF/pages/common/rs_js.jsp"%>
+
 	<%@ include file="/WEB-INF/pages/common/imageUploadUtil_js.jsp"%>
 
 
 
 	<script type="text/javascript">
 		jQuery(function($) {
-
+			var id = ${productid}
+			console.log(id)
+		       if(id!=""){
+		    	   $("#productid").attr("value",id);
+		       }
 		});
 	</script>
 
-	<script src="js/jquery-2.1.1.min.js" type="text/javascript"></script>
+	<%-- <script src="${path}/resources/assets/js/jquery-2.0.3.min.js" type="text/javascript"></script> --%>
 
 	<script type="text/javascript">
-		$('#ssi-upload').ssi_uploader({
-			url : '#',
-			maxFileSize : 6,
-			allowed : [ 'jpg', 'gif', 'txt', 'png', 'pdf' ]
-		});
-		$('#ssi-upload2').ssi_uploader({
-			url : '#',
-			preview : false,
-			allowed : [ 'jpg', 'gif', 'txt', 'png', 'pdf' ]
-		});
-		$('#ssi-upload3').ssi_uploader({
-			url : '#',
-			dropZone : false,
-			allowed : [ 'jpg', 'gif', 'txt', 'png', 'pdf' ]
-		});
+
 	</script>	
 </body>
 </html>

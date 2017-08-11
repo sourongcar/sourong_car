@@ -31,9 +31,10 @@ public class CarpictureController {
 	private CarpictureService service;
 	
 	@RequestMapping("/edit")
-	public String edit(Integer id,ModelMap map){
-		if(id!=null){
-			map.addAttribute("entity",service.get(id));
+	public String edit(@RequestParam(value="productid",required=false)Integer productid,ModelMap map){
+		if(productid!=null){
+			map.addAttribute("entity",service.get(productid));
+			map.addAttribute("productid",productid);
 		}
 		return "carpicture/edit";//跳转到编辑页面
 	}
@@ -69,12 +70,10 @@ public class CarpictureController {
 
 	//上传图片并提交数据到数据库
 	@RequestMapping(value = "/doEdit",method=RequestMethod.POST,consumes={"multipart/form-data"})
-	public String doEdit(@RequestParam("pictures") MultipartFile[] pictures,CarpictureVO entity){
-
-		System.out.println("进入程序");
+	public String doEdit(@RequestParam("file") MultipartFile[] file,CarpictureVO entity){
 
 		//图片上传
-		if(pictures!=null){
+		if(file!=null){
 			//判断原来的picture是否为空
 			if(entity.getPicture()!=null||entity.getPicture()!=""){
 				//为空则进行删除
@@ -84,11 +83,11 @@ public class CarpictureController {
 				System.out.println("删除成功"); 
 			}
 			//把进来的图片进行循环读取
-			for(int i=0;i<pictures.length; i++){
+			for(int i=0;i<file.length; i++){
 				
-				String fileName=pictures[i].getOriginalFilename();
+				String fileName=file[i].getOriginalFilename();
 				//打印信息
-				System.out.println("图片大小"+pictures[i].getSize());
+				System.out.println("图片大小"+file[i].getSize());
 				System.out.println("图片名字"+fileName);
 				
 				String savename=UUID.randomUUID()+fileName.substring(fileName.lastIndexOf("."));
@@ -97,7 +96,7 @@ public class CarpictureController {
                 
                 
 				try {
-					pictures[i].transferTo(new File(savenpath));
+					file[i].transferTo(new File(savenpath));
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -118,11 +117,12 @@ public class CarpictureController {
 		}else{
 		if(entity.getCarpictureid()!=null){//修改
 			service.update(entity);		
+			System.out.println("修改数据");
 		}else{//新增
 			service.add(entity);
+			System.out.println("增加数据");
 		}
 		}
-		System.out.println("提交数据库");
 		return "redirect:/carpicture/list.action";//跳转到列表页面
 		
 	}	
@@ -138,7 +138,7 @@ public class CarpictureController {
 	
 	@RequestMapping("/list")
 	public String list(ModelMap map,@RequestParam(value="productid",required=false) Integer productid){
-		System.out.println("##############" + productid);
+		
 		map.addAttribute("productid", productid);
 		return "carpicture/list";//跳转到分页查询页面
 	}

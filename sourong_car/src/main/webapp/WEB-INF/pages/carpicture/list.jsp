@@ -23,7 +23,7 @@
 					placeholder="请输入产品类型">					
 				<button type="button" class="btn btn-default" id="search">查询</button> -->
 
-				<a  href="${path }/carpicture/edit.action" class="btn btn-primary" id="add">新增</a>
+				<a  href="${path }/carpicture/edit.action?productid=${productid}" class="btn btn-primary" id="add">新增</a>
 				
 			</div>
 			<div class="table-responsive">
@@ -32,10 +32,10 @@
 					<thead>
 						<tr>
 
-							<th>编号</th> 
+							<th style="width:10%">编号</th> 
 							<!-- <th>产品类型</th>  -->
 							<th>产品图</th>
-							<th>操作</th>
+							<th style="width:20%">操作</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -47,13 +47,13 @@
 	</div>
 	
 		<!-- 公司logo模态框（Modal） -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" style="left:-25%" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="left:0px;width:300px;height:300px">
-        <div class="modal-content" style="width:300px;height:300px" >
-           <div class="modal-body" style="width:300px;height:300px">
+        <div class="modal-content" style="width:550px;height:300px" >
+           <div class="modal-body" style="width:550px;height:300px">
 					<table>
 						<tr>
-							<td><img src="" id='companyqrcheck' style="width:250px;height:250px"></td>
+							<td><img src="" id='companyqrcheck' style="width:500px;height:250px"></td>
 						</tr>
 					</table>
 				</div>           
@@ -104,8 +104,9 @@
 									"type" : "POST",
 									"data" : function(pdata) {
 										var id = ${productid}
-										pdata.searchColumns={
-											"ProductidEqualTo":'${productid}'
+
+										pdata.searchColumns={//id位置注意双引号问题
+											"ProductidEqualTo":id
 										}
 										var data = JSON.stringify(pdata);
 										//JSON.parse();
