@@ -72,7 +72,7 @@
 					<value>getCompanyinformation.action</value>
 					<value>forMoreInformation.action</value>
 					<value>getDisplayList.action</value>
-					<value>product/rest/looping</value>
+					<value>product/rest/looping</value> 
 					<value>product/rest/display</value>
 					<value>configuration/rest/get</value>
 					<value>getCompanyinformation.action</value>
