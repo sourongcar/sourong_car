@@ -25,6 +25,7 @@ import com.base.datatables.domain.DataTablesResponse;
 import com.sourong.brand.service.BrandService;
 import com.sourong.cartype.service.CartypeService;
 import com.sourong.product.domain.ProductVO;
+import com.sourong.product.domain.ProductVOExt;
 import com.sourong.product.service.ProductService;
 
 @Controller
@@ -44,8 +45,8 @@ public class ProductController {
 		if (id != null) {
 			ProductVO entity = service.get(id);
 			Integer hit = entity.getHit();
-			if(hit==null){
-				hit=-1;
+			if (hit == null) {
+				hit = -1;
 			}
 			if (hit != 0 && service.countOfHit(0) >= 4) {// 首页限制4个
 				map.addAttribute("headfull", true);
@@ -53,9 +54,9 @@ public class ProductController {
 			if (hit != 1 && service.countOfHit(1) >= 6) {// 热门限制6个
 				map.addAttribute("hotfull", true);
 			}
-			String brandname=entity.getBrandname();
-			if(!brandNames.contains(brandname)){
-				brandname=brandNames.get(0);
+			String brandname = entity.getBrandname();
+			if (!brandNames.contains(brandname)) {
+				brandname = brandNames.get(0);
 			}
 			map.addAttribute("cartypes", cartypeService.of(brandname));
 			map.addAttribute("entity", entity);
@@ -90,7 +91,8 @@ public class ProductController {
 				default:
 					throw new IllegalArgumentException("图片类型错误");
 				}
-				String desName = "product/" + IDUtil.uuid() + '.' + FilenameUtils.getExtension(cover.getOriginalFilename());
+				String desName = "product/" + IDUtil.uuid() + '.'
+						+ FilenameUtils.getExtension(cover.getOriginalFilename());
 				cover.transferTo(new File(ConfigUtil.getValue("saveImage") + desName));
 				entity.setCoverpic(desName);
 			}
@@ -139,29 +141,44 @@ public class ProductController {
 	 */
 	@RequestMapping("/toggleVisibility")
 	public @ResponseBody String toggleVisibility(Integer id) {
+		if (id == null)
+			return null;
 		if (service.changeVisibility(id) == 1) {
 			return "success";
 		}
 		return "fail";
 	}
-	
+
 	@RequestMapping("/rest/looping")
 	public @ResponseBody List<ProductVO> listLoopingCar() {
 		return service.listLooping();
 	}
-	
+
 	@RequestMapping("/rest/display")
-	public @ResponseBody Map<String,Object> listDisplay(int offset) {
+	public @ResponseBody Map<String, Object> listDisplay(Integer offset) {
+		if (offset == null)
+			return null;
 		return service.listDisplay(offset);
 	}
-	
+
 	@RequestMapping("/rest/get")
-	public @ResponseBody ProductVO get(int id) {
+	public @ResponseBody ProductVO get(Integer id) {
+		if (id == null)
+			return null;
 		return service.get(id);
 	}
-	
+
+	@RequestMapping("/rest/getFull")
+	public @ResponseBody ProductVOExt getFull(Integer id) {
+		if (id == null)
+			return null;
+		return service.getFull(id);
+	}
+
 	@RequestMapping("/rest/getProductByCarType")
 	public @ResponseBody List<ProductVO> ofCartype(String cartype) {
+		if (cartype == null)
+			return null;
 		return service.ofCartype(cartype);
 	}
 }

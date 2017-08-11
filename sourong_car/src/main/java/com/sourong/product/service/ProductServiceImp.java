@@ -29,6 +29,7 @@ import com.sourong.product.dao.ProductVOMapper;
 import com.sourong.product.dao.ProductVOMapperExt;
 import com.sourong.product.domain.ProductVO;
 import com.sourong.product.domain.ProductVOExample;
+import com.sourong.product.domain.ProductVOExt;
 
 @Service
 public class ProductServiceImp implements ProductService {
@@ -212,12 +213,16 @@ public class ProductServiceImp implements ProductService {
 		return result;
 	}
 
+	@Override
+	public List<ProductVO> ofCartype(String name) {
+		ProductVOExample example=new ProductVOExample();
+		example.createCriteria().andCartypeEqualTo(name);
+		return mapper.selectByExample(example);
+	}
 
 	@Override
- 	public List<ProductVO> ofCartype(String name) {
- 		ProductVOExample example=new ProductVOExample();
- 		example.createCriteria().andCartypeEqualTo(name);
- 		return mapper.selectByExample(example);
- 	}
- 
+	public ProductVOExt getFull(int id) {
+		return mapperExt.getFull(id);
+	}
+
 }

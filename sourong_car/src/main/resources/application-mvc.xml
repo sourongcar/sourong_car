@@ -74,7 +74,7 @@
 					<value>getDisplayList.action</value>
 					<value>product/rest/looping</value> 
 					<value>product/rest/display</value>
-					<value>configuration/rest/get</value>
+					<value>product/rest/getFull</value>
 					<value>getCompanyinformation.action</value>
 					<value>doAdd.action</value>
 					<value>doDelete.action</value>

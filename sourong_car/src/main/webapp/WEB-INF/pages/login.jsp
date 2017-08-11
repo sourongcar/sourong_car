@@ -14,7 +14,8 @@ if(window !=top){
 </script>
 </head>
 
-<body class="login-layout" style="background:url(${path}/resources/assets/images/backgroundimage2.jpg) no-repeat 40%;background-size:130% 100% ">
+<body class="login-layout" style="background:#05121a; ">
+	<div style="position:absolute;text-align: center;"><img src="${path}/resources/assets/images/backgroundimage2.png" style="max-width: 100%;" ></div>
 	<div class="main-container">
 		<div class="main-content">
 			<div class="row">

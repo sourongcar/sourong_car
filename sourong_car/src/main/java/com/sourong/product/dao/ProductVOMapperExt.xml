@@ -16,4 +16,31 @@
 		AND isdisplay=0
 		ORDER BY hit ASC,productid DESC limit ${param1},${param2}
     </select>
+    <resultMap type="com.sourong.product.domain.ProductVOExt" id="productFull">
+    	<id column="productid" property="productid"/>
+    	<result column="marketprice" property="marketprice"/>
+    	<result column="sourongprice" property="sourongprice"/>
+    	<result column="title" property="title"/>
+    	<result column="brandname" property="brandname"/>
+    	<result column="cartype" property="cartype"/>
+    	<association property="configuration" javaType="com.sourong.configuration.domain.ConfigurationVO">
+	    	<result column="color" property="color"/>
+	    	<result column="comprehensiveoilconsumption" property="comprehensiveoilconsumption"/>
+	    	<result column="driverway" property="driverway"/>
+	    	<result column="engine" property="engine"/>
+	    	<result column="mainoilconsumption" property="mainoilconsumption"/>
+	    	<result column="size" property="size"/>
+	    	<result column="structure" property="structure"/>
+	    	<result column="transmissioncase" property="transmissioncase"/>
+	    	<result column="warranty" property="warranty"/>
+    	</association>
+    </resultMap>
+    <select id="getFull" resultMap="productFull" parameterType="int">
+    	SELECT p.productid,p.marketprice,p.sourongprice,p.title,p.brandname,p.cartype
+		,c.color,c.comprehensiveoilconsumption,c.driverway,c.`engine`
+		,c.mainoilconsumption,c.size,c.structure,c.transmissioncase,c.warranty
+		FROM s_product p left join s_configuration c
+		ON p.productid=c.productid
+		WHERE p.productid=#{id} AND p.isdisplay=0
+    </select>
 </mapper>

@@ -6,6 +6,7 @@ import java.util.Map;
 import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
 import com.sourong.product.domain.ProductVO;
+import com.sourong.product.domain.ProductVOExt;
 
 public interface ProductService {
 	public static final int HEAD_FULL=-1;
@@ -59,4 +60,6 @@ public interface ProductService {
 	Map<String,Object> listDisplay(int displayedCount);
 	
 	List<ProductVO> ofCartype(String name);
+	
+	ProductVOExt getFull(int id);
 }
