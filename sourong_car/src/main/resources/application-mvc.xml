@@ -69,6 +69,7 @@
 					<value>doLogin.action</value>
 					<value>register.action</value>
 					<value>getArticle.action</value>
+					<value>getCompanyinformation.action</value>
 					<value>forMoreInformation.action</value>
 					<value>getDisplayList.action</value>
 					<value>product/rest/looping</value>
