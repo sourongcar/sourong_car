@@ -59,11 +59,12 @@ public class CollectionController {
 	}
 
 	@RequestMapping("/ifBeCollected")
-	public @ResponseBody Map<Integer,Integer> ifBeCollected(Integer userid,@RequestParam(value="productIdList") List<Integer> productIdList,HttpServletResponse response){
+	public @ResponseBody List<CollectionVO> ifBeCollected(Integer userid,@RequestParam(value="productIdList") List<Integer> productIdList,HttpServletResponse response){
 		response.setHeader("Access-Control-Allow-Origin", "*");
+		System.out.println(productIdList);
+		System.out.println(userid);
 		Map<Integer,Integer> result = new HashMap<>();
-		service.ifBeCollected(userid,productIdList);
-		return result;
+		return service.ifBeCollected(userid,productIdList);
 	}
 }
 
