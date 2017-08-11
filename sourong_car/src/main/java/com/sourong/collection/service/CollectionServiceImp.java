@@ -86,28 +86,35 @@ public class CollectionServiceImp implements CollectionService {
 		CollectionVO collectionVO = new CollectionVO();
 		collectionVO.setUserid(userId);
 		collectionVO.setProductid(productId);
-		collectionVO.setTitle(collectionVO.getTitle());
-		collectionVO.setMarketprice(collectionVO.getMarketprice());
+		collectionVO.setTitle(productVO.getTitle());
+		collectionVO.setMarketprice(productVO.getMarketprice());
 		collectionVO.setSourongprice(productVO.getSourongprice());
-		collectionVO.setCoverpic(collectionVO.getCoverpic());
+		collectionVO.setCoverpic(productVO.getCoverpic());
 		return cMapper.insertSelective(collectionVO);	
 	}
 	@Override
 	public List<CollectionVO> ifBeCollected(Integer userid, List<Integer> productIdList) {
 		CollectionVOExample example = new CollectionVOExample();
 		List<Criteria> criteriaList = example.getOredCriteria();
-		for(Integer productId : productIdList){
-			Criteria criteria = example.createCriteria();
-			criteria.andProductidEqualTo(productId);
-			criteriaList.add(criteria);
-		}
-		example.createCriteria().andUseridEqualTo(userid);
+		example.createCriteria().andUseridEqualTo(userid).andProductidIn(productIdList);
 		return cMapper.selectByExample(example);
 	}
-	//收藏的取消功能
-		public void cancle(Integer userid, Integer productid) {
-			// TODO Auto-generated method stub
-			cMapper.deleteByUserAndPro(userid, productid);
-		
+	@Override
+	public CollectionVO operateUserCollectionOnIndex(Integer userid, Integer productid) {
+		CollectionVOExample example = new CollectionVOExample();
+		example.createCriteria().andUseridEqualTo(userid).andProductidEqualTo(productid);
+		List<CollectionVO> collectionVOList = cMapper.selectByExample(example);
+		System.out.println("----------------------------");
+		if(collectionVOList.size() != 0){
+			//如果数据库中存在记录则删除
+			cMapper.deleteByExample(example);
+			CollectionVO collectionVO = new CollectionVO();
+			collectionVO.setProductid(-1);
+			return collectionVO;
+		}else{
+			//不存在则插入记录
+			this.insertCollectionItem(userid, productid);
+			return cMapper.selectByExample(example).get(0);
+		}
 	}
 }
