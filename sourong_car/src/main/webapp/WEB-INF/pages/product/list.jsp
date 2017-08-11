@@ -247,7 +247,7 @@
 											"render" : function(data, type, row) {
 												//return '<p:permission privilege="com.base.product.controller.ProductController:doEdit"><a href="${path }/product/edit.action?id='+data+'" class="tooltip-success" data-rel="tooltip" title="修改"><span class="green"><i class="icon-edit bigger-120"></i>修改</a></p:permission>&nbsp;&nbsp;'
 												//+'<p:permission privilege="com.base.product.controller.ProductController:doDelete"><a href="javascript:void(0)" onclick="del(\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="删除"><span class="red"><i class="icon-trash bigger-120"></i>删除</a></p:permission>';
-												return '<a href="javascript:void(0)" onclick="showConfig(\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="删除"><span class="orange"><i class="icon-cog bigger-120"></i>查看配置</a>';
+												return '<a href="javascript:void(0)" onclick="showConfig(\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="查看配置"><span class="orange"><i class="icon-cog bigger-120"></i>查看配置</a>';
 											},
 											"targets" : 2
 										},
@@ -280,7 +280,7 @@
 												return '<a href="${path }/product/edit.action?id='+data+'" class="tooltip-success" data-rel="tooltip" title="修改"><span class="green"><i class="icon-edit bigger-120"></i></span></a>&nbsp;'
 												+'<a href="javascript:void(0)" onclick="del(\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="删除"><span class="red"><i class="icon-trash bigger-120"></i></span></a>&nbsp;'
 												+'<a href="javascript:void(0)" onclick="toggleshow(this,\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="是否展示"><span class="blue"><i class="icon-eye-'+(row.isdisplay==0?'open':'close')+' bigger-120"></i></span></a>&nbsp;'//
-												+'<a href="${path}/carpicture/list.action" class="tooltip-error" data-rel="tooltip" title="展示图片"><span class="grey"><i class="icon-picture bigger-120"></i></span></a>';
+												+'<a href="${path}/carpicture/list.action?productid='+row.productid+'" class="tooltip-error" data-rel="tooltip" title="展示图片"><span class="grey"><i class="icon-picture bigger-120"></i></span></a>';
 											},
 											"targets" : 10
 										} ],
@@ -390,7 +390,7 @@
 		//车辆配置
 		function showConfig(configId){
 			$.ajax({
-				"url" : "${path }/configuration/get.action?id="+configId,
+				"url" : "${path }/configuration/rest/get.action?id="+configId,
 				dataType : "json",
 				contentType : 'application/json;charset=UTF-8',
 				success:function(data){
