@@ -212,7 +212,7 @@ public class ProductServiceImp implements ProductService {
 		return result;
 	}
 
-	
+
 	@Override
  	public List<ProductVO> ofCartype(String name) {
  		ProductVOExample example=new ProductVOExample();

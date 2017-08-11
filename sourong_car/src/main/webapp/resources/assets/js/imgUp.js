@@ -1,59 +1,60 @@
 $(function(){
 	var delParent;
+	var limit=8;
 	var defaults = {
 		fileType         : ["jpg","png","bmp","jpeg"],   // 上传文件的类型
 		fileSize         : 1024 * 1024 * 10                  // 上传文件的大小 10M
 	};
 		/*点击图片的文本框*/
 	$(".file").change(function(){
-		var idFile = $(this).attr("id");
-		var file = document.getElementById(idFile);
-		var imgContainer = $(this).parents(".z_photo"); //存放图片的父亲元素
+		var self=$(this);
+		var file = self[0];
+		var imgContainer = self.parents(".z_photo"); //存放图片的父亲元素
 		var fileList = file.files; //获取的图片文件
 
-		var input = $(this).parent();//文本框的父亲元素
+		var input = self.parent();//文本框的父亲元素
 		var imgArr = [];
 		//遍历得到的图片文件
 		var numUp = imgContainer.find(".up-section").length;
 		var totalNum = numUp + fileList.length;  //总的数量
-		if(fileList.length > 8 || totalNum > 8 ){
-			alert("上传图片数目不可以超过8个，请重新选择");  //一次选择上传超过8个 或者是已经上传和这次上传的到的总数也不可以超过5个
+		if(fileList.length>1){
+			alert("一次只能上传1个图片，只上传第一个");
+		}else if(totalNum > limit ){
+			alert("上传图片数目不可以超过"+limit+"个，请重新选择");  //一次选择上传超过8个 或者是已经上传和这次上传的到的总数也不可以超过5个
 		}
-		else if(numUp < 8){
+		else if(fileList.length==1){
 			fileList = validateUp(fileList);
-			for(var i = 0;i<fileList.length;i++){
-			 var imgUrl = window.URL.createObjectURL(fileList[i]);
-			     imgArr.push(imgUrl);
-			 var $section = $("<section class='up-section fl loading'>");
+			var imgUrl = window.URL.createObjectURL(fileList[0]);
+			    imgArr.push(imgUrl);
+			var $section = $("<section class='up-section fl loading'>");
 			     imgContainer.prepend($section);
-			 var $span = $("<span class='up-span'>");
+			var $span = $("<span class='up-span'>");
 			     $span.appendTo($section);
 			
-		     var $img0 = $("<img class='close-upimg'>").on("click",function(event){
+		     var $img0 = $("<button class='close-upimg'>&times;</button>").on("click",function(event){
 				    event.preventDefault();
 					event.stopPropagation();
 					$(".works-mask").show();
 					delParent = $(this).parent();
-				});   
-				$img0.attr("src","/sourong_car/resources/assets/images/picupload/a7.png").appendTo($section);
+				}).appendTo($section);
 		     var $img = $("<img class='up-img up-opcity'>");
-		         $img.attr("src",imgArr[i]);
+		         $img.attr("src",imgArr[0]);
 		         $img.appendTo($section);
 		     var $p = $("<p class='img-name-p'>");
-		         $p.html(fileList[i].name).appendTo($section);
+		         $p.html(fileList[0].name).appendTo($section);
 		     var $input = $("<input id='taglocation' name='taglocation' value='' type='hidden'>");
 		         $input.appendTo($section);
 		     var $input2 = $("<input id='tags' name='tags' value='' type='hidden'/>");
 		         $input2.appendTo($section);
-		      
-		   }
+		     self.removeClass('file').unbind('change').appendTo($section);
+		     $('<input type="file" name="file" class="file" accept="image/jpg,image/jpeg,image/png,image/bmp">').change(arguments.callee).appendTo(input);
 		}
 		setTimeout(function(){
              $(".up-section").removeClass("loading");
 		 	 $(".up-img").removeClass("up-opcity");
 		 },450);
 		 numUp = imgContainer.find(".up-section").length;
-		if(numUp >= 8){
+		if(numUp >= limit){
 			$(this).parent().hide();
 		}
 		
@@ -69,8 +70,8 @@ $(function(){
 		
 	$(".wsdel-ok").click(function(){
 		$(".works-mask").hide();
-		var numUp = delParent.siblings().length;
-		if(numUp < 9){
+		var numUp = delParent.siblings('.up-section').length;
+		if(numUp < limit){
 			delParent.parent().find(".z_file").show();
 		}
 		 delParent.remove();
@@ -108,26 +109,5 @@ $(function(){
 			return arrFiles;
 		}
 		
-
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 })

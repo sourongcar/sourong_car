@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.base.common.domain.CurrentUser;
 import com.base.common.domain.JsonResult;
 import com.base.common.util.ConfigUtil;
 import com.base.datatables.domain.DataTablesRequest;
@@ -73,7 +72,7 @@ public class CarpictureController {
 	public String doEdit(@RequestParam("file") MultipartFile[] file,CarpictureVO entity){
 
 		//图片上传
-		if(file!=null){
+		if(file!=null&&file.length>0){
 			//判断原来的picture是否为空
 			if(entity.getPicture()!=null||entity.getPicture()!=""){
 				//为空则进行删除
@@ -84,15 +83,18 @@ public class CarpictureController {
 			}
 			//把进来的图片进行循环读取
 			for(int i=0;i<file.length; i++){
+				if(file[i].getSize()<=0){
+					continue;
+				}
 				
 				String fileName=file[i].getOriginalFilename();
 				//打印信息
 				System.out.println("图片大小"+file[i].getSize());
 				System.out.println("图片名字"+fileName);
-				
-				String savename=UUID.randomUUID()+fileName.substring(fileName.lastIndexOf("."));
+				int index=fileName.lastIndexOf(".");
+				String savename=UUID.randomUUID()+(index>0?fileName.substring(fileName.lastIndexOf(".")):"");
 				String savenpath=ConfigUtil.getValue("saveImage")+savename;
-					System.out.println("成功储存");
+				System.out.println("成功储存");
                 
                 
 				try {
