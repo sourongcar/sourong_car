@@ -78,8 +78,12 @@
 					<value>getCompanyinformation.action</value>
 					<value>doAdd.action</value>
 					<value>doDelete.action</value>
+					<value>product/rest/getProductByCarType</value>
+					<value>product/rest/getProductBybrandname</value>
 					<value>ifBeCollected.action</value>
 					<value>operateUserCollection.action</value>
+					<value>brand/weblist</value>
+					<value>brand/getList</value>
 				</list>
 			</property>
 		</bean>

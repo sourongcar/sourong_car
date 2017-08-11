@@ -95,7 +95,6 @@ $(document).ready(function(){
 							var isRead = ${requestScope.isRead};
 							pdata.searchColumns={"IsreplyEqualTo":isRead,"UsernameLike":$('#username').val()};
 							var data = JSON.stringify(pdata);
-							console.log(pdata);
 							return data;
 						},
 						dataType : "json",
@@ -216,18 +215,24 @@ $(document).ready(function(){
 					"data":{"id":id},
 					"dataType":"json",
 					"success":function(data){
-						console.log(data);
-						var htmlcore =    '<div class="form-group"><label for="brandname" class="col-sm-2 control-label"></div></div>';
-						var brandname=    '品牌名:</label><div class="col-sm-10"><p  class=" col-xs-10" style="top: 5px">'+data.brandname+'</p></div></div>' ;
-						var cartype=      '车型:</label><div class="col-sm-10"><p class=" col-xs-10" style="top: 5px">'+data.type+'</p></div></div>' ;
-						var marketprice = '市价:</label><div class="col-sm-10"><p  class="col-xs-10" style="top: 5px">'+data.marketprice+'</p></div></div>' ;
-						var sourongprice ='搜融价:</label><div class="col-sm-10"><p  class="col-xs-10" style="top: 5px">'+data.sourongprice+'</p></div></div>' ;
-						var coverpic =    '封面图片:</label><div class="col-sm-10"><img  class="col-xs-10" src="'+data.coverpic+'" style="top: 5px;width:300px;height:150px"></div></div>' ;
+						if(data.coverpic==null){
+							data.coverpic='${path}/resources/assets/images/nocoverpic.png';
+							
+						}
+						var htmlcore =    '<div class="form-group"><label for="brandname" class="col-sm-2 control-label">';
+						var brandname=    '品牌名:</label><div class="col-sm-10"><p  class=" col-xs-10" >'+data.brandname+'</p></div></div>' ;
+						var cartype=      '车型:</label><div class="col-sm-10"><p class=" col-xs-10" >'+data.cartype+'</p></div></div>' ;
+						var marketprice = '市价:</label><div class="col-sm-10"><p  class="col-xs-10" >'+data.marketprice+'</p></div></div>' ;
+						var sourongprice ='搜融价:</label><div class="col-sm-10"><p  class="col-xs-10" >'+data.sourongprice+'</p></div></div>' ;
+						var coverpic =    '封面图片:</label><div class="col-sm-10"><img  class="col-xs-10" src="'+data.coverpic+'" style="width:300px;height:150px"></div></div>' ;
 						$('.modal-title').text('产品信息');
+						$('.modal-footer').css('border-top','0px');
 						$(".modal-body").html(htmlcore+brandname+htmlcore+cartype+htmlcore+marketprice+htmlcore+sourongprice+htmlcore+coverpic)				
 					},
 					"error":function(data){
-						alert("请求失败，请稍后再试");
+						$('.modal-title').text('产品信息');
+						$('.modal-footer').css('border-top','0px');
+						$(".modal-body").html("<h3 style='text-align:center'>产品不存在或者已下线</h3>")
 					}
 			  })
 		 }		 

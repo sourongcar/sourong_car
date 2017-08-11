@@ -225,4 +225,11 @@ public class ProductServiceImp implements ProductService {
 		return mapperExt.getFull(id);
 	}
 
+	@Override
+	public List<ProductVO> ofbrandname(String name) {
+		ProductVOExample example=new ProductVOExample();
+		example.createCriteria().andBrandnameEqualTo(name);
+		return mapper.selectByExample(example);
+	}
+
 }

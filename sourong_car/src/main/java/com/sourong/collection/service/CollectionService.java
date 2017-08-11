@@ -72,5 +72,5 @@ public interface CollectionService {
 	 * @return
 	 */
 	public CollectionVO operateUserCollectionOnIndex(Integer userid, Integer productid);
-	
+
 }

@@ -1,9 +1,11 @@
 package com.sourong.product.controller;
 
 import java.io.File;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.commons.io.FilenameUtils;
@@ -176,9 +178,19 @@ public class ProductController {
 	}
 
 	@RequestMapping("/rest/getProductByCarType")
-	public @ResponseBody List<ProductVO> ofCartype(String cartype) {
+	public @ResponseBody List<ProductVO> ofCartype(String cartype,HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		if (cartype == null)
 			return null;
 		return service.ofCartype(cartype);
+	}
+	@RequestMapping("/rest/getProductBybrandname")
+	public @ResponseBody List<ProductVO> ofbrandname(Integer id,HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		if (id== null)
+			return null;
+		System.out.println(id);
+		String brandname = brandService.getbybrandid(id).get(0).getBrandname();
+		return service.ofbrandname(brandname);
 	}
 }

@@ -43,6 +43,7 @@ public interface BrandService {
 	List<String> names();
 	
 	public List<BrandVO> list()throws Throwable;
+	public List<BrandVO> getbybrandid(Integer brandid);
 	
 
 }

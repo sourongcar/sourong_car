@@ -82,6 +82,12 @@ public class BrandServiceImp implements BrandService {
 		example.createCriteria();
 		return mapper.selectByExample(example);
 	}
+	@Override
+	public List<BrandVO> getbybrandid(Integer brandid) {
+		BrandVOExample example=new BrandVOExample();
+		example.createCriteria().andBrandidEqualTo(brandid);
+		return mapper.selectByExample(example);
+	}
 	
 	
 	

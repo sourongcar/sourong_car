@@ -60,6 +60,7 @@ public interface ProductService {
 	Map<String,Object> listDisplay(int displayedCount);
 	
 	List<ProductVO> ofCartype(String name);
+	List<ProductVO> ofbrandname(String name);
 	
 	ProductVOExt getFull(int id);
 }
