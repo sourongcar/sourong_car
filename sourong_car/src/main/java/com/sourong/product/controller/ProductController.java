@@ -159,4 +159,9 @@ public class ProductController {
 	public @ResponseBody ProductVO get(int id) {
 		return service.get(id);
 	}
+	
+	@RequestMapping("/rest/getProductByCarType")
+	public @ResponseBody List<ProductVO> ofCartype(String cartype) {
+		return service.ofCartype(cartype);
+	}
 }
