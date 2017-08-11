@@ -55,7 +55,7 @@ public class CollectionController {
 
 	Controller
 		 * 用户的详情页取消收藏功能
-		 **/
+		 **/ 
 		@RequestMapping("/doCancel")
 		public @ResponseBody String doCancel(@RequestParam(required=true) Integer userid,
 				@RequestParam(required=true) Integer productid,
