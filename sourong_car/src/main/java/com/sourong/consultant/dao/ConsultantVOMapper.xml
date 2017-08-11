@@ -122,7 +122,7 @@
       #{replyresult,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{changetime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.sourong.consultant.domain.ConsultantVO" useGeneratedKeys="true" keyProperty="id" >
+  <insert id="insertSelective" parameterType="com.sourong.consultant.domain.ConsultantVO" useGeneratedKeys="true" keyProperty="consultantid" >
     insert into s_consultant
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="consultantid != null" >
