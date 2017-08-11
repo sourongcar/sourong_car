@@ -63,6 +63,7 @@ public interface CollectionService {
 	 * @return
 	 */
 	public List<CollectionVO> ifBeCollected(Integer userid, List<Integer> productIdList);
+	public void cancle(Integer userid, Integer productid);
 	
 
 }

@@ -78,6 +78,7 @@
 					<value>getCompanyinformation.action</value>
 					<value>doAdd.action</value>
 					<value>doDelete.action</value>
+					<value>doCancel.action</value>
 					<value>ifBeCollected.action</value>
 				</list>
 			</property>

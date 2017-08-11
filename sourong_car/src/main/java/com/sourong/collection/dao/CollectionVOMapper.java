@@ -27,4 +27,6 @@ public interface CollectionVOMapper {
     int updateByPrimaryKeySelective(CollectionVO record);
 
     int updateByPrimaryKey(CollectionVO record);
+
+	void deleteByUserAndPro(Integer userid, Integer productid);
 }

@@ -104,4 +104,10 @@ public class CollectionServiceImp implements CollectionService {
 		example.createCriteria().andUseridEqualTo(userid);
 		return cMapper.selectByExample(example);
 	}
+	//收藏的取消功能
+		public void cancle(Integer userid, Integer productid) {
+			// TODO Auto-generated method stub
+			cMapper.deleteByUserAndPro(userid, productid);
+		
+	}
 }

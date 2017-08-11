@@ -49,6 +49,22 @@ public class CollectionController {
 		System.out.println("取消成功");
 		return "删除成功";
 	}
+	
+	/*
+
+
+	Controller
+		 * 用户的详情页取消收藏功能
+		 **/
+		@RequestMapping("/doCancel")
+		public @ResponseBody String doCancel(@RequestParam(required=true) Integer userid,
+				@RequestParam(required=true) Integer productid,
+				HttpServletResponse response) {
+			response.setHeader("Access-Control-Allow-Origin", "*");
+			service.cancle(userid,productid);
+			return "删除成功";
+		}
+
 	/**
 	 * 用户的查看“我的收藏”功能
 	 **/
