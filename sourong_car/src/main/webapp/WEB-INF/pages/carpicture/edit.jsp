@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>xx编辑页面</title>
+<title>汽车展示编辑页面</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <%@ include file="/WEB-INF/pages/common/rs_css.jsp"%>
 <%@ include file="/WEB-INF/pages/common/imageUploadUtil_css.jsp"%>
@@ -42,9 +42,9 @@
 							<input type="text" class="form-control" id="picture"
 								name="picture" value="${entity.picture}" style="display:none">
 								<section class="z_file fl">
-									<img src="${path}/resources/assets/images/picupload/a11.png" class="add-img">
-									 <input type="file" name="file" id="file" class="file"
-										accept="image/jpg,image/jpeg,image/png,image/bmp"  multiple="multiple" />
+									<div<%--  src="${path}/resources/assets/images/picupload/a11.png" --%> class="add-img"></div>
+									 <input type="file" name="file" class="file"
+										accept="image/jpg,image/jpeg,image/png,image/bmp" />
 								</section>
 							</div>
 						</section>
