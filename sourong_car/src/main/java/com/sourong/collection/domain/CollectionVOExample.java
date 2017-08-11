@@ -516,73 +516,73 @@ public class CollectionVOExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andCoverpictIsNull() {
-            addCriterion("coverpict is null");
+        public Criteria andCoverpicIsNull() {
+            addCriterion("coverpic is null");
             return (Criteria) this;
         }
 
-        public Criteria andCoverpictIsNotNull() {
-            addCriterion("coverpict is not null");
+        public Criteria andCoverpicIsNotNull() {
+            addCriterion("coverpic is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCoverpictEqualTo(String value) {
-            addCriterion("coverpict =", value, "coverpict");
+        public Criteria andCoverpicEqualTo(String value) {
+            addCriterion("coverpic =", value, "coverpic");
             return (Criteria) this;
         }
 
-        public Criteria andCoverpictNotEqualTo(String value) {
-            addCriterion("coverpict <>", value, "coverpict");
+        public Criteria andCoverpicNotEqualTo(String value) {
+            addCriterion("coverpic <>", value, "coverpic");
             return (Criteria) this;
         }
 
-        public Criteria andCoverpictGreaterThan(String value) {
-            addCriterion("coverpict >", value, "coverpict");
+        public Criteria andCoverpicGreaterThan(String value) {
+            addCriterion("coverpic >", value, "coverpic");
             return (Criteria) this;
         }
 
-        public Criteria andCoverpictGreaterThanOrEqualTo(String value) {
-            addCriterion("coverpict >=", value, "coverpict");
+        public Criteria andCoverpicGreaterThanOrEqualTo(String value) {
+            addCriterion("coverpic >=", value, "coverpic");
             return (Criteria) this;
         }
 
-        public Criteria andCoverpictLessThan(String value) {
-            addCriterion("coverpict <", value, "coverpict");
+        public Criteria andCoverpicLessThan(String value) {
+            addCriterion("coverpic <", value, "coverpic");
             return (Criteria) this;
         }
 
-        public Criteria andCoverpictLessThanOrEqualTo(String value) {
-            addCriterion("coverpict <=", value, "coverpict");
+        public Criteria andCoverpicLessThanOrEqualTo(String value) {
+            addCriterion("coverpic <=", value, "coverpic");
             return (Criteria) this;
         }
 
-        public Criteria andCoverpictLike(String value) {
-            addCriterion("coverpict like", value, "coverpict");
+        public Criteria andCoverpicLike(String value) {
+            addCriterion("coverpic like", value, "coverpic");
             return (Criteria) this;
         }
 
-        public Criteria andCoverpictNotLike(String value) {
-            addCriterion("coverpict not like", value, "coverpict");
+        public Criteria andCoverpicNotLike(String value) {
+            addCriterion("coverpic not like", value, "coverpic");
             return (Criteria) this;
         }
 
-        public Criteria andCoverpictIn(List<String> values) {
-            addCriterion("coverpict in", values, "coverpict");
+        public Criteria andCoverpicIn(List<String> values) {
+            addCriterion("coverpic in", values, "coverpic");
             return (Criteria) this;
         }
 
-        public Criteria andCoverpictNotIn(List<String> values) {
-            addCriterion("coverpict not in", values, "coverpict");
+        public Criteria andCoverpicNotIn(List<String> values) {
+            addCriterion("coverpic not in", values, "coverpic");
             return (Criteria) this;
         }
 
-        public Criteria andCoverpictBetween(String value1, String value2) {
-            addCriterion("coverpict between", value1, value2, "coverpict");
+        public Criteria andCoverpicBetween(String value1, String value2) {
+            addCriterion("coverpic between", value1, value2, "coverpic");
             return (Criteria) this;
         }
 
-        public Criteria andCoverpictNotBetween(String value1, String value2) {
-            addCriterion("coverpict not between", value1, value2, "coverpict");
+        public Criteria andCoverpicNotBetween(String value1, String value2) {
+            addCriterion("coverpic not between", value1, value2, "coverpic");
             return (Criteria) this;
         }
 

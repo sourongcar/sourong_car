@@ -146,7 +146,7 @@ public class ProductServiceImp implements ProductService {
 		CollectionVOExample collectionExample = new CollectionVOExample();
 		collectionExample.createCriteria().andProductidEqualTo(entity.getProductid());
 		CollectionVO collection = new CollectionVO();
-		collection.setCoverpict(entity.getCoverpic());
+		collection.setCoverpic(entity.getCoverpic());
 		collection.setMarketprice(entity.getMarketprice());
 		collection.setSourongprice(entity.getSourongprice());
 		collection.setTitle(entity.getTitle());
