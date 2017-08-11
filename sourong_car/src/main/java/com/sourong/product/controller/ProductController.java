@@ -154,4 +154,9 @@ public class ProductController {
 	public @ResponseBody Map<String,Object> listDisplay(int offset) {
 		return service.listDisplay(offset);
 	}
+	
+	@RequestMapping("/rest/get")
+	public @ResponseBody ProductVO get(int id) {
+		return service.get(id);
+	}
 }
