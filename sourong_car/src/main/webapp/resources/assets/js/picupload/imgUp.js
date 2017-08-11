@@ -91,7 +91,7 @@ $(function(){
 				var newStr = file.name.split("").reverse().join("");
 				if(newStr.split(".")[0] != null){
 						var type = newStr.split(".")[0].split("").reverse().join("");
-						console.log(type+"===type===");
+						
 						if(jQuery.inArray(type, defaults.fileType) > -1){
 							// 类型符合，可以上传
 							if (file.size >= defaults.fileSize) {

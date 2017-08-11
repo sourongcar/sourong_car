@@ -6,7 +6,6 @@
 <meta charset="utf-8" />
 <title>介绍页面编辑页面</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<%-- <%@ include file="/WEB-INF/pages/common/rs_css.jsp"%> --%>
 <%@ include file="/WEB-INF/pages/common/rs_picupload_css.jsp"%>
 <body>
 <h2 style="text-align:center;margin-top:5%">介绍页面管理</h2>
@@ -64,7 +63,8 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>	
-<%@ include file="/WEB-INF/pages/common/rs_js.jsp"%>
+<%-- <%@ include file="/WEB-INF/pages/common/rs_js.jsp"%> --%>
+	<%@ include file="/WEB-INF/pages/common/rs_picupload_js.jsp"%>
 <%@ include file="/WEB-INF/pages/common/baiduEditor_js.jsp"%>
 <script type="text/javascript">
 		jQuery(function($) {
