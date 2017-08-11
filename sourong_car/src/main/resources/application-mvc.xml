@@ -75,6 +75,7 @@
 					<value>configuration/rest/get</value>
 					<value>doAdd.action</value>
 					<value>doDelete.action</value>
+					<value>ifBeCollected.action</value>
 				</list>
 			</property>
 		</bean>

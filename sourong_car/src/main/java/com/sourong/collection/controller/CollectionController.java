@@ -1,6 +1,8 @@
 package com.sourong.collection.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,18 +30,13 @@ public class CollectionController {
 	 * 用户的添加收藏功能
 	 */
 	@RequestMapping("/doAdd")
-	public @ResponseBody int doAdd(CollectionVO entity,HttpServletResponse response) {
+	public @ResponseBody JsonResult doAdd(Integer userId,Integer productId,HttpServletResponse response) {
 		response.setHeader("Access-Control-Allow-Origin", "*");
-		/*
-		 * CurrentUser user = CurrentUser.getInstance();
-		 * //entity.setCreatorUserId(user.getUserId());//创建者id
-		 * if(entity.getUserid()!=null){//修改 service.update(entity); }else{//新增
-		 * service.add(entity); }
-		 */
-		service.add(entity);
-		int id=entity.getCollectionid();
-		System.out.println("id是"+id);
-		return id;
+		int status = service.insertCollectionItem(userId,productId);
+		JsonResult result = new JsonResult();
+		result.setStatus(status);
+		result.setMsg("收藏成功");
+		return result;
 	}
 
 	/*
@@ -52,15 +49,6 @@ public class CollectionController {
 		System.out.println("取消成功");
 		return "删除成功";
 	}
-/*	@RequestMapping("/doDelete")
-	public @ResponseBody JsonResult doDelete(Integer id) {
-		JsonResult rs = new JsonResult();
-		service.delete(id);
-		rs.setStatus(1);
-		rs.setMsg("收藏已取消！");
-		return rs;
-	}
-*/
 	/**
 	 * 用户的查看“我的收藏”功能
 	 **/
@@ -70,23 +58,13 @@ public class CollectionController {
 		return service.getDisplayList(userid);
 	}
 
+	@RequestMapping("/ifBeCollected")
+	public @ResponseBody Map<Integer,Integer> ifBeCollected(Integer userid,@RequestParam(value="productIdList") List<Integer> productIdList,HttpServletResponse response){
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		Map<Integer,Integer> result = new HashMap<>();
+		service.ifBeCollected(userid,productIdList);
+		return result;
+	}
 }
 
-/*
- * @RequestMapping("/list") public String list(){ return
- * "collection/list";//跳转到分页查询页面 }
- *//**
-	 * datatable分页查询接口
-	 * 
-	 * @param request
-	 * @return
-	 * @throws Throwable
-	 *//*
-		 * @RequestMapping("/rest/doSearch") public @ResponseBody
-		 * DataTablesResponse<CollectionVO> pageSearch(
-		 * 
-		 * @RequestBody DataTablesRequest request) throws Throwable{ return
-		 * service.listByPage(request); }
-		 * 
-		 */
 
