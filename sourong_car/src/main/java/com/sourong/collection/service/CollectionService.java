@@ -63,7 +63,14 @@ public interface CollectionService {
 	 * @return
 	 */
 	public List<CollectionVO> ifBeCollected(Integer userid, List<Integer> productIdList);
-	public void cancle(Integer userid, Integer productid);
 	
-
+	
+	/**
+	 * 操作首页的收藏功能
+	 * @param userid 当前登陆用户的id
+	 * @param productid 首页轮播图车辆的id
+	 * @return
+	 */
+	public CollectionVO operateUserCollectionOnIndex(Integer userid, Integer productid);
+	
 }
