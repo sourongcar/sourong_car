@@ -1,5 +1,7 @@
 package com.sourong.carpicture.service;
 
+import java.util.List;
+
 import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
 import com.sourong.carpicture.domain.CarpictureVO;
@@ -37,5 +39,5 @@ public interface CarpictureService {
 	 */
 	public DataTablesResponse<CarpictureVO> listByPage(DataTablesRequest request) throws Throwable;
 	
-	
+	List<CarpictureVO> listFull(int productid);
 }

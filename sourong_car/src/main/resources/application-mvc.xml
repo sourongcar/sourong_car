@@ -84,6 +84,7 @@
 					<value>operateUserCollection.action</value>
 					<value>brand/weblist</value>
 					<value>brand/getList</value>
+					<value>carpicture/rest/getFull</value>
 				</list>
 			</property>
 		</bean>

@@ -2,7 +2,11 @@ package com.sourong.carpicture.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -154,5 +158,14 @@ public class CarpictureController {
 	public @ResponseBody DataTablesResponse<CarpictureVO> pageSearch(
 			@RequestBody DataTablesRequest request) throws Throwable{
 		return service.listByPage(request);
+	}
+	
+	@RequestMapping("/rest/getFull")
+	public @ResponseBody List<CarpictureVO> getFull(Integer productid,HttpServletResponse response){
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		if(productid==null){
+			return null;
+		}
+		return service.listFull(productid);
 	}
 }

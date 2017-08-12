@@ -1,5 +1,7 @@
 package com.sourong.carpicture.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.base.common.util.SearchConditionUtils;
@@ -62,6 +64,13 @@ public class CarpictureServiceImp implements CarpictureService {
 		response.setData(mapper.selectByExample(example));
 		return response;
 		
+	}
+	@Override
+	public List<CarpictureVO> listFull(int productid) {
+		CarpictureVOExample example = new CarpictureVOExample();
+		example.createCriteria().andProductidEqualTo(productid);
+		example.setOrderByClause("islooping asc");
+		return mapper.selectByExample(example);
 	}
 
 }
