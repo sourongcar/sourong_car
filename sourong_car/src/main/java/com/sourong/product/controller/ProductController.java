@@ -152,12 +152,14 @@ public class ProductController {
 	}
 
 	@RequestMapping("/rest/looping")
-	public @ResponseBody List<ProductVO> listLoopingCar() {
+	public @ResponseBody List<ProductVO> listLoopingCar(HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		return service.listLooping();
 	}
 
 	@RequestMapping("/rest/display")
-	public @ResponseBody Map<String, Object> listDisplay(Integer offset) {
+	public @ResponseBody Map<String, Object> listDisplay(Integer offset,HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		if (offset == null)
 			return null;
 		return service.listDisplay(offset);
@@ -171,7 +173,8 @@ public class ProductController {
 	}
 
 	@RequestMapping("/rest/getFull")
-	public @ResponseBody ProductVOExt getFull(Integer id) {
+	public @ResponseBody ProductVOExt getFull(Integer id,HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		if (id == null)
 			return null;
 		return service.getFull(id);
