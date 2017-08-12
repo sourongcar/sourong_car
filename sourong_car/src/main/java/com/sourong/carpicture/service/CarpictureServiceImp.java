@@ -1,5 +1,6 @@
 package com.sourong.carpicture.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +11,16 @@ import com.base.datatables.domain.DataTablesResponse;
 import com.sourong.carpicture.dao.CarpictureVOMapper;
 import com.sourong.carpicture.domain.CarpictureVO;
 import com.sourong.carpicture.domain.CarpictureVOExample;
+import com.sourong.product.dao.ProductVOMapper;
+import com.sourong.product.domain.ProductVO;
 
 
 @Service
 public class CarpictureServiceImp implements CarpictureService {
 	@Autowired
 	private CarpictureVOMapper mapper;
+	@Autowired
+	private ProductVOMapper productMapper;
 	/**
 	 * 新增
 	 * @param entity
@@ -67,10 +72,15 @@ public class CarpictureServiceImp implements CarpictureService {
 	}
 	@Override
 	public List<CarpictureVO> listFull(int productid) {
-		CarpictureVOExample example = new CarpictureVOExample();
-		example.createCriteria().andProductidEqualTo(productid);
-		example.setOrderByClause("islooping asc");
-		return mapper.selectByExample(example);
+		ProductVO p=productMapper.selectByPrimaryKey(productid);
+		if(p!=null&&p.getIsdisplay()==0){
+			CarpictureVOExample example = new CarpictureVOExample();
+			example.createCriteria().andProductidEqualTo(productid);
+			example.setOrderByClause("islooping asc");
+			return mapper.selectByExample(example);
+		}
+		else
+			return new ArrayList<CarpictureVO>(1);
 	}
 
 }
