@@ -56,7 +56,6 @@
 						<tr>
 						    <th></th>
 							<th>名称</th>
-							<th>配置</th>
 							<th>品牌</th>
 							<th>车型</th>
 							<th>封面图</th>
@@ -215,10 +214,6 @@
 									"data" : "title"
 								},
 								{
-									"data" : "configurationid",
-									"orderable":false
-								},
-								{
 									"data" : "brandname"
 								},
 								{
@@ -247,19 +242,17 @@
 								"columnDefs" : [
 										{
 											"render" : function(data, type, row) {
-												//return '<p:permission privilege="com.base.product.controller.ProductController:doEdit"><a href="${path }/product/edit.action?id='+data+'" class="tooltip-success" data-rel="tooltip" title="修改"><span class="green"><i class="icon-edit bigger-120"></i>修改</a></p:permission>&nbsp;&nbsp;'
-												//+'<p:permission privilege="com.base.product.controller.ProductController:doDelete"><a href="javascript:void(0)" onclick="del(\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="删除"><span class="red"><i class="icon-trash bigger-120"></i>删除</a></p:permission>';
-												return '<a href="javascript:void(0)" onclick="showConfig(\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="查看配置"><span class="orange"><i class="icon-cog bigger-120"></i>查看配置</a>';
-											},
-											"targets" : 2
-										},
-										{
-											"render" : function(data, type, row) {
 												var url=data&&('/images/'+data)||'';
 												console.log(url);
 												return '<div class="btn btn-link"'+(data?' onclick="showImg(\''+url+'\')"':'')+'><img class="img"'+(data?('src="'+url+'"'):'')+'></div>';
 											},
-											"targets" : 5
+											"targets" : 4
+										},
+										{
+											"render" : function(data, type, row) {
+												return data+'万';
+											},
+											"targets" : 6
 										},
 										{
 											"render" : function(data, type, row) {
@@ -269,24 +262,19 @@
 										},
 										{
 											"render" : function(data, type, row) {
-												return data+'万';
-											},
-											"targets" : 8
-										},
-										{
-											"render" : function(data, type, row) {
 												return data==0?'首页轮播':data==1?'热门':data==2?'普通':'无';
 											},
-											"targets" : 9
+											"targets" : 8
 										},
 										{
 											"render" : function(data, type, row) {
 												return '<a href="${path }/product/edit.action?id='+data+'" class="tooltip-success" data-rel="tooltip" title="修改"><span class="green"><i class="icon-edit bigger-120"></i></span></a>&nbsp;'
 												+'<a href="javascript:void(0)" onclick="del(\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="删除"><span class="red"><i class="icon-trash bigger-120"></i></span></a>&nbsp;'
 												+'<a href="javascript:void(0)" onclick="toggleshow(this,\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="是否展示"><span class="blue"><i class="icon-eye-'+(row.isdisplay==0?'open':'close')+' bigger-120"></i></span></a>&nbsp;'//
-												+'<a href="${path}/carpicture/list.action?productid='+row.productid+'" class="tooltip-error" data-rel="tooltip" title="展示图片"><span class="grey"><i class="icon-picture bigger-120"></i></span></a>';
+												+'<a href="javascript:void(0)" onclick="showConfig(\''+row.configurationid+'\')" class="tooltip-error" data-rel="tooltip" title="查看配置"><span class="orange"><i class="icon-cog bigger-120"></i></a>&nbsp;'
+												+'<a href="${path}/carpicture/list.action?productid='+data+'" class="tooltip-error" data-rel="tooltip" title="展示图片"><span class="grey"><i class="icon-picture bigger-120"></i></span></a>';
 											},
-											"targets" : 10
+											"targets" : 9
 										} ],
 
 								"language" : {

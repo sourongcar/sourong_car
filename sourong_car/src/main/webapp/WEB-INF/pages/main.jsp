@@ -121,7 +121,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="#" class="dropdown-toggle"> <i class="icon-desktop"></i> <span class="menu-text">用户咨询</span><b class="arrow icon-angle-down"></b></a>
+						<a href="#" class="dropdown-toggle"> <i class="icon-desktop"></i> <span class="menu-text">用户咨询管理</span><b class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
 							<li>
 								<a href="${path }/consultant/list.action?isRead=1"target="contentframe"><i class="icon-double-angle-right"></i>待咨询用户列表</a>
@@ -143,7 +143,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="#" class="dropdown-toggle"> <i class="icon-desktop"></i> <span class="menu-text">品牌栏目管理</span><b class="arrow icon-angle-down"></b></a>
+						<a href="#" class="dropdown-toggle"> <i class="icon-desktop"></i> <span class="menu-text">产品信息管理</span><b class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
 							<li>
 								<a href="${path }/brand/list.action"target="contentframe"><i class="icon-double-angle-right"></i>品牌列表</a>
@@ -151,21 +151,8 @@
 							<li>
 								<a href="${path }/cartype/list.action"target="contentframe"><i class="icon-double-angle-right"></i>车型列表</a>
 							</li>
-						</ul>
-					</li>
-					<li>
-						<a href="#" class="dropdown-toggle"> <i class="icon-desktop"></i> <span class="menu-text">汽车展示图管理</span><b class="arrow icon-angle-down"></b></a>
-						<ul class="submenu">
 							<li>
-								<a href="${path }/carpicture/list.action"target="contentframe"><i class="icon-double-angle-right"></i>汽车展示图管理</a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<a href="#" class="dropdown-toggle"> <i class="icon-desktop"></i> <span class="menu-text">产品信息管理</span><b class="arrow icon-angle-down"></b></a>
-						<ul class="submenu">
-							<li>
-								<a href="${path }/product/list.action"target="contentframe"><i class="icon-double-angle-right"></i>产品信息管理</a>
+								<a href="${path }/product/list.action"target="contentframe"><i class="icon-double-angle-right"></i>产品列表</a>
 							</li>
 						</ul>
 					</li>
@@ -189,21 +176,10 @@
 			<div class="main-content">
 				<div class="breadcrumbs" id="breadcrumbs"></div>
 
-				<div class="page-content">
-
-					<div class="row">
-						<div class="col-xs-12">
-							<!-- 内容 PAGE CONTENT BEGINS -->
-							<iframe width="100%" id="contentframe" name="contentframe"
-								onload="ifmresize()" frameborder="0" scrolling="yes"
+				<div>
+					<iframe width="100%" height="100%" id="contentframe" name="contentframe"
+								onload="this.contentWindow.document.body.style.padding='15px';" frameborder="0" scrolling="yes"
 								src="${path}/user/list.action"> </iframe>
-
-
-							<!-- PAGE CONTENT ENDS -->
-						</div>
-						<!-- /.col -->
-					</div>
-					<!-- /.row -->
 				</div>
 				<!-- /.page-content -->
 			</div>
@@ -227,17 +203,21 @@
 			ifm.height = document.documentElement.clientHeight;
 		}
 		window.onresize = function() {
-			ifmresize();
+			//ifmresize();
+			$("#contentframe").parent()[0].style.height=(document.documentElement.clientHeight-89)+'px';
 		}
+			$("#contentframe").parent()[0].style.height=(document.documentElement.clientHeight-89)+'px';
 		$(function() {
 			$(".nav-list li:first").addClass("active").addClass('open');
 			$(".submenu li:first").addClass("active");
-			$(".nav-list>li").click(function() {
+			$(".nav-list>li").unbind('click').click(function() {
 				//$(".nav-list>li[class='active']").removeAttr("class");
 			});
-			$(".submenu li").click(function() {
+			$(".submenu li").unbind('click').click(function() {
+				var parent=$(this).parent();
 				$(".submenu li.active").removeClass("active");
-				$(".nav-list>li.active").removeClass("active").removeClass('open');
+				$(".nav-list>li.open>.submenu").each(function(){if(parent[0]!=this)$(this).slideUp(200).parent().removeClass('open');})
+				$(".nav-list>li.active").removeClass("active");
 				$(this).addClass("active").parents('li').addClass("active").addClass('open');
 			});
 		});
