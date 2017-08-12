@@ -73,8 +73,10 @@ public class CollectionServiceImp implements CollectionService {
 		
 	}
 	@Override
-	public List<CollectionVO> getDisplayList(Integer userId) {
+	public List<CollectionVO> getDisplayList(Integer userId,Integer offset,Integer start) {
 		CollectionVOExample example = new CollectionVOExample();
+		example.setLimit(start);
+		example.setOffset(offset);
 		example.createCriteria().andUseridEqualTo(userId);
 		List<CollectionVO> displayList = cMapper.selectByExample(example);
 		return displayList;

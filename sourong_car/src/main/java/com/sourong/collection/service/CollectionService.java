@@ -46,7 +46,7 @@ public interface CollectionService {
 	 * @return
 	 */
 	
-	public List<CollectionVO> getDisplayList(Integer userId);
+	public List<CollectionVO> getDisplayList(Integer userid, Integer offset, Integer start);
 	
 	/**
 	 * 插入收藏的条目
@@ -72,5 +72,6 @@ public interface CollectionService {
 	 * @return
 	 */
 	public CollectionVO operateUserCollectionOnIndex(Integer userid, Integer productid);
+	
 
 }

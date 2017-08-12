@@ -27,9 +27,9 @@ public class CollectionController {
 	 * 用户的查看“我的收藏”功能
 	 **/
 	@RequestMapping("/getDisplayList")
-	public @ResponseBody List<CollectionVO> getDisplayList(Integer userid,HttpServletResponse response) {
+	public @ResponseBody List<CollectionVO> getDisplayList(Integer userid,Integer start,Integer offset,HttpServletResponse response) {
 		response.setHeader("Access-Control-Allow-Origin", "*");
-		return service.getDisplayList(userid);
+		return service.getDisplayList(userid,start,offset);
 	}
 
 	@RequestMapping("/ifBeCollected")
