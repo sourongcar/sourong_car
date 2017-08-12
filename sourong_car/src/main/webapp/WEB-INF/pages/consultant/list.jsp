@@ -195,9 +195,7 @@ $(document).ready(function(){
 				"data":{"consultantId":consultantId},
 				"dataType":"json",
 				"success":function(data){
-					if(data.status == 1){
-						$(obj).replaceWith('<span>已回复</span>');
-					}
+					mydatatables.ajax.reload();
 				},
 				"error":function(data){
 					alert("请求失败，请稍后再试");
@@ -219,15 +217,14 @@ $(document).ready(function(){
 							data.coverpic='${path}/resources/assets/images/nocoverpic.png';
 							
 						}
-						var htmlcore =    '<div class="form-group"><label for="brandname" class="col-sm-2 control-label">';
-						var brandname=    '品牌名:</label><div class="col-sm-10"><p  class=" col-xs-10" >'+data.brandname+'</p></div></div>' ;
-						var cartype=      '车型:</label><div class="col-sm-10"><p class=" col-xs-10" >'+data.cartype+'</p></div></div>' ;
-						var marketprice = '市价:</label><div class="col-sm-10"><p  class="col-xs-10" >'+data.marketprice+'</p></div></div>' ;
-						var sourongprice ='搜融价:</label><div class="col-sm-10"><p  class="col-xs-10" >'+data.sourongprice+'</p></div></div>' ;
-						var coverpic =    '封面图片:</label><div class="col-sm-10"><img  class="col-xs-10" src="'+data.coverpic+'" style="width:300px;height:150px"></div></div>' ;
+						var htmlcore =    '<div class="form-group"><label class="col-sm-3 control-label">';
+						var brandname=    '品牌名:</label><div class="col-sm-9"><p  class=" col-xs-10" style="padding: 6px 12px;">'+data.brandname+'</p></div></div>' ;
+						var cartype=      '车型:</label><div class="col-sm-9"><p class=" col-xs-10" style="padding: 6px 12px;">'+data.cartype+'</p></div></div>' ;
+						var marketprice = '市价:</label><div class="col-sm-9"><p  class="col-xs-10" style="padding: 6px 12px;">'+data.marketprice+'</p></div></div>' ;
+						var sourongprice ='搜融价:</label><div class="col-sm-9"><p  class="col-xs-10" style="padding: 6px 12px;">'+data.sourongprice+'</p></div></div>' ;
+						var coverpic =    '封面图片:</label><div class="col-sm-9"><img  src="'+data.coverpic+'" style="width:300px;height:150px"></div></div>' ;
 						$('.modal-title').text('产品信息');
-						$('.modal-footer').css('border-top','0px');
-						$(".modal-body").html(htmlcore+brandname+htmlcore+cartype+htmlcore+marketprice+htmlcore+sourongprice+htmlcore+coverpic)				
+						$(".modal-body").html('<form class="form-horizontal">'+htmlcore+brandname+htmlcore+cartype+htmlcore+marketprice+htmlcore+sourongprice+htmlcore+coverpic+"</form>")				
 					},
 					"error":function(data){
 						$('.modal-title').text('产品信息');

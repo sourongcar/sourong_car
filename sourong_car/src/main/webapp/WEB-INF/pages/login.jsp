@@ -15,7 +15,7 @@ if(window !=top){
 </head>
 
 <body class="login-layout" style="background:#05121a; ">
-	<div style="position:absolute;text-align: center;"><img src="${path}/resources/assets/images/backgroundimage2.png" style="max-width: 100%;" ></div>
+	<div style="position:absolute;text-align: center;bottom:0;overflow: hidden"><img src="${path}/resources/assets/images/backgroundimage2.png" style="max-width: 100%;" ></div>
 	<div class="main-container">
 		<div class="main-content">
 			<div class="row">

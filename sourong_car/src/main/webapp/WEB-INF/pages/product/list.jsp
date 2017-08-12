@@ -21,12 +21,14 @@
 .imgwrap .close{
 	display: none;
 	position: absolute;
-	right: 0;
-	padding: 5px;
 	border-radius: 50%;
 	background-color: black;
 	top:-15px;
 	right:-15px;
+    width: 30px;
+    text-align: center;
+    line-height: 25px;
+    height: 30px;
 }
 .imgwrap:hover .close{
 	display: block;
@@ -253,7 +255,9 @@
 										},
 										{
 											"render" : function(data, type, row) {
-												return '<div class="btn btn-link" onclick="showImg(\''+(data&&('/images/'+data))+'\')"><img class="img" src="'+(data&&('/images/'+data))+'"></div>';
+												var url=data&&('/images/'+data)||'';
+												console.log(url);
+												return '<div class="btn btn-link"'+(data?' onclick="showImg(\''+url+'\')"':'')+'><img class="img"'+(data?('src="'+url+'"'):'')+'></div>';
 											},
 											"targets" : 5
 										},
