@@ -88,11 +88,9 @@ public class ConsultantServiceImp implements ConsultantService {
 		example.setLimit(1);
 		example.createCriteria().andUseridEqualTo(userId).andProductidEqualTo(carId);
 		List<ConsultantVO> consultantList = mapper.selectByExample(example);
-		System.out.println(consultantList);
 		if(consultantList.size() > 0){
 			Instant createtime = consultantList.get(0).getCreatetime().toInstant();
 			Duration duration = Duration.between(createtime, Instant.now());
-			System.out.println(duration.toDays());
 			if(Math.abs(duration.toDays()) >= 1){
 				return true;
 			}else{			

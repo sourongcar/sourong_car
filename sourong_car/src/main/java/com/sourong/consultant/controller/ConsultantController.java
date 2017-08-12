@@ -100,7 +100,6 @@ public class ConsultantController {
 			ProductVO productVO = productServce.get(carId);
 			if(consultantService.canConsultAgain(userId, carId)){
 				SouronguserVO souronguserVO = userService.get(userId);
-				System.out.println(souronguserVO);
 				ConsultantVO consultantVO = new ConsultantVO();
 				consultantVO.setUserid(userId);
 				consultantVO.setUserphone(souronguserVO.getUserphone());
