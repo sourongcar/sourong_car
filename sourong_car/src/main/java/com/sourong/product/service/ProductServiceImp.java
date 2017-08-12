@@ -232,4 +232,19 @@ public class ProductServiceImp implements ProductService {
 		return mapper.selectByExample(example);
 	}
 
+	@Override
+	public List<ProductVO> getlistbydoSearch(String dosearch) {
+		ProductVOExample example=new ProductVOExample();
+		example.createCriteria().andCartypeLessThanOrEqualTo(dosearch);
+		example.or().andBrandnameLessThanOrEqualTo(dosearch);
+		return mapper.selectByExample(example);
+	}
+
+	@Override
+	public List<ProductVO> getAlllist() {
+		ProductVOExample example=new ProductVOExample();
+		example.createCriteria();
+		return mapper.selectByExample(example);
+	}
+
 }

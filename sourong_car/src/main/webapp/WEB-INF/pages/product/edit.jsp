@@ -66,7 +66,7 @@ label.fileup input[type=file] {
 					<div class="col-sm-10">
 						<label class="fileup">
 							<input type="file" id="coverpic" name="cover" accept="image/jpeg,image/png,image/gif">
-							<img <c:if test='${entity.coverpic ne null}'>src="/images/${entity.coverpic}"</c:if>>
+							<img style="width:400px" <c:if test='${entity.coverpic ne null}'>src="/images/${entity.coverpic}"</c:if>>
 							<div class="btn btn-success"><i class="icon-upload-alt"></i>点击上传</div>
 						</label><br><span class="red"></span>
 					</div>

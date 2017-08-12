@@ -171,6 +171,11 @@ public class ProductController {
 			return null;
 		return service.get(id);
 	}
+	@RequestMapping("/rest/getAlllist")
+	public @ResponseBody List<ProductVO> getAllist(HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		return service.getAlllist();
+	}
 
 	@RequestMapping("/rest/getFull")
 	public @ResponseBody ProductVOExt getFull(Integer id,HttpServletResponse response) {
@@ -187,6 +192,14 @@ public class ProductController {
 			return null;
 		return service.ofCartype(cartype);
 	}
+	@RequestMapping("/rest/getlistbydosearch")
+	public @ResponseBody List<ProductVO> getlistbydosearch(String dosearch,HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		if (dosearch == null)
+			return null;
+		return service.getlistbydoSearch(dosearch);
+	}
+	
 	@RequestMapping("/rest/getProductBybrandname")
 	public @ResponseBody List<ProductVO> ofbrandname(Integer id,HttpServletResponse response) {
 		response.setHeader("Access-Control-Allow-Origin", "*");

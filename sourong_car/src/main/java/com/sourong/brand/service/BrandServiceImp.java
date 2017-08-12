@@ -88,6 +88,7 @@ public class BrandServiceImp implements BrandService {
 		example.createCriteria().andBrandidEqualTo(brandid);
 		return mapper.selectByExample(example);
 	}
+
 	
 	
 	

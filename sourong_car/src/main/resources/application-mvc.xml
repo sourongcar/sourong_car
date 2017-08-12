@@ -85,6 +85,8 @@
 					<value>brand/weblist</value>
 					<value>brand/getList</value>
 					<value>carpicture/rest/getFull</value>
+					<value>product/rest/getlistbydosearch</value>
+					<value>product/rest/getAlllist</value>
 				</list>
 			</property>
 		</bean>

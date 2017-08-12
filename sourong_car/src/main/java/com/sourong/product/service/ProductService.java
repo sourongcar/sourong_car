@@ -63,4 +63,7 @@ public interface ProductService {
 	List<ProductVO> ofbrandname(String name);
 	
 	ProductVOExt getFull(int id);
+	List<ProductVO> getlistbydoSearch(String dosearch);
+	
+	List<ProductVO> getAlllist();
 }
