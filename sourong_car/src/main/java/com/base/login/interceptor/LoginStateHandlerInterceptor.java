@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import com.base.common.util.ConfigUtil;
 
 /**
  * 登录状态检测拦截器
@@ -29,18 +30,18 @@ public class LoginStateHandlerInterceptor implements HandlerInterceptor {
 		logger.debug("LoginStateHandlerInterceptor preHandle");
 		HttpServletRequest httpReq = (HttpServletRequest) request;
 		HttpServletResponse httpRes = (HttpServletResponse) response;
-		if (httpReq.getSession().getAttribute("s_user") != null) {// 已经登录
-			logger.debug("已经登录");
+		String uri = httpReq.getRequestURI();
+		if (isAllowURI(uri)) {// 本身不需要拦截
+			String accessControl=ConfigUtil.getValue("accesscontrol");
+			if(accessControl!=null&&!accessControl.equals(""))
+				httpRes.setHeader("Access-Control-Allow-Origin", ConfigUtil.getValue("accesscontrol"));
 			return true;
-		} else {// 没有登录
-			String uri = httpReq.getRequestURI();
-			if (isAllowURI(uri)) {// 本身登录模块不需要 拦截
+		}else if (httpReq.getSession().getAttribute("s_user") != null) {// 已经登录
+				logger.debug("已经登录");
 				return true;
-			} else {
-				httpRes.sendRedirect(httpReq.getContextPath() + "/login.action");
-				return false;
-			}
-
+		} else {// 没有登录
+			httpRes.sendRedirect(httpReq.getContextPath() + "/login.action");
+			return false;
 		}
 	}
 

@@ -1,11 +1,9 @@
 package com.sourong.product.controller;
 
 import java.io.File;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.commons.io.FilenameUtils;
@@ -152,14 +150,12 @@ public class ProductController {
 	}
 
 	@RequestMapping("/rest/looping")
-	public @ResponseBody List<ProductVO> listLoopingCar(HttpServletResponse response) {
-		response.setHeader("Access-Control-Allow-Origin", "*");
+	public @ResponseBody List<ProductVO> listLoopingCar() {
 		return service.listLooping();
 	}
 
 	@RequestMapping("/rest/display")
-	public @ResponseBody Map<String, Object> listDisplay(Integer offset,HttpServletResponse response) {
-		response.setHeader("Access-Control-Allow-Origin", "*");
+	public @ResponseBody Map<String, Object> listDisplay(Integer offset) {
 		if (offset == null)
 			return null;
 		return service.listDisplay(offset);
@@ -172,37 +168,32 @@ public class ProductController {
 		return service.get(id);
 	}
 	@RequestMapping("/rest/getAlllist")
-	public @ResponseBody List<ProductVO> getAllist(HttpServletResponse response) {
-		response.setHeader("Access-Control-Allow-Origin", "*");
+	public @ResponseBody List<ProductVO> getAllist() {
 		return service.getAlllist();
 	}
 
 	@RequestMapping("/rest/getFull")
-	public @ResponseBody ProductVOExt getFull(Integer id,HttpServletResponse response) {
-		response.setHeader("Access-Control-Allow-Origin", "*");
+	public @ResponseBody ProductVOExt getFull(Integer id) {
 		if (id == null)
 			return null;
 		return service.getFull(id);
 	}
 
 	@RequestMapping("/rest/getProductByCarType")
-	public @ResponseBody List<ProductVO> ofCartype(String cartype,HttpServletResponse response) {
-		response.setHeader("Access-Control-Allow-Origin", "*");
+	public @ResponseBody List<ProductVO> ofCartype(String cartype) {
 		if (cartype == null)
 			return null;
 		return service.ofCartype(cartype);
 	}
 	@RequestMapping("/rest/getlistbydosearch")
-	public @ResponseBody List<ProductVO> getlistbydosearch(String dosearch,HttpServletResponse response) {
-		response.setHeader("Access-Control-Allow-Origin", "*");
+	public @ResponseBody List<ProductVO> getlistbydosearch(String dosearch) {
 		if (dosearch == null)
 			return null;
 		return service.getlistbydoSearch(dosearch);
 	}
 	
 	@RequestMapping("/rest/getProductBybrandname")
-	public @ResponseBody List<ProductVO> ofbrandname(Integer id,HttpServletResponse response) {
-		response.setHeader("Access-Control-Allow-Origin", "*");
+	public @ResponseBody List<ProductVO> ofbrandname(Integer id) {
 		if (id== null)
 			return null;
 		System.out.println(id);

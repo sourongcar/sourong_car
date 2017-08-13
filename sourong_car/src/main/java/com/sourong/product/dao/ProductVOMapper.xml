@@ -120,13 +120,11 @@
     insert into s_product (productid, configurationid, brandname, 
       cartype, marketprice, sourongprice, 
       coverpic, picintroduction, isdisplay, 
-      title, hit, createtime, 
-      changetime)
+      title, hit)
     values (#{productid,jdbcType=INTEGER}, #{configurationid,jdbcType=INTEGER}, #{brandname,jdbcType=VARCHAR}, 
       #{cartype,jdbcType=VARCHAR}, #{marketprice,jdbcType=VARCHAR}, #{sourongprice,jdbcType=VARCHAR}, 
       #{coverpic,jdbcType=VARCHAR}, #{picintroduction,jdbcType=VARCHAR}, #{isdisplay,jdbcType=INTEGER}, 
-      #{title,jdbcType=VARCHAR}, #{hit,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{changetime,jdbcType=TIMESTAMP})
+      #{title,jdbcType=VARCHAR}, #{hit,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.sourong.product.domain.ProductVO" useGeneratedKeys="true" keyProperty="productid" >
     insert into s_product
@@ -164,12 +162,6 @@
       <if test="hit != null" >
         hit,
       </if>
-      <if test="createtime != null" >
-        createtime,
-      </if>
-      <if test="changetime != null" >
-        changetime,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="productid != null" >
@@ -204,12 +196,6 @@
       </if>
       <if test="hit != null" >
         #{hit,jdbcType=INTEGER},
-      </if>
-      <if test="createtime != null" >
-        #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="changetime != null" >
-        #{changetime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -278,9 +264,7 @@
       picintroduction = #{record.picintroduction,jdbcType=VARCHAR},
       isdisplay = #{record.isdisplay,jdbcType=INTEGER},
       title = #{record.title,jdbcType=VARCHAR},
-      hit = #{record.hit,jdbcType=INTEGER},
-      createtime = #{record.createtime,jdbcType=TIMESTAMP},
-      changetime = #{record.changetime,jdbcType=TIMESTAMP}
+      hit = #{record.hit,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -318,11 +302,6 @@
       <if test="hit != null" >
         hit = #{hit,jdbcType=INTEGER},
       </if>
-      <if test="createtime != null" >
-        createtime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="changetime != null" >
-        changetime = #{changetime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where productid = #{productid,jdbcType=INTEGER}
@@ -338,9 +317,7 @@
       picintroduction = #{picintroduction,jdbcType=VARCHAR},
       isdisplay = #{isdisplay,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
-      hit = #{hit,jdbcType=INTEGER},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      changetime = #{changetime,jdbcType=TIMESTAMP}
+      hit = #{hit,jdbcType=INTEGER}
     where productid = #{productid,jdbcType=INTEGER}
   </update>
 </mapper>

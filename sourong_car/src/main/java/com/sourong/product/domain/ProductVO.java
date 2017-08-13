@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -42,9 +43,9 @@ public class ProductVO implements Serializable {
     @Min(0)
     @NotNull
     private Integer hit;
-
+    @Null
     private Date createtime;
-
+    @Null
     private Date changetime;
 
     private static final long serialVersionUID = 1L;

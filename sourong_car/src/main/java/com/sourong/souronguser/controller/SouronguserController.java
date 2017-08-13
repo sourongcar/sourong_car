@@ -1,13 +1,9 @@
 package com.sourong.souronguser.controller;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -25,8 +21,7 @@ public class SouronguserController {
 
 	
 	@RequestMapping("/getUUID")
-	public @ResponseBody JsonResult getUUID(HttpServletResponse res) {
-		res.setHeader("Access-Control-Allow-Origin", "*");
+	public @ResponseBody JsonResult getUUID() {
 		JsonResult rs = new JsonResult();
 		rs.setStatus(1);
 		rs.setMsg(IDUtil.uuid());
@@ -35,8 +30,7 @@ public class SouronguserController {
 	
 	
 	@RequestMapping("/getSalt")
-	public @ResponseBody JsonResult getSalt(@RequestParam(required = true) String phone,HttpServletResponse res) {
-		res.setHeader("Access-Control-Allow-Origin", "*");
+	public @ResponseBody JsonResult getSalt(@RequestParam(required = true) String phone) {
 		JsonResult rs = new JsonResult();
 		SouronguserVO souronguser = service.getUserFormPhone(phone);
 		if(souronguser != null){
@@ -54,8 +48,7 @@ public class SouronguserController {
 	
 	@RequestMapping("/doLogin")
 	public @ResponseBody JsonResult doLogin(@RequestParam(required = true) Integer userid,
-			@RequestParam(required = true) String password,HttpServletResponse res) {
-		res.setHeader("Access-Control-Allow-Origin", "*");
+			@RequestParam(required = true) String password) {
 		JsonResult rs = new JsonResult();
 		if(userid != null && !StringUtils.isEmpty(password)){
 			SouronguserVO souronguser = service.get(userid);
@@ -72,8 +65,7 @@ public class SouronguserController {
 		return rs;
 	}
 	@RequestMapping(value="/register")
-	public @ResponseBody JsonResult register(SouronguserVO souronguser,HttpServletResponse res){
-		res.setHeader("Access-Control-Allow-Origin",  "*");
+	public @ResponseBody JsonResult register(SouronguserVO souronguser){
 		JsonResult rs = new JsonResult() ;
 		SouronguserVO user = service.getUserFormPhone(souronguser.getUserphone());
 		if(user==null){

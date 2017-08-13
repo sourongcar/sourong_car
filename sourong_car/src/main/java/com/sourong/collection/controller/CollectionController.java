@@ -1,10 +1,6 @@
 package com.sourong.collection.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,21 +23,18 @@ public class CollectionController {
 	 * 用户的查看“我的收藏”功能
 	 **/
 	@RequestMapping("/getDisplayList")
-	public @ResponseBody List<CollectionVO> getDisplayList(Integer userid,Integer start,Integer offset,HttpServletResponse response) {
-		response.setHeader("Access-Control-Allow-Origin", "*");
+	public @ResponseBody List<CollectionVO> getDisplayList(Integer userid,Integer start,Integer offset) {
 		return service.getDisplayList(userid,start,offset);
 	}
 
 	@RequestMapping("/ifBeCollected")
-	public @ResponseBody List<CollectionVO> ifBeCollected(Integer userid,@RequestParam(value="productIdList") List<Integer> productIdList,HttpServletResponse response){
-		response.setHeader("Access-Control-Allow-Origin", "*");
+	public @ResponseBody List<CollectionVO> ifBeCollected(Integer userid,@RequestParam(value="productIdList") List<Integer> productIdList){
 		return service.ifBeCollected(userid,productIdList);
 	}
 	
 	
 	@RequestMapping("/operateUserCollection")
-	public @ResponseBody CollectionVO operateUserCollection(@RequestParam(required=true)Integer userid,@RequestParam(required=true)Integer productid,HttpServletResponse response){
-		response.setHeader("Access-Control-Allow-Origin", "*");
+	public @ResponseBody CollectionVO operateUserCollection(@RequestParam(required=true)Integer userid,@RequestParam(required=true)Integer productid){
 		return service.operateUserCollectionOnIndex(userid,productid);
 	}
 }

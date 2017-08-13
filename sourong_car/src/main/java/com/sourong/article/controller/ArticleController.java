@@ -7,10 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.base.common.domain.CurrentUser;
+
 import com.base.common.domain.JsonResult;
 import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
@@ -34,15 +33,13 @@ public class ArticleController {
 	
 	@RequestMapping("/getContent")
 	public  @ResponseBody String getContent(Integer articleid){
-		System.out.println(service.getContent(articleid));
 		return service.getContent(articleid);//单独获取内容
 	}
 	
 	@RequestMapping("/doEdit")
 	public String doEdit(ArticleVO entity){
-		CurrentUser user = CurrentUser.getInstance();
+		//CurrentUser user = CurrentUser.getInstance();
 		//entity.setCreatorUserId(user.getUserId());//创建者id
-		System.out.println(entity.getContent());
 		if(entity.getArticleid()!=null){//修改
 			service.update(entity);
 		}else{//新增
@@ -83,9 +80,7 @@ public class ArticleController {
 	 * @return
 	 */
 	@RequestMapping(value="/getArticle")
-	public @ResponseBody ArticleVO forMoreInformation(@RequestParam(required=true) Integer articleid,
-			HttpServletResponse response){
-		    response.setHeader("Access-Control-Allow-Origin", "*");
+	public @ResponseBody ArticleVO forMoreInformation(@RequestParam(required=true) Integer articleid){
 		return service.get(articleid) ;
 	}
 	

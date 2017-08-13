@@ -5,9 +5,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,82 +22,62 @@ import com.base.datatables.domain.DataTablesResponse;
 import com.sourong.carpicture.domain.CarpictureVO;
 import com.sourong.carpicture.service.CarpictureService;
 
-
 @Controller
 @RequestMapping("/carpicture")
 public class CarpictureController {
-	
+
 	@Autowired
 	private CarpictureService service;
-	
+
 	@RequestMapping("/edit")
-	public String edit(@RequestParam(value="productid",required=false)Integer productid,ModelMap map){
-		if(productid!=null){
-			map.addAttribute("entity",service.get(productid));
-			map.addAttribute("productid",productid);
+	public String edit(@RequestParam(value = "productid", required = false) Integer productid, ModelMap map) {
+		if (productid != null) {
+			map.addAttribute("entity", service.get(productid));
+			map.addAttribute("productid", productid);
 		}
-		return "carpicture/edit";//跳转到编辑页面
+		return "carpicture/edit";// 跳转到编辑页面
 	}
-	//轮播判断
+
+	// 轮播判断
 	@RequestMapping("/islooping")
-	public @ResponseBody String islooping(CarpictureVO entity,String carpictureid,String islooping){
-		System.out.println("进入代码块");
-        System.out.println(carpictureid);
-        System.out.println(islooping);
-        
-		if(carpictureid!=null){
-			System.out.println("第一步");
-			
-			if("0".equals(islooping)){
-				System.out.println("第二步");
-	
+	public @ResponseBody String islooping(CarpictureVO entity, String carpictureid, String islooping) {
+		if (carpictureid != null) {
+			if ("0".equals(islooping)) {
 				entity.setIslooping(1);
 				service.update(entity);
-				System.out.println("第三步");
-				
-			}else if("1".equals(islooping)){
-					System.out.println("第四步");
-			
-					entity.setIslooping(0);
-					service.update(entity);
-					System.out.println("执行成功第五步");
-					}
-				}
-		 
-		return service.get(Integer.parseInt(carpictureid)).getIslooping().toString();//跳转到列表页面
-		}
-	
-
-	//上传图片并提交数据到数据库
-	@RequestMapping(value = "/doEdit",method=RequestMethod.POST,consumes={"multipart/form-data"})
-	public String doEdit(@RequestParam("file") MultipartFile[] file,CarpictureVO entity){
-
-		//图片上传
-		if(file!=null&&file.length>0){
-			//判断原来的picture是否为空
-			if(entity.getPicture()!=null||entity.getPicture()!=""){
-				//为空则进行删除
-				System.out.println("获取原来图片信息进行删除");
-				File deletefile = new File(ConfigUtil.getValue("saveImage")+entity.getPicture());		 
-				deletefile.delete();
-				System.out.println("删除成功"); 
+			} else if ("1".equals(islooping)) {
+				entity.setIslooping(0);
+				service.update(entity);
 			}
-			//把进来的图片进行循环读取
-			for(int i=0;i<file.length; i++){
-				if(file[i].getSize()<=0){
+		}
+		return service.get(Integer.parseInt(carpictureid)).getIslooping().toString();// 跳转到列表页面
+	}
+
+	// 上传图片并提交数据到数据库
+	@RequestMapping(value = "/doEdit", method = RequestMethod.POST, consumes = { "multipart/form-data" })
+	public String doEdit(@RequestParam("file") MultipartFile[] file, CarpictureVO entity) {
+		// 图片上传
+		if (file != null && file.length > 0) {
+			// 判断原来的picture是否为空
+			if (entity.getPicture() != null || entity.getPicture() != "") {
+				// 为空则进行删除
+				//System.out.println("获取原来图片信息进行删除");
+				File deletefile = new File(ConfigUtil.getValue("saveImage") + entity.getPicture());
+				deletefile.delete();
+				//System.out.println("删除成功");
+			}
+			// 把进来的图片进行循环读取
+			for (int i = 0; i < file.length; i++) {
+				if (file[i].getSize() <= 0) {
 					continue;
 				}
-				
-				String fileName=file[i].getOriginalFilename();
-				//打印信息
-				System.out.println("图片大小"+file[i].getSize());
-				System.out.println("图片名字"+fileName);
-				int index=fileName.lastIndexOf(".");
-				String savename=UUID.randomUUID()+(index>0?fileName.substring(fileName.lastIndexOf(".")):"");
-				String savenpath=ConfigUtil.getValue("saveImage")+savename;
-				System.out.println("成功储存");
-                
-                
+
+				String fileName = file[i].getOriginalFilename();
+				// 打印信息
+				int index = fileName.lastIndexOf(".");
+				String savename = UUID.randomUUID() + (index > 0 ? fileName.substring(fileName.lastIndexOf(".")) : "");
+				String savenpath = ConfigUtil.getValue("saveImage") + savename;
+
 				try {
 					file[i].transferTo(new File(savenpath));
 				} catch (IllegalStateException e) {
@@ -108,62 +85,59 @@ public class CarpictureController {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				//把读取到的图片路径存进数据库
-					entity.setPicture(savename);
-				System.out.println("把图片地址写进entity了");
-				
-				//提交数据库，修改，新增			
-				if(entity.getCarpictureid()!=null){//修改
-					service.update(entity);		
-				}else{//新增
+				// 把读取到的图片路径存进数据库
+				entity.setPicture(savename);
+
+				// 提交数据库，修改，新增
+				if (entity.getCarpictureid() != null) {// 修改
+					service.update(entity);
+				} else {// 新增
 					service.add(entity);
 				}
-				System.out.println("提交数据库");
 			}
-		}else{
-		if(entity.getCarpictureid()!=null){//修改
-			service.update(entity);		
-			System.out.println("修改数据");
-		}else{//新增
-			service.add(entity);
-			System.out.println("增加数据");
+		} else {
+			if (entity.getCarpictureid() != null) {// 修改
+				service.update(entity);
+			} else {// 新增
+				service.add(entity);
+			}
 		}
-		}
-		return "redirect:/carpicture/list.action";//跳转到列表页面
-		
-	}	
-	//删除(根据id)
+		return "redirect:/carpicture/list.action";// 跳转到列表页面
+
+	}
+
+	// 删除(根据id)
 	@RequestMapping("/rest/doDelete")
-	public @ResponseBody JsonResult doDelete(Integer id){
-		JsonResult rs=new JsonResult();
+	public @ResponseBody JsonResult doDelete(Integer id) {
+		JsonResult rs = new JsonResult();
 		service.delete(id);
 		rs.setStatus(1);
 		rs.setMsg("删除成功！");
 		return rs;
 	}
-	
+
 	@RequestMapping("/list")
-	public String list(ModelMap map,@RequestParam(value="productid",required=false) Integer productid){
-		
+	public String list(ModelMap map, @RequestParam(value = "productid", required = false) Integer productid) {
 		map.addAttribute("productid", productid);
-		return "carpicture/list";//跳转到分页查询页面
+		return "carpicture/list";// 跳转到分页查询页面
 	}
+
 	/**
 	 * datatable分页查询接口
+	 * 
 	 * @param request
 	 * @return
 	 * @throws Throwable
 	 */
 	@RequestMapping("/rest/doSearch")
-	public @ResponseBody DataTablesResponse<CarpictureVO> pageSearch(
-			@RequestBody DataTablesRequest request) throws Throwable{
+	public @ResponseBody DataTablesResponse<CarpictureVO> pageSearch(@RequestBody DataTablesRequest request)
+			throws Throwable {
 		return service.listByPage(request);
 	}
-	
+
 	@RequestMapping("/rest/getFull")
-	public @ResponseBody List<CarpictureVO> getFull(Integer productid,HttpServletResponse response){
-		response.setHeader("Access-Control-Allow-Origin", "*");
-		if(productid==null){
+	public @ResponseBody List<CarpictureVO> getFull(Integer productid) {
+		if (productid == null) {
 			return null;
 		}
 		return service.listFull(productid);
