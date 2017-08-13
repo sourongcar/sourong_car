@@ -163,9 +163,14 @@ $(document).ready(function(){
 			});
 		});
 		function replyContent(obj){
+			
 			var data = $('#mydatatables').DataTable().row($(obj).parent().parent()).data();
 			$('.modal-title').text('客户回复结果');
+			if(data.replyresult==null){				
+				$('.modal-body').html("无回复结果");
+			}else{
 			$('.modal-body').html(data.replyresult);
+			}
 		};
 		var data;
 		function recordContent(obj){
@@ -195,6 +200,7 @@ $(document).ready(function(){
 				"data":{"consultantId":consultantId},
 				"dataType":"json",
 				"success":function(data){
+					console.log(data)
 					mydatatables.ajax.reload();
 				},
 				"error":function(data){

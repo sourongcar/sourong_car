@@ -50,7 +50,7 @@ public class CompanyController {
 			String fileformat =file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));
 			String picname= UUID.randomUUID()+fileformat;
 			entity.setCompanyqr(picname);
-			file.transferTo(new File(path+"\\"+picname));
+			file.transferTo(new File(path+"/"+picname));
 			a=1;//因为有新的文件输入，所以需要删除旧的文件。
 		}
 		//entity.setCreatorUserId(user.getUserId());//创建者id

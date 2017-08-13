@@ -1,13 +1,7 @@
 package com.sourong.brand.controller;
 
-
-
-
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -28,18 +22,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-
-
-
-
-
-
-
 import org.springframework.web.multipart.MultipartFile;
-
-import com.base.common.domain.CurrentUser;
 import com.base.common.domain.JsonResult;
+import com.base.common.util.ConfigUtil;
 import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
 import com.sourong.brand.domain.BrandVO;
@@ -67,16 +52,17 @@ public class BrandController {
 	@RequestMapping(value="/doEdit",method=RequestMethod.POST,consumes={"multipart/form-data"})
 	public String doEdit(Integer brandid,BrandVO brandVO,@RequestParam(value="pic")MultipartFile file) throws IllegalStateException, IOException{
 		//CurrentUser user = CurrentUser.getInstance();
+		String saveImage = ConfigUtil.getValue("saveImage");
 		if(brandVO.getBrandid()!=null){//修改
 			brandVO.setChangetime(new Date());//最后修改时间（取当前系统时间）
 			BrandVO br=service.get(brandid);
 			String picname=br.getBrandpic();
 			if(picname!=null){
-				new File("E:/image/"+picname).delete();//删除原先的图片
+				new File(ConfigUtil.getValue("saveImage")+picname).delete();//删除原先的图片
 			}			
 			String orgname=file.getOriginalFilename();
 			String savename=UUID.randomUUID()+orgname.substring(orgname.lastIndexOf("."));//保存图片的名字唯一
-			String savepath="E:/image/"+savename;
+			String savepath=saveImage+savename;
 			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(savepath));//图片存放位置
 			file.transferTo(new File(savepath));
              brandVO.setBrandpic(savename);
@@ -86,7 +72,7 @@ public class BrandController {
 			brandVO.setChangetime(new Date());//最后修改时间（取当前系统时间）
 			String orgname=file.getOriginalFilename();
 			String savename=UUID.randomUUID()+orgname.substring(orgname.lastIndexOf("."));//保存图片的名字唯一
-			String savepath="E:/image/"+savename;
+			String savepath=saveImage+savename;
 			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(savepath));//图片存放位置
 			file.transferTo(new File(savepath));
              brandVO.setBrandpic(savename);
@@ -104,7 +90,7 @@ public class BrandController {
 		JsonResult rs=new JsonResult();
 		BrandVO brandVO=service.get(brandid);
 		String picname=brandVO.getBrandpic();	
-		new File("E:/image/"+picname).delete();
+		new File(ConfigUtil.getValue("saveImage")+picname).delete();
 		service.delete(brandid);
 		List<CartypeVO> list=carservice.getByBrandid(brandid);
 		for(CartypeVO cartype:list){
@@ -135,8 +121,7 @@ public class BrandController {
 	}
     
 	@RequestMapping("/getList")
-	public @ResponseBody List<CartypeVO> getList(Integer brandid,HttpServletResponse response){	
-		response.setHeader("Access-Control-Allow-Origin", "*");
+	public @ResponseBody List<CartypeVO> getList(Integer brandid){	
 		return carservice.getByBrandid(brandid);
 	}
 	
@@ -152,8 +137,7 @@ public class BrandController {
 	
 	
 	@RequestMapping("/weblist")
-	public @ResponseBody List<BrandVO> getlist(HttpServletResponse response) throws Throwable{
-		response.setHeader("Access-Control-Allow-Origin", "*");
+	public @ResponseBody List<BrandVO> getlist() throws Throwable{
 		return service.list();
 	}
 }

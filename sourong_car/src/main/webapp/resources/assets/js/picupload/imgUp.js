@@ -39,7 +39,7 @@ $(function(){
 					delParent = $(this).parent();
 				 }); 
 		     
-				$img0.attr("src","/sourong_car/resources/assets/images/picupload/a7.png").appendTo($section);
+				$img0.attr("src","/sourongcar/resources/assets/images/picupload/a7.png").appendTo($section);
 		     var $img = $("<img class='up-img up-opcity'>");
 		         $img.attr("src",imgArr[i]);
 		         $img.appendTo($section);
