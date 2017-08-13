@@ -1,6 +1,5 @@
 package com.sourong.cartype.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.base.common.domain.CurrentUser;
 import com.base.common.domain.JsonResult;
 import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
@@ -37,14 +35,10 @@ public class CartypeController {
 	
 	@RequestMapping("/doEdit")
 	public String doEdit(String brandname,CartypeVO cartypeVO,ModelMap map) throws Throwable{
-		CurrentUser user = CurrentUser.getInstance();
+		//CurrentUser user = CurrentUser.getInstance();
 		if(cartypeVO.getCartypeid()!=null){//修改
-			cartypeVO.setChangetime(new Date());//最后修改时间（取当前系统时间）
 			service.update(cartypeVO);
 		}else{//新增
-			cartypeVO.setCreatetime(new Date());//取创建时的时间
-			cartypeVO.setChangetime(new Date());//最后修改时间（取当前系统时间）
-			System.out.println(brandname);
 			Integer brandid=Integer.parseInt(brandname);
 			cartypeVO.setBrandid(brandid);
 			service.add(cartypeVO);
@@ -54,8 +48,6 @@ public class CartypeController {
 	
 	@RequestMapping("/docarEdit")
 	public String docarEdit(CartypeVO cartypeVO) throws Throwable{
-		cartypeVO.setCreatetime(new Date());//取创建时的时间
-		cartypeVO.setChangetime(new Date());//最后修改时间（取当前系统时间）
 		service.add(cartypeVO);
 		return "redirect:/brand/getCartype.action?brandid="+cartypeVO.getBrandid();
 	}

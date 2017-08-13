@@ -2,8 +2,6 @@ package com.sourong.consultant.controller;
 
 import java.util.Date;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,15 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.base.common.domain.JsonResult;
 import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
-import com.sourong.collection.domain.CollectionVO;
-import com.sourong.collection.domain.CollectionVOExample;
 import com.sourong.consultant.domain.ConsultantVO;
 import com.sourong.consultant.service.ConsultantService;
-import com.sourong.product.domain.ProductVO;
-import com.sourong.product.service.ProductService;
 import com.sourong.souronguser.domain.SouronguserVO;
 import com.sourong.souronguser.service.SouronguserService;
     
@@ -31,8 +26,8 @@ public class ConsultantController {
 	private ConsultantService  consultantService;
 	@Autowired
 	private SouronguserService userService;
-	@Autowired
-	private ProductService productServce;
+	//@Autowired
+	//private ProductService productServce;
 	
 	@RequestMapping(value="/doEdit",method=RequestMethod.POST)
 	public @ResponseBody JsonResult doEdit(ConsultantVO entity){
@@ -90,14 +85,13 @@ public class ConsultantController {
 	
 	@RequestMapping(value="/forMoreInformation",method=RequestMethod.POST)
 	public @ResponseBody JsonResult forMoreInformation(@RequestParam(required=true) Integer carId,
-			Integer userId,HttpServletResponse response){
-		response.setHeader("Access-Control-Allow-Origin", "*");
+			Integer userId){
 		JsonResult result = new JsonResult();
 		if("".equals(userId) || userId == null){
 			result.setMsg("当前没有用户登陆");
 			result.setStatus(0);
 		}else{
-			ProductVO productVO = productServce.get(carId);
+			//ProductVO productVO = productServce.get(carId);
 			if(consultantService.canConsultAgain(userId, carId)){
 				SouronguserVO souronguserVO = userService.get(userId);
 				ConsultantVO consultantVO = new ConsultantVO();

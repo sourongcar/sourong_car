@@ -2,11 +2,7 @@ package com.sourong.company.controller;
 
 
 import java.io.File;
-import java.io.IOException;
 import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.base.common.domain.CurrentUser;
 import com.base.common.domain.JsonResult;
 import com.base.common.util.ConfigUtil;
 import com.base.datatables.domain.DataTablesRequest;
@@ -94,8 +89,7 @@ public class CompanyController {
 	
 	
 	@RequestMapping("/getCompanyinformation")
-	public @ResponseBody CompanyVO getCompany(HttpServletResponse response){
-		response.setHeader("Access-Control-Allow-Origin", "*");
+	public @ResponseBody CompanyVO getCompany(){
 		return service.get(1);//跳转到分页查询页面
 	}
 }
