@@ -130,7 +130,7 @@ label.fileup input[type=file] {
 					reader.onload=function(){
 						$("label.fileup img").attr("src",reader.result);
 						reader=null;
-						$(this).parent().next().text("");
+						$(this).parent().next().next().text("");
 					}
 					reader.readAsDataURL(file[0]);
 				}
