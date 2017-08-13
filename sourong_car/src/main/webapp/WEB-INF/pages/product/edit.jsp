@@ -66,7 +66,7 @@ label.fileup input[type=file] {
 					<div class="col-sm-10">
 						<label class="fileup">
 							<input type="file" id="coverpic" name="cover" accept="image/jpeg,image/png,image/gif">
-							<img style="width:400px" <c:if test='${entity.coverpic ne null}'>src="/images/${entity.coverpic}"</c:if>>
+							<img style="max-width:400px" <c:if test='${entity.coverpic ne null}'>src="/images/${entity.coverpic}"</c:if>>
 							<div class="btn btn-success"><i class="icon-upload-alt"></i>点击上传</div>
 						</label><br><span class="red"></span>
 					</div>
@@ -137,7 +137,7 @@ label.fileup input[type=file] {
 				else{
 					var p=$(this).parent();
 					p.children("img").removeAttr('src');
-					p.next().text("文件格式应为jpg，png或gif，大小不超过512k");
+					p.next().next().text("文件格式应为jpg，png或gif，大小不超过512k");
 					this.value='';
 				}
 				file=null;
