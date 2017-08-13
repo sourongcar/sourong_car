@@ -302,7 +302,6 @@
       <if test="hit != null" >
         hit = #{hit,jdbcType=INTEGER},
       </if>
-      </if>
     </set>
     where productid = #{productid,jdbcType=INTEGER}
   </update>
