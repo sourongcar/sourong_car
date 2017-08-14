@@ -78,7 +78,7 @@
 		<div class="modal-content">
 		<div class="imgwrap">
 			<div type="button" class="close" data-dismiss="modal" aria-hidden="true">×</div>
-	    	<img src="/image/e2af67965a8f4532981877960cf92044.png" style="width:100%;">
+	    	<img src="" style="width:100%;">
 	    </div>
 		</div>
 		</div>
@@ -243,7 +243,6 @@
 										{
 											"render" : function(data, type, row) {
 												var url=data&&('/images/'+data)||'';
-												console.log(url);
 												return '<div class="btn btn-link"'+(data?' onclick="showImg(\''+url+'\')"':'')+'><img class="img"'+(data?('src="'+url+'"'):'')+'></div>';
 											},
 											"targets" : 4
@@ -359,13 +358,11 @@
 		//切换是否展示
 		function toggleshow(self,id){
 			var span=$(self).children("span");
-			console.log(span);
 			var i=span.children("i");
 			span=span.children('span');
 			$.getJSON("${path }/product/toggleVisibility.action?id="+id,
 				function(data){
-					console.log(data);
-					if(data=="success"){console.log(span);
+					if(data=="success"){
 						if(i.hasClass("icon-eye-open")){
 							i.removeClass("icon-eye-open").addClass("icon-eye-close");
 						}else{
