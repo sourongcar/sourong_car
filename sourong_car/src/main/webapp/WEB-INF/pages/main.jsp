@@ -21,7 +21,7 @@
 		<div class="navbar-container" id="navbar-container">
 			<div class="navbar-header pull-left">
 				<a href="#" class="navbar-brand"> <small> <i
-						class="icon-leaf"></i> 码神官网后台管理
+						class="icon-desktop"></i> 码神官网后台管理
 				</small>
 				</a>
 				<!-- /.brand -->
@@ -113,7 +113,7 @@
 				<ul class="nav nav-list">
 					<!-- 此处添加菜单 -->
 					<li>
-						<a href="#" class="dropdown-toggle"> <i class="icon-desktop"></i> <span class="menu-text">系统管理</span><b class="arrow icon-angle-down"></b></a>
+						<a href="#" class="dropdown-toggle"> <i class="icon-wrench"></i> <span class="menu-text">系统管理</span><b class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
 							<li>
 								<a href="${path }/user/list.action"target="contentframe"><i class="icon-double-angle-right"></i>管理员列表</a>
@@ -121,7 +121,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="#" class="dropdown-toggle"> <i class="icon-desktop"></i> <span class="menu-text">用户咨询管理</span><b class="arrow icon-angle-down"></b></a>
+						<a href="#" class="dropdown-toggle"> <i class="icon-comments-alt"></i> <span class="menu-text">用户咨询管理</span><b class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
 							<li>
 								<a href="${path }/consultant/list.action?isRead=1"target="contentframe"><i class="icon-double-angle-right"></i>待咨询用户列表</a>
@@ -132,7 +132,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="#" class="dropdown-toggle"> <i class="icon-desktop"></i> <span class="menu-text">公司信息管理</span><b class="arrow icon-angle-down"></b></a>
+						<a href="#" class="dropdown-toggle"> <i class="icon-info-sign"></i> <span class="menu-text">公司信息管理</span><b class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
 							<li>
 								<a href="${path }/company/list.action"target="contentframe"><i class="icon-double-angle-right"></i>公司信息列表</a>
@@ -143,7 +143,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="#" class="dropdown-toggle"> <i class="icon-desktop"></i> <span class="menu-text">产品信息管理</span><b class="arrow icon-angle-down"></b></a>
+						<a href="#" class="dropdown-toggle"> <i class="icon-tags"></i> <span class="menu-text">产品信息管理</span><b class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
 							<li>
 								<a href="${path }/brand/list.action"target="contentframe"><i class="icon-double-angle-right"></i>品牌列表</a>
@@ -178,7 +178,7 @@
 
 				<div>
 					<iframe width="100%" height="100%" id="contentframe" name="contentframe"
-								onload="this.contentWindow.document.body.style.padding='15px';" frameborder="0" scrolling="yes"
+								onload="ifmresize();this.contentWindow.document.body.style.padding='15px';" frameborder="0" scrolling="yes"
 								src="${path}/user/list.action"> </iframe>
 				</div>
 				<!-- /.page-content -->
@@ -198,15 +198,25 @@
 	<!-- /.main-container -->
 	<%@ include file="/WEB-INF/pages/common/rs_js.jsp"%>
 	<script type="text/javascript">
+		var ifm = document.getElementById("contentframe");
 		function ifmresize() {
-			var ifm = document.getElementById("contentframe");
-			ifm.height = document.documentElement.clientHeight;
+			var win=ifm.contentWindow;
+			//console.log(win.document.body.clientHeight);
+			setTimeout(function(){ifm.height = win.document.body.clientHeight;},0);
+			win.onresize=innerResize;
+		}
+		function innerResize(){
+			console.log(this.document.body.clientHeight);
+			var h=this.document.body.clientHeight;
+			setTimeout(function(){ifm.height = h;},0);
 		}
 		window.onresize = function() {
+			//console.log('window resize');
+			ifm.contentWindow.onresize();
 			//ifmresize();
-			$("#contentframe").parent()[0].style.height=(document.documentElement.clientHeight-89)+'px';
+			//$("#contentframe").parent()[0].style.height=(document.documentElement.clientHeight-89)+'px';
 		}
-			$("#contentframe").parent()[0].style.height=(document.documentElement.clientHeight-89)+'px';
+			//$("#contentframe").parent()[0].style.height=(document.documentElement.clientHeight-89)+'px';
 		$(function() {
 			$(".nav-list li:first").addClass("active").addClass('open');
 			$(".submenu li:first").addClass("active");
@@ -216,9 +226,9 @@
 			$(".submenu li").unbind('click').click(function() {
 				var parent=$(this).parent();
 				$(".submenu li.active").removeClass("active");
-				$(".nav-list>li.open>.submenu").each(function(){if(parent[0]!=this)$(this).slideUp(200).parent().removeClass('open');})
 				$(".nav-list>li.active").removeClass("active");
 				$(this).addClass("active").parents('li').addClass("active").addClass('open');
+				$(".nav-list>li.open>.submenu").each(function(){if(parent[0]!=this)$(this).slideUp(200).parent().removeClass('open');})
 			});
 		});
 	</script>

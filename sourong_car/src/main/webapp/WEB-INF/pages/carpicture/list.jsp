@@ -139,7 +139,7 @@
 										{
 											"render" : function(data, type, row) {
 												        var loopresult="未轮播"
-												    if(row.islooping==1){
+												    if(row.islooping==0){
 												    	loopresult="已轮播"
 												    }
 												return '<a href="${path }/carpicture/edit.action?id='+data+'" class="tooltip-success" data-rel="tooltip" title="修改"><span class="green"><i class="icon-edit bigger-120"></i></a>&nbsp;&nbsp;'
@@ -203,9 +203,9 @@
 			    	
 			        $(that).attr("loopingnum",data)//给属性赋值
 			        
-			    	if(data==1){
+			    	if(data==0){
 				     $(that).text("已轮播")			    		
-			    	}else if(data==0){
+			    	}else if(data==1){
 			    		
 				     $(that).text("未轮播")			    		
 			    	}

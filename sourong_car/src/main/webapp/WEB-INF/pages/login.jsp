@@ -23,7 +23,7 @@ if(window !=top){
 					<div class="login-container">
 						<div class="center">
 							<h1>
-								<i class="icon-leaf green"></i> <span class="red">MS</span> <span
+								<i class="icon-desktop green"></i> <span class="red">搜融好车</span> <span
 									class="white">后台管理系统</span>
 							</h1>
 							<h4 class="blue">&copy; 搜融到家</h4>
@@ -37,7 +37,7 @@ if(window !=top){
 								<div class="widget-body">
 									<div class="widget-main">
 										<h4 class="header blue lighter bigger">
-											<i class="icon-coffee green"></i> 请输入登录信息
+											<i class="icon-signin green"></i> 请输入登录信息
 										</h4>
 
 										<div class="space-6"></div>

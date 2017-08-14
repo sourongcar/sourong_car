@@ -228,7 +228,7 @@ $(document).ready(function(){
 						var cartype=      '车型:</label><div class="col-sm-9"><p class=" col-xs-10" style="padding: 6px 12px;">'+data.cartype+'</p></div></div>' ;
 						var marketprice = '市价:</label><div class="col-sm-9"><p  class="col-xs-10" style="padding: 6px 12px;">'+data.marketprice+'</p></div></div>' ;
 						var sourongprice ='搜融价:</label><div class="col-sm-9"><p  class="col-xs-10" style="padding: 6px 12px;">'+data.sourongprice+'</p></div></div>' ;
-						var coverpic =    '封面图片:</label><div class="col-sm-9"><img  src="'+data.coverpic+'" style="width:300px;height:150px"></div></div>' ;
+						var coverpic =    '封面图片:</label><div class="col-sm-9"><img  src="/images/'+data.coverpic+'" style="width:300px;height:150px"></div></div>' ;
 						$('.modal-title').text('产品信息');
 						$(".modal-body").html('<form class="form-horizontal">'+htmlcore+brandname+htmlcore+cartype+htmlcore+marketprice+htmlcore+sourongprice+htmlcore+coverpic+"</form>")				
 					},
