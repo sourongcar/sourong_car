@@ -32,15 +32,18 @@ public class LoginStateHandlerInterceptor implements HandlerInterceptor {
 		HttpServletResponse httpRes = (HttpServletResponse) response;
 		String uri = httpReq.getRequestURI();
 		if (isAllowURI(uri)) {// 本身不需要拦截
-			String accessControl=ConfigUtil.getValue("accesscontrol");
-			if(accessControl!=null&&!accessControl.equals(""))
+			String accessControl = ConfigUtil.getValue("accesscontrol");
+			if (accessControl != null && !accessControl.equals(""))
 				httpRes.setHeader("Access-Control-Allow-Origin", ConfigUtil.getValue("accesscontrol"));
 			return true;
-		}else if (httpReq.getSession().getAttribute("s_user") != null) {// 已经登录
-				logger.debug("已经登录");
-				return true;
+		} else if (httpReq.getSession().getAttribute("s_user") != null) {// 已经登录
+			logger.debug("已经登录");
+			return true;
 		} else {// 没有登录
-			httpRes.sendRedirect(httpReq.getContextPath() + "/login.action");
+			String path = (String) httpReq.getServletContext().getAttribute("path");
+			System.out.println(path);
+			httpRes.sendRedirect(path+"/../login.action");
+			/*httpRes.sendRedirect(path + "/../login.action");linux下访问路径*/
 			return false;
 		}
 	}

@@ -76,7 +76,7 @@ public class ConsultantServiceImp implements ConsultantService {
 		ConsultantVOExample example = new ConsultantVOExample();
 		example.createCriteria().andConsultantidEqualTo(Integer.valueOf(consultantId));
 		ConsultantVO vo = new ConsultantVO();
-		vo.setIsreply(0);//表示已回复
+		vo.setIsreply(1);//表示已回复
 		return mapper.updateByExampleSelective(vo,example);
 	}
 	

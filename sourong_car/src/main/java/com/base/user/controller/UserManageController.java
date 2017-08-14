@@ -116,7 +116,7 @@ public class UserManageController {
 		// 1代表成功 0代表失败
 		int result = service.update(userid, oldpassword, newpassword);
 		if (result == 1)
-			return "redirect:main.action";
+			return "redirect:/main.action";
 		else
 			request.setAttribute("error", "原密码错误，请重新输入");
 		return "user/password";

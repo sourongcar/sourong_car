@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>码神软件后台管理系统</title>
+<title>搜融好车后台管理系统</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <%@ include file="/WEB-INF/pages/common/rs_css.jsp"%>
 </head>
@@ -21,7 +21,7 @@
 		<div class="navbar-container" id="navbar-container">
 			<div class="navbar-header pull-left">
 				<a href="#" class="navbar-brand"> <small> <i
-						class="icon-desktop"></i> 码神官网后台管理
+						class="icon-desktop"></i> 搜融好车官网后台管理
 				</small>
 				</a>
 				<!-- /.brand -->
@@ -48,7 +48,7 @@
 							<li><a href="${path }/loginout.action"> <i
 									class="icon-off"></i> 注销
 							</a></li>
-							<li><a href="${path}/user/updatePassword.action"><i
+							<li><a href="${path}/user/updatePassword.action" target="contentframe"><i
 									class="icon-off"></i> 修改密码</a></li>
 						</ul></li>
 				</ul>
@@ -61,7 +61,11 @@
 
 	<div class="main-container" id="main-container">
 		<script type="text/javascript">
-			try {
+		//防止iframe页面内嵌
+		
+		if (window != top) 
+		top.location.href = location.href; 
+           try {
 				ace.settings.check('main-container', 'fixed')
 			} catch (e) {
 			}
@@ -120,10 +124,10 @@
 						<a href="#" class="dropdown-toggle"> <i class="icon-comments-alt"></i> <span class="menu-text">用户咨询管理</span><b class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
 							<li>
-								<a href="${path }/consultant/list.action?isRead=1"target="contentframe"><i class="icon-double-angle-right"></i>待咨询用户列表</a>
+								<a href="${path }/consultant/list.action?isRead=0"target="contentframe"><i class="icon-double-angle-right"></i>待咨询用户列表</a>
 							</li>
 							<li>
-								<a href="${path }/consultant/list.action?isRead=0"target="contentframe"><i class="icon-double-angle-right"></i>已咨询用户列表</a>
+								<a href="${path }/consultant/list.action?isRead=1"target="contentframe"><i class="icon-double-angle-right"></i>已咨询用户列表</a>
 							</li>
 						</ul>
 					</li>
@@ -144,9 +148,7 @@
 							<li>
 								<a href="${path }/brand/list.action"target="contentframe"><i class="icon-double-angle-right"></i>品牌列表</a>
 							</li>
-							<%-- <li>
-								<a href="${path }/cartype/list.action"target="contentframe"><i class="icon-double-angle-right"></i>车型列表</a>
-							</li> --%>
+						
 							<li>
 								<a href="${path }/product/list.action"target="contentframe"><i class="icon-double-angle-right"></i>产品列表</a>
 							</li>
@@ -172,7 +174,7 @@
 			<div class="main-content">
 				<div class="breadcrumbs" id="breadcrumbs"></div>
 
-				<div>
+				<div style="height:calc(100vh - 86px)">
 					<iframe width="100%" height="100%" id="contentframe" name="contentframe"
 								onload="ifmresize();this.contentWindow.document.body.style.padding='15px';" frameborder="0" scrolling="yes"
 								src="${path}/user/list.action"> </iframe>
@@ -196,19 +198,19 @@
 	<script type="text/javascript">
 		var ifm = document.getElementById("contentframe");
 		function ifmresize() {
-			var win=ifm.contentWindow;
+			//var win=ifm.contentWindow;
 			//console.log(win.document.body.clientHeight);
-			setTimeout(function(){ifm.height = win.document.body.clientHeight;},0);
-			win.onresize=innerResize;
+			//setTimeout(function(){ifm.height = win.document.body.clientHeight;},0);
+			//win.onresize=innerResize;
 		}
 		function innerResize(){
-			console.log(this.document.body.clientHeight);
-			var h=this.document.body.clientHeight;
-			setTimeout(function(){ifm.height = h;},0);
+			//console.log(this.document.body.clientHeight);
+			//var h=this.document.body.clientHeight;
+			//setTimeout(function(){ifm.height = h;},0);
 		}
 		window.onresize = function() {
 			//console.log('window resize');
-			ifm.contentWindow.onresize();
+			//ifm.contentWindow.onresize();
 			//ifmresize();
 			//$("#contentframe").parent()[0].style.height=(document.documentElement.clientHeight-89)+'px';
 		}

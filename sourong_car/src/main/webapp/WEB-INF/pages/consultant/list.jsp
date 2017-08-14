@@ -138,9 +138,9 @@ $(document).ready(function(){
 					        }).nodes().each(function(cell, i) {
 					            cell.innerHTML = i + 1;
 					        });
-							if(row.isreply == 0){
+							if(row.isreply == 1){
 								return "<span>已回复</span>";
-							}else if(row.isreply == 1){
+							}else if(row.isreply == 0){
 								return 	"<button onClick=recordContent(this) data-toggle='modal' data-target='#myModal' class='btn btn-info' style=' line-height: 0.5;font-size: 11px;padding: 7px 10px;'>记录咨询结果</button>" +"  "+
 								"<button onClick=mark(this) class='btn btn-success' style=' line-height: 0.5;font-size: 11px;padding: 7px 10px;'>标记为已回复</button>" ; 
 							}
@@ -171,6 +171,7 @@ $(document).ready(function(){
 			}else{
 			$('.modal-body').html(data.replyresult);
 			}
+			$('.modal-footer').html('<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>')
 		};
 		var data;
 		function recordContent(obj){
@@ -188,6 +189,7 @@ $(document).ready(function(){
 				"dataType":"json",
 				"success":function(){
 					alert("操作成功");
+					mydatatables.ajax.reload();
 				}
 			}); 
 		}
@@ -200,7 +202,6 @@ $(document).ready(function(){
 				"data":{"consultantId":consultantId},
 				"dataType":"json",
 				"success":function(data){
-					console.log(data)
 					mydatatables.ajax.reload();
 				},
 				"error":function(data){

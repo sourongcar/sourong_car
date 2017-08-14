@@ -166,7 +166,6 @@ label.fileup input[type=file] {
 						dataType :"json",
 						contentType :'application/json;charset=UTF-8',
 						success:function(data){
-							console.log(data);
 							brandTree[brandName]=data;
 							updateCartype(data);
 						}
@@ -184,10 +183,10 @@ label.fileup input[type=file] {
 				arguments.callee.list.push(data);
 				var f=function(){
 					var self=$(this);
-					if(self.val().match("^"+data.pattern+"$"))
-					self.next().text(data.success||"").addClass("green");
+					if(self.val().match("^"+data.pattern+"$")&&(data.length?self.val().length<=data.length:true))
+						self.next().text(data.success||"").addClass("green");
 					else
-					self.next().text(data.error||"输入错误").removeClass("green");
+						self.next().text(data.error||"输入错误").removeClass("green");
 				}
 				$(data.el).focus(f).blur(f);
 				return arguments.callee;
@@ -197,7 +196,7 @@ label.fileup input[type=file] {
 				for(var i=0;i<this.list.length||0;i++){
 					var data=this.list[i];
 					if([].join.call($(data.el).map(function(){
-						if($(this).val().match("^"+data.pattern+"$"))
+						if($(this).val().match("^"+data.pattern+"$")&&(data.length?$(this).val().length<=data.length:true))
 							return null;
 						else{
 							this.focus();
@@ -208,7 +207,7 @@ label.fileup input[type=file] {
 				}
 				return true;
 			};
-			validate({el:"#marketprice,#sourongprice",pattern:"\\d+(\\.\\d+)?",error:"请输入数字"})
+			validate({el:"#marketprice,#sourongprice",pattern:"\\d+(\\.\\d+)?",error:"请输入数字，最多10个字符",length:10})
 			({el:"#picintroduction",pattern:".{1,128}",error:"长度为1到128字符"})({el:"#title",pattern:".{1,36}",error:"长度为1到36个字符"})
 		});
 	</script>
