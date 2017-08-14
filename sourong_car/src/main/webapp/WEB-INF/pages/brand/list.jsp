@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <%@ include file="/WEB-INF/pages/common/rs_css.jsp"%>
 </head>
+
 <body style="width:98%">
 	<div class="row">
 		<div class="col-xs-12">
@@ -185,8 +186,8 @@
 										},
 										{
 											"render" : function(data, type, row) {
-												/* return '<img src="/images/'+row.brandpic+'" height="100" width="100" alt="这里是图片"/>'; */
-												return '<a  data-toggle="modal" data-target="#lookpic"  href="javascript:void(0)" onclick="look(\''+row.brandpic+'\')">点击查看品牌图标</a>';
+												return '<div data-toggle="modal" data-target="#lookpic" onclick="look(\''+row.brandpic+'\')"><img id="brandsign" src="/images/'+row.brandpic+'"  width="60px" height="50px" alt="这里是图片"/></div>';
+											
 											},
 											"targets" : 2
 										} 

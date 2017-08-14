@@ -48,6 +48,8 @@
 							<li><a href="${path }/loginout.action"> <i
 									class="icon-off"></i> 注销
 							</a></li>
+							<li><a href="${path}/user/updatePassword.action"><i
+									class="icon-off"></i> 修改密码</a></li>
 						</ul></li>
 				</ul>
 				<!-- /.ace-nav -->
@@ -142,9 +144,9 @@
 							<li>
 								<a href="${path }/brand/list.action"target="contentframe"><i class="icon-double-angle-right"></i>品牌列表</a>
 							</li>
-							<li>
+							<%-- <li>
 								<a href="${path }/cartype/list.action"target="contentframe"><i class="icon-double-angle-right"></i>车型列表</a>
-							</li>
+							</li> --%>
 							<li>
 								<a href="${path }/product/list.action"target="contentframe"><i class="icon-double-angle-right"></i>产品列表</a>
 							</li>
