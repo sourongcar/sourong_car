@@ -111,7 +111,7 @@ $(document).ready(function(){
 								{"data" : "productid","width": "25%"},
 								{"data" : "isreply","width": "10%","visible":false},
 								{"data" : "replyresult","orderable": false,"width": "10%",
-									<c:if test="${isRead == 1}">
+									<c:if test="${isRead == 0}">
 										"visible":false
 									</c:if>},
 								{"data" : "createtime","width": "20%"},
