@@ -13,6 +13,13 @@
 	table{
 		text-align: center
 	}
+	.textarea_adapt {  
+    width: 100%; /*自动适应父布局宽度*/  
+    overflow: auto;  
+    word-break: break-all;  
+    resize:none;/*禁止拖动*/
+    /*在ie中解决断行问题(防止自动变为在一行显示，主要解决ie兼容问题，ie8中当设宽度为100%时，文本域类容超过一行时，当我们双击文本内容就会自动变为一行显示，所以只能用ie的专有断行属性“word-break或word-wrap”控制其断行)*/  
+	}  
 </style>
 </head>
 <body style="width:98%">
@@ -177,7 +184,7 @@ $(document).ready(function(){
 		function recordContent(obj){
 			data = $('#mydatatables').DataTable().row($(obj).parent().parent()).data();
 			$('.modal-title').text('填写客户咨询记录');
-			$('.modal-body').html('<textarea rows="6" cols="50" placeholder="在此填写记录" id="textArea"> ' + data.replyresult + '</textarea>')
+			$('.modal-body').html('<textarea rows="6" cols="50" class="textarea_adapt" placeholder="在此填写记录" id="textArea"> ' + data.replyresult + '</textarea>')
 			$('#submit').remove();
 			$('.modal-footer').append('<button id="submit" onclick="saveRecord(data)" type="button" class="btn btn-primary" data-dismiss="modal">提交</button>')
 		}
