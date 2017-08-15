@@ -27,8 +27,9 @@
 	right:-15px;
     width: 30px;
     text-align: center;
-    line-height: 25px;
+    line-height: 30px;
     height: 30px;
+    font-size:25px;
 }
 .imgwrap:hover .close{
 	display: block;
@@ -78,7 +79,7 @@
 		<div class="modal-content">
 		<div class="imgwrap">
 			<div type="button" class="close" data-dismiss="modal" aria-hidden="true">×</div>
-	    	<img src="" style="width:100%;">
+	    	<img style="width:100%;">
 	    </div>
 		</div>
 		</div>
@@ -243,7 +244,7 @@
 										{
 											"render" : function(data, type, row) {
 												var url=data&&('/images/'+data)||'';
-												return '<div class="btn btn-link"'+(data?' onclick="showImg(\''+url+'\')"':'')+'><img class="img"'+(data?('src="'+url+'"'):'')+'></div>';
+												return data?('<div class="btn btn-link" onclick="showImg(\''+url+'\')"><img class="img" src="'+url+'"></div>'):'暂无';
 											},
 											"targets" : 4
 										},
@@ -261,7 +262,7 @@
 										},
 										{
 											"render" : function(data, type, row) {
-												return data==0?'首页轮播':data==1?'热门':data==2?'普通':'无';
+												return data==0?'首页轮播':data==1?'<span class="red"><strong>热门</strong></span>':data==2?'普通':'无';
 											},
 											"targets" : 8
 										},
@@ -269,7 +270,7 @@
 											"render" : function(data, type, row) {
 												return '<a href="${path }/product/edit.action?id='+data+'" class="tooltip-success" data-rel="tooltip" title="修改"><span class="green"><i class="icon-edit bigger-120"></i></span></a>&nbsp;'
 												+'<a href="javascript:void(0)" onclick="del(\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="删除"><span class="red"><i class="icon-trash bigger-120"></i></span></a>&nbsp;'
-												+'<a href="javascript:void(0)" onclick="toggleshow(this,\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="是否展示"><span class="blue"><i class="icon-eye-'+(row.isdisplay==0?'open':'close')+' bigger-120"></i></span></a>&nbsp;'//
+												+'<a href="javascript:void(0)" onclick="toggleshow(this,\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="是否展示"><span class="'+(row.isdisplay==0?'blue':'light-grey')+'"><i class="icon-eye-'+(row.isdisplay==0?'open':'close')+' bigger-120"></i></span></a>&nbsp;'//
 												+'<a href="javascript:void(0)" onclick="showConfig(\''+row.configurationid+'\')" class="tooltip-error" data-rel="tooltip" title="查看配置"><span class="orange"><i class="icon-cog bigger-120"></i></a>&nbsp;'
 												+'<a href="${path}/carpicture/list.action?productid='+data+'" class="tooltip-error" data-rel="tooltip" title="展示图片"><span class="grey"><i class="icon-picture bigger-120"></i></span></a>';
 											},
@@ -279,7 +280,7 @@
 								"language" : {
 									"url" : "${path }/resources/assets/language/zh_CN.txt"
 								}
-							});
+							}).on('draw.dt',function(){onresize();});
 
 			$("#search").click(function() {
 				mydatatables.ajax.reload();
@@ -317,9 +318,9 @@
 				var f=function(){
 					var self=$(this);
 					if(self.val().match("^"+data.pattern+"$"))
-					self.next().text(data.success||"").addClass("green");
+						self.next().text(data.success||"").addClass("green");
 					else
-					self.next().text(data.error||"输入错误").removeClass("green");
+						self.next().text(data.error||"输入错误").removeClass("green");
 				}
 				$(data.el).focus(f).blur(f);
 				return arguments.callee;
@@ -359,13 +360,14 @@
 		function toggleshow(self,id){
 			var span=$(self).children("span");
 			var i=span.children("i");
-			span=span.children('span');
 			$.getJSON("${path }/product/toggleVisibility.action?id="+id,
 				function(data){
 					if(data=="success"){
 						if(i.hasClass("icon-eye-open")){
+							span.removeClass("blue").addClass("light-grey");
 							i.removeClass("icon-eye-open").addClass("icon-eye-close");
 						}else{
+							span.removeClass("light-grey").addClass("blue");
 							i.removeClass("icon-eye-close").addClass("icon-eye-open");
 						}
 					}
