@@ -26,8 +26,11 @@ public class CartypeController {
 	@Autowired
 	private BrandService brandservice;
 	@RequestMapping("/edit")
-	public String edit(Integer cartypeid,ModelMap map){
+	public String edit(Integer cartypeid,ModelMap map) throws Throwable{
 		if(cartypeid!=null){
+			Integer brandid=service.get(cartypeid).getBrandid();
+			BrandVO brvo=brandservice.get(brandid);
+			map.addAttribute("brandname", brvo.getBrandname());
 			map.addAttribute("cartypeVO",service.get(cartypeid));
 		}
 		return "cartype/edit";//跳转到编辑页面
@@ -36,7 +39,7 @@ public class CartypeController {
 	@RequestMapping("/doEdit")
 	public String doEdit(String brandname,CartypeVO cartypeVO,ModelMap map) throws Throwable{
 		//CurrentUser user = CurrentUser.getInstance();
-		if(cartypeVO.getCartypeid()!=null){//修改
+		if(cartypeVO.getCartypeid()!=null){//修改		
 			service.update(cartypeVO);
 		}else{//新增
 			Integer brandid=Integer.parseInt(brandname);
@@ -44,11 +47,17 @@ public class CartypeController {
 			service.add(cartypeVO);
 		}
 		return "redirect:/cartype/list.action";//跳转到列表页面
-	}
-	
+		}
+		
 	@RequestMapping("/docarEdit")
 	public String docarEdit(CartypeVO cartypeVO) throws Throwable{
 		service.add(cartypeVO);
+		return "redirect:/brand/getCartype.action?brandid="+cartypeVO.getBrandid();
+	}
+
+	@RequestMapping("/docarupdate")
+	public String docarupdate(CartypeVO cartypeVO) throws Throwable{
+		service.update(cartypeVO);
 		return "redirect:/brand/getCartype.action?brandid="+cartypeVO.getBrandid();
 	}
 	@RequestMapping("/rest/doDelete")

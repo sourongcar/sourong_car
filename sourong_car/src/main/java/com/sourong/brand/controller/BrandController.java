@@ -52,23 +52,28 @@ public class BrandController {
 			String picname=br.getBrandpic();
 			if(picname!=null){
 				new File(ConfigUtil.getValue("saveImage")+picname).delete();//删除原先的图片
-			}			
-			String orgname=file.getOriginalFilename();
-			String savename=UUID.randomUUID()+orgname.substring(orgname.lastIndexOf("."));//保存图片的名字唯一
-			String savepath=saveImage+savename;
-			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(savepath));//图片存放位置
-			file.transferTo(new File(savepath));
-             brandVO.setBrandpic(savename);
+			}
+			if(!file.isEmpty()){	
+				String orgname=file.getOriginalFilename();
+				String savename=UUID.randomUUID()+orgname.substring(orgname.lastIndexOf("."));//保存图片的名字唯一
+				String savepath=saveImage+savename;
+				FileUtils.copyInputStreamToFile(file.getInputStream(), new File(savepath));//图片存放位置
+				file.transferTo(new File(savepath));
+				brandVO.setBrandpic(savename);
+			}
+			
              service.update(brandVO);
 		}else{//新增
 			brandVO.setCreatetime(new Date());//取创建时的时间
 			brandVO.setChangetime(new Date());//最后修改时间（取当前系统时间）
-			String orgname=file.getOriginalFilename();
-			String savename=UUID.randomUUID()+orgname.substring(orgname.lastIndexOf("."));//保存图片的名字唯一
-			String savepath=saveImage+savename;
-			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(savepath));//图片存放位置
-			file.transferTo(new File(savepath));
-             brandVO.setBrandpic(savename);
+			if(!file.isEmpty()){	
+				String orgname=file.getOriginalFilename();
+				String savename=UUID.randomUUID()+orgname.substring(orgname.lastIndexOf("."));//保存图片的名字唯一
+				String savepath=saveImage+savename;
+				FileUtils.copyInputStreamToFile(file.getInputStream(), new File(savepath));//图片存放位置
+				file.transferTo(new File(savepath));
+				brandVO.setBrandpic(savename);
+			}
              service.add(brandVO);
 			
 		}
@@ -82,8 +87,10 @@ public class BrandController {
 	public @ResponseBody JsonResult doDelete(Integer brandid) throws Throwable{
 		JsonResult rs=new JsonResult();
 		BrandVO brandVO=service.get(brandid);
-		String picname=brandVO.getBrandpic();	
-		new File(ConfigUtil.getValue("saveImage")+picname).delete();
+		String picname=brandVO.getBrandpic();
+		if(picname!=null){	
+			new File(ConfigUtil.getValue("saveImage")+picname).delete();
+		}
 		service.delete(brandid);
 		List<CartypeVO> list=carservice.getByBrandid(brandid);
 		for(CartypeVO cartype:list){

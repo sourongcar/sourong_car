@@ -70,7 +70,7 @@
 					<input type="file" name="pic" id="pic" onchange="previewFile()" /> 
 				</div>
 				<div class="col-sm-10" style="margin-top: 30px">
-					<img src=""  id="modelimg" style="max-width: 300px;max-height: 500px"  alt="Image preview..." />   		
+					<img src=""  id="modelimg" style="max-width: 300px;max-height: 500px"  alt="图片预览..." />   		
 				</div>
 			</div>
 		            </div>
@@ -191,7 +191,7 @@
 										},
 										{
 											"render" : function(data, type, row) {
-												return '<div data-toggle="modal" data-target="#lookpic" onclick="look(\''+row.brandpic+'\')"><img id="brandsign" src="/images/'+row.brandpic+'"  width="50px" height="50px" alt="这里是图片"/></div>';
+												return '<div data-toggle="modal" data-target="#lookpic" onclick="look(\''+row.brandpic+'\')"><img id="brandsign" src="/images/'+row.brandpic+'"  width="50px" height="50px" alt="图片加载不了。。。"/></div>';
 											
 											},
 											"targets" : 2
@@ -226,7 +226,6 @@
 		};
 		function look(brandpic){
 			var asd="/images/"+brandpic;
-			console.log(asd)
 			$("#modelpic").attr("src",asd);									
 		}
 	</script>

@@ -11,16 +11,16 @@
 <div class="container">
 		<div class="row clearfix">
 			<div class="col-md-12 column">
-	<form class="form-horizontal" role="form" action="${path }/cartype/doEdit.action" method="post">
+	<form class="form-horizontal" role="form" action="${path }/cartype/docarupdate.action" method="post">
 	<input type="hidden" name="cartypeid" value="${cartypeVO.cartypeid}">
-	
-	<div class="form-group">
-		<label for="brandid" class="col-sm-2 control-label">品牌编号</label>
+	<input type="hidden" name="brandid" value="${cartypeVO.brandid}">
+		<div class="form-group">
+		<label for="brandname" class="col-sm-2 control-label">品牌名</label>
 		<div class="col-sm-10">
-			<input type="text" class="form-control" id="brandid" name="brandid" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" value="${cartypeVO.brandid}"
-				   placeholder="请输入品牌编号">
+			<input type="text" class="form-control" id="brandname" name="brandname"  value="${brandname}"
+				   readonly="readonly">
 		</div>
-	</div>
+	</div> 
 	<div class="form-group">
 		<label for="cartypename" class="col-sm-2 control-label">车型名</label>
 		<div class="col-sm-10">

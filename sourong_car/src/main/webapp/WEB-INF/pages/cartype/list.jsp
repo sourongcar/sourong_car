@@ -56,13 +56,6 @@
             </div>
             <div class="modal-body">
 			<input type="hidden" name="cartypeid" value="${cartypeVO.cartypeid}">
-			 <%-- <div class="form-group">
-				<label for="brandid" class="col-sm-2 control-label">品牌编号</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" id="brandid" name="brandid" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" value="${cartypeVO.brandid}"
-						   placeholder="请输入品牌编号" required="请输入品牌编号" >
-				</div>
-			</div> --%>
 			<div class="form-group">
 					<label for="brandname" class="col-sm-2 control-label">品牌名</label>
 					<div class="col-sm-10">
@@ -134,7 +127,9 @@
 								"columns" : [ 
 							     
 								{
-									"data" : "cartypeid"
+									"data" : "cartypeid",
+									"visible" : false
+									
 								},
 								{
 									"data" : "brandid"
