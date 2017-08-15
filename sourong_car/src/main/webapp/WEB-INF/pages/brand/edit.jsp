@@ -8,12 +8,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link href="../resources/css/common.css" type="text/css" rel="stylesheet">
 <link href="../resources/css/index.css" type="text/css" rel="stylesheet">
+<link href="../resources/assets/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">  
-	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<%@ include file="/WEB-INF/pages/common/rs_css.jsp"%>
 <body>
 
 <div class="container">
@@ -31,19 +28,14 @@
 			<div class="form-group">
 				<label for="brandpic" class="col-sm-2 control-label">品牌图标</label>
 				<div class="col-sm-10">
-					<input type="file" name="pic" id="pic" onchange="previewFile()"/> 
-					
+				<span style="display:inline;padding-left: 10px;color: #999">只允许上传图片</span>
+				<input style="display: inline;" type="file" name="pic" id="pic" onchange="previewFile()"/> 
 				</div>
 				<div class="col-sm-10" style="margin-top: 30px">
 					<img src="/images/${brandVO.brandpic}"  class="img-thumbnail" style="max-width: 300px;max-height: 500px"  alt="Image preview..."/>   
 							
 				</div> 
-				<!-- <div class="z_photo upimg-div clear" >	   
-		               	 <div class="z_file fl">
-		               	 	<img src="../resources/img/a11.png" class="add-img">
-		               	 	<input type="file" name="pic" id="pic" class="file" value="" accept="image/jpg,image/jpeg,image/png,image/bmp" multiple />
-		               	 </div>
-		               </div>	 --> 
+				
 		         </div>			
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
@@ -71,7 +63,7 @@
 		 }
 		} 
 		</script>
-<script src="../resources/js/jquery.min.js"></script>
-<script src="../resources/js/imgUp.js"></script>	
+<script type="text/javascript" src="../resources/assets/js/jquery-3.2.1.min.js"></script>	
+<script type="text/javascript" src="../resources/assets/js/bootstrap.min.js"></script>		
 </body>
 </html>

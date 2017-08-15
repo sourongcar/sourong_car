@@ -121,7 +121,7 @@
 										}
 										var data = JSON.stringify(pdata);
 										//JSON.parse();
-										console.log(data);
+									
 										return data;
 									},
 									dataType : "json",
