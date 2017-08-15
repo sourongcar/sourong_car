@@ -9,7 +9,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <%@ include file="/WEB-INF/pages/common/rs_css.jsp"%>
 </head>
-
+<style>
+#car{
+	color:white;
+	text-decoration: none;
+}
+</style>
 <body style="width:98%">
 	<div class="row">
 		<div class="col-xs-12">
@@ -180,13 +185,13 @@
 											"render" : function(data, type, row) {
 												return '<p:permission privilege="com.sourong.brand.controller.BrandController:doEdit"><a href="${path }/brand/edit.action?brandid='+row.brandid+'" class="tooltip-success" data-rel="tooltip" title="修改"><span class="green"><i class="icon-edit bigger-150"></i></a></p:permission>&nbsp;&nbsp&nbsp;&nbsp'
 												+'<p:permission privilege="com.sourong.brand.controller.BrandController:doDelete"><a href="javascript:void(0)" onclick="del(\''+row.brandid+'\')" class="tooltip-error" data-rel="tooltip" title="删除"><span class="red"><i class="icon-trash bigger-150"></i></a></p:permission>&nbsp;&nbsp&nbsp;&nbsp'
-												+'<p:permission privilege="com.sourong.brand.controller.BrandController:getCartype"><a href="${path }/brand/getCartype.action?brandid='+row.brandid+'" class="tooltip-success" data-rel="tooltip" title="车型"><span class="green">more</a></p:permission>&nbsp;&nbsp&nbsp;&nbsp;';
+												+'<p:permission privilege="com.sourong.brand.controller.BrandController:getCartype"><button type="button" class="btn btn-info btn-sm"><a  id="car" href="${path }/brand/getCartype.action?brandid='+row.brandid+'" class="tooltip-success" data-rel="tooltip" title="车型">查看车型</a></button></p:permission>&nbsp;&nbsp&nbsp;&nbsp;';
 											},
 											"targets" : 3
 										},
 										{
 											"render" : function(data, type, row) {
-												return '<div data-toggle="modal" data-target="#lookpic" onclick="look(\''+row.brandpic+'\')"><img id="brandsign" src="/images/'+row.brandpic+'"  width="60px" height="50px" alt="这里是图片"/></div>';
+												return '<div data-toggle="modal" data-target="#lookpic" onclick="look(\''+row.brandpic+'\')"><img id="brandsign" src="/images/'+row.brandpic+'"  width="50px" height="50px" alt="这里是图片"/></div>';
 											
 											},
 											"targets" : 2
