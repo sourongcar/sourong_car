@@ -42,7 +42,7 @@ public class LoginStateHandlerInterceptor implements HandlerInterceptor {
 		} else {// 没有登录
 			String path = (String) httpReq.getServletContext().getAttribute("path");
 			System.out.println(path);
-			httpRes.sendRedirect(path+"/../login.action");
+			httpRes.sendRedirect(path+"login.action");
 			/*httpRes.sendRedirect(path + "/../login.action");linux下访问路径*/
 			return false;
 		}

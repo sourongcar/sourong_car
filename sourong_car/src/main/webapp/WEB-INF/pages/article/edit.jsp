@@ -31,12 +31,17 @@
 	</div>
 	<div class="form-group">
 		<label for="content" class="col-sm-2 control-label">内容</label>
-		<div class="col-sm-10">
-			<input type="text" class="form-control" id="content" name="content" value=""
-			 placeholder="请输入内容" style="display:none">
-				   <button class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#myModal" id="checkeditor">查看并修改</button>
-		</div>
-	</div>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="content"
+								name="content" value="" placeholder="请输入内容"
+								style="display: none">
+							<table>
+								<script id="contentload" type="text/plain"></script>
+							</table>
+							<button class="btn btn-primary btn-sm" data-toggle="modal"
+								data-target="#myModal" id="checkeditor" style="margin-top:2%">查看并修改</button>
+						</div>
+					</div>
 	
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
@@ -50,15 +55,17 @@
 	</div>
 <!-- 模态框（Modal） -->
 <div class="modal fade" style="z-index:15" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="left:0px;;height:600px">
-        <div class="modal-content" style="height:600px" >
-           <div class="modal-body" style="height:600px">
+    <div class="modal-dialog" style="left:0px;">
+        <div class="modal-content" style="text-align: center;" >
+           <div class="modal-body" style="text-align: center;">
 					<table>
-						 <h1 style="text-align:center">编辑内容</h1>
-               <script id="editor" type="text/plain" ></script>             
+						 <h1 style="text-align:center;margin-bottom:5%">编辑内容</h1>
+                     <script id="editor" type="text/plain" ></script>             
 					</table>
+			<div class="modal-footer" >
 					<button class="btn btn-primary btn-sm" style="margin-top:10px;margin-left:40%" data-dismiss="modal" id="savecontent">保存</button>
-					<button class="btn btn-primary btn-sm" style="margin-top:10px" data-dismiss="modal">取消</button>
+					<button class="btn btn-primary btn-sm" style="margin-top:10px" data-dismiss="modal" id="cancelcontent">取消</button>
+			</div>
 				</div>           
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
@@ -70,39 +77,81 @@
 		jQuery(function($) {
 			//实例化编辑器
 		    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
-			 var ue = UE.getEditor('editor',{
-				 initialFrameHeight:350,//设置编辑器高度
-				 scaleEnabled:true//设置不自动调整高度
-				 //scaleEnabled {Boolean} [默认值：false]//是否可以拉伸长高，(设置true开启时，自动长高失效)
-				 });
+			 var ue = UE.getEditor('editor', {
+			    toolbars: [
+			        ['forecolor','bold','|','fontsize', 'fontfamily','|','undo', 'redo', '|']
+			    ],
+			    autoHeightEnabled: true,
+			    autoFloatEnabled: true,
+			    initialFrameHeight:300,
+			    initialFrameWidth:550,
+			    scaleEnabled:true,       //不自动调整高度   
+			     wordCount:true          //是否开启字数统计
+		        ,maximumWords:5000       //允许的最大字符数
+		        //字数统计提示，{#count}代表当前字数，{#leave}代表还可以输入多少字符数,留空支持多语言自动切换，否则按此配置显示
+		        ,wordCountMsg:'<span style="color:red;">当前已输入 {#count} 个字符，您还可以输入{#leave} 个字符</span>'   
+		        ,wordOverFlowMsg:'<span style="color:red;">你输入的字符个数已经超出最大允许值 ，服务器可能会拒绝保存！</span>'    
+			});
+			 var uer = UE.getEditor('contentload', {
+				    toolbars: [
+				    ['|']
+				    ], 		   
+				    autoHeightEnabled: true,
+				    autoFloatEnabled: true,
+				    initialFrameHeight:300,//初始化高度为300
+				    initialFrameWidth:550,
+				    readonly : true,      //只读
+				    elementPathEnabled : false,//不显示元素路径
+				    enableAutoSave: false, //不自动保存
+				    wordCount:false,     //关闭字数统计
+				    scaleEnabled:true,       //不自动调整高度   
+				     wordCount:true          //是否开启字数统计
+			        ,maximumWords:5000 ,      //允许的最大字符数
+			        //字数统计提示，{#count}代表当前字数，{#leave}代表还可以输入多少字符数,留空支持多语言自动切换，否则按此配置显示
+			        zIndex:10,
+				});
+			
+			
 			if("${entity.type}"==0){
 				$('#typename').text("关于搜融");
 			}else if("${entity.type}"==1){
 				$('#typename').text("产品介绍");
 			}else if("${entity.type}"==2){
 				$('#typename').text("合作车行");
-			}			
+			}		
+			 $.ajax({  
+		          type:'post',      
+		         url:'${path }/article/getContent.action',  
+		          data:{
+		        	  articleid:"${entity.articleid}"
+		          } ,  
+		          dataType:'json',  
+		         success:function(data){ 
+		        	 $("#content").val(data);
+		        	 var a = data
+		        	 console.log(data)
+		        	 uer.setContent(a)
+		          }  
+		      });
 	});
-		 $.ajax({  
-	          type:'post',      
-	         url:'${path }/article/getContent.action',  
-	          data:{
-	        	  articleid:"${entity.articleid}"
-	          } ,  
-	          dataType:'json',  
-	         success:function(data){ 
-	        	 $("#content").val(data);
-	        	  
-	          }  
-	      });
+		var contentsetnum =0
 		
 	$("#checkeditor").click(function(){
-		 UE.getEditor('editor').setHeight(350);
-		//将数据库的content内容获取到编辑器中		
+		 var widt =$(".modal-body").height();
+		 var width =document.getElementsByClassName("modal-body").offsetWidth;
+		 console.log(widt)
+		 if( contentsetnum==0){
+		//将数据库的content内容获取到编辑器中	
 		 UE.getEditor('editor').setContent( $("#content").val());
+		 }
+		    contentsetnum =1;
 	})    
     $("#savecontent").click(function(){
     	$("#content").val(UE.getEditor('editor').getContent()); 	
+    })
+    
+    $("#cancelcontent").click(function(){
+    	   UE.getEditor('editor').setContent( $("#content").val());
     })
 </script>
 	
