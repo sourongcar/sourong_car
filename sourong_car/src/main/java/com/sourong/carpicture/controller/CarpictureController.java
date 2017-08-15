@@ -29,7 +29,7 @@ public class CarpictureController {
 	@Autowired
 	private CarpictureService service;
 
-	@RequestMapping("/edit")
+	//@RequestMapping("/edit")
 	public String edit(@RequestParam(value = "productid", required = false) Integer productid, ModelMap map) {
 		if (productid != null) {
 			map.addAttribute("entity", service.get(productid));
@@ -55,54 +55,49 @@ public class CarpictureController {
 
 	// 上传图片并提交数据到数据库
 	@RequestMapping(value = "/doEdit", method = RequestMethod.POST, consumes = { "multipart/form-data" })
-	public String doEdit(@RequestParam("file") MultipartFile[] file, CarpictureVO entity) {
+	public String doEdit(MultipartFile file, CarpictureVO entity) {
 		// 图片上传
-		if (file != null && file.length > 0) {
+		if (file != null) {
 			// 判断原来的picture是否为空
-			if (entity.getPicture() != null || entity.getPicture() != "") {
+			//if (entity.getPicture() != null || entity.getPicture() != "") {
 				// 为空则进行删除
 				//System.out.println("获取原来图片信息进行删除");
-				File deletefile = new File(ConfigUtil.getValue("saveImage") + entity.getPicture());
-				deletefile.delete();
+				//File deletefile = new File(ConfigUtil.getValue("saveImage") + entity.getPicture());
+				//deletefile.delete();
 				//System.out.println("删除成功");
-			}
-			// 把进来的图片进行循环读取
-			for (int i = 0; i < file.length; i++) {
-				if (file[i].getSize() <= 0) {
-					continue;
-				}
-
-				String fileName = file[i].getOriginalFilename();
+			//}
+			
+			if (file.getSize() > 0) {
+				String fileName = file.getOriginalFilename();
 				// 打印信息
 				int index = fileName.lastIndexOf(".");
 				String savename = UUID.randomUUID() + (index > 0 ? fileName.substring(fileName.lastIndexOf(".")) : "");
 				String savenpath = ConfigUtil.getValue("saveImage") + savename;
-
+				
 				try {
-					file[i].transferTo(new File(savenpath));
+					file.transferTo(new File(savenpath));
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				// 把读取到的图片路径存进数据库
-				entity.setPicture(savename);
-
+				
 				// 提交数据库，修改，新增
 				if (entity.getCarpictureid() != null) {// 修改
+					File deletefile = new File(ConfigUtil.getValue("saveImage") + entity.getPicture());
+					deletefile.delete();
+					// 把读取到的图片路径存进数据库
+					entity.setPicture(savename);
 					service.update(entity);
 				} else {// 新增
+					// 把读取到的图片路径存进数据库
+					entity.setPicture(savename);
+					entity.setIslooping(1);
 					service.add(entity);
 				}
 			}
-		} else {
-			if (entity.getCarpictureid() != null) {// 修改
-				service.update(entity);
-			} else {// 新增
-				service.add(entity);
-			}
 		}
-		return "redirect:/carpicture/list.action";// 跳转到列表页面
+		return "redirect:/carpicture/list.action?productid="+entity.getProductid();// 跳转到列表页面
 
 	}
 
@@ -141,5 +136,13 @@ public class CarpictureController {
 			return null;
 		}
 		return service.listFull(productid);
+	}
+	
+	@RequestMapping("/rest/count")
+	public @ResponseBody int getcount(Integer productid) {
+		if (productid == null) {
+			return 0;
+		}
+		return service.count(productid);
 	}
 }

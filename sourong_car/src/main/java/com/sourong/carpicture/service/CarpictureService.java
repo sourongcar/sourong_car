@@ -38,6 +38,16 @@ public interface CarpictureService {
 	 * @return
 	 */
 	public DataTablesResponse<CarpictureVO> listByPage(DataTablesRequest request) throws Throwable;
-	
+	/**
+	 * 如果产品可见，列出所有图片
+	 * @param productid
+	 * @return
+	 */
 	List<CarpictureVO> listFull(int productid);
+	
+	List<CarpictureVO> listByProduct(int productid);
+	/**
+	 * 产品图片数量
+	 */
+	int count(int productid);
 }

@@ -8,6 +8,7 @@
 <title>xxx列表</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <%@ include file="/WEB-INF/pages/common/rs_css.jsp"%>
+<%@ include file="/WEB-INF/pages/common/imageUploadUtil_css.jsp"%>
 <% 
  String name = request.getParameter("productid");//用request得到 
 %> 
@@ -18,12 +19,8 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<div>
-			
-<!-- 				<input type="text" class="form-control-static" id="xxx"
-					placeholder="请输入产品类型">					
-				<button type="button" class="btn btn-default" id="search">查询</button> -->
 
-				<a  href="${path }/carpicture/edit.action?productid=${productid}" class="btn btn-primary" id="add">新增</a>
+				<button class="btn btn-primary" id="add">新增</button>
 				
 			</div>
 			<div class="table-responsive">
@@ -33,7 +30,6 @@
 						<tr>
 
 							<th style="width:10%">编号</th> 
-							<!-- <th>产品类型</th>  -->
 							<th>产品图</th>
 							<th style="width:20%">操作</th>
 						</tr>
@@ -46,7 +42,49 @@
 		</div>
 	</div>
 	
-		<!-- 公司logo模态框（Modal） -->
+<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+			<div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">上传图片</h4>
+            </div>
+            
+            <div class="modal-body" role="form">
+	            <form class='form-horizontal' enctype="multipart/form-data"
+					action="${path}/carpicture/doEdit.action" method="post">
+	            	<input type="hidden" id="productid" name="productid" value="${productid }">
+	            	<input type="hidden" id="carpictureid" name="carpictureid">
+	            	<input type="hidden" id="picture" name="picture">
+	            	<div class="form-group">
+						<div class="col-xs-12">
+							<section class=" img-section">
+								<div class="z_photo upimg-div clear">
+									<section class="z_file fl">
+										<div<%--  src="${path}/resources/assets/images/picupload/a11.png" --%> class="add-img"></div>
+										 <input type="file" name="file" class="file"
+											accept="image/jpg,image/jpeg,image/png,image/bmp" />
+									</section>
+								</div>
+							</section>
+						</div>
+					</div>
+					<aside class="mask works-mask">
+						<div class="mask-content">
+							<p class="del-p">您确定要删除作品图片吗？</p>
+							<p class="check-p">
+								<span class="del-com wsdel-ok">确定</span><span class="wsdel-no">取消</span>
+							</p>
+						</div>
+					</aside>
+					<button type="submit" class="btn btn-info pull-right">确认</button>
+					<div class="clear"></div>
+	            </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" style="left:-25%" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="left:0px;width:300px;height:300px">
         <div class="modal-content" style="width:550px;height:300px" >
@@ -61,7 +99,7 @@
     </div><!-- /.modal -->
 </div>
 	<%@ include file="/WEB-INF/pages/common/rs_js.jsp"%>
-
+	<script src="${path}/resources/assets/js/imgUp.js"></script> 
 	<script type="text/javascript">
 /* 	//获取地址url参数
 	function UrlSearch() 
@@ -87,9 +125,11 @@
 		          
 			mydatatables = $('#mydatatables').DataTable(
 							{
-								"lengthMenu" : [[10,20,50,1000],
-										[10,20,50,"All"]],
+								"lengthMenu" : [[8],
+										[8]],
 								"pageLength" :10,
+								"info":false,
+								"lengthChange": false,
 								"searching" : true,
 								"ordering" : true,
 								"processing" : true,
@@ -139,22 +179,20 @@
 										{
 											"render" : function(data, type, row) {
 												        var loopresult="未轮播"
-												    if(row.islooping==0){
-												    	loopresult="已轮播"
-												    }
-												return '<a href="${path }/carpicture/edit.action?id='+data+'" class="tooltip-success" data-rel="tooltip" title="修改"><span class="green"><i class="icon-edit bigger-120"></i></a>&nbsp;&nbsp;'
-												+'<p:permission privilege="com.sourong.carpicture.controller.CarpictureController:doDelete"><a href="javascript:void(0)" onclick="del(\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="删除"><span class="red"><i class="icon-trash bigger-120"></i></a></p:permission>&nbsp;&nbsp;'
-												+'<button style="" class="btn btn-primary" name="0" id="loopbtn" loopingnum='+row.islooping+' onclick="dolooping(this,'+row.carpictureid+')">'+loopresult+'</button>&nbsp;&nbsp;'
-												
-												;
-											},
+													    if(row.islooping==0){
+													    	loopresult="已轮播"
+													    }
+														return '<button class="btn-link tooltip-success" onclick="showedit('+data+',\''+row.picture+'\')" data-rel="tooltip" title="修改图片"><span class="green"><i class="icon-edit bigger-120"></i></button>&nbsp;&nbsp;'
+														+'<p:permission privilege="com.sourong.carpicture.controller.CarpictureController:doDelete"><a href="javascript:void(0)" onclick="del(\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="删除"><span class="red"><i class="icon-trash bigger-120"></i></a></p:permission>&nbsp;&nbsp;'
+														+'<button style="" class="btn btn-primary btn-sm loopbtn" name="0" loopingnum='+row.islooping+' onclick="dolooping(this,'+row.carpictureid+')">'+loopresult+'</button>&nbsp;&nbsp;';
+													},
 											"targets" :2
 										}, 
 										//pricure  图片显示
 										{
 											"render" : function(data, type, row) {
 												/* return '<img style="float:right;margin:4px;width:50px;height:50px" src ="/images/'+row.picture+'" >' */
-												 return '<button class="btn btn-primary btn-sm" onclick="dobutton(this)" value='+row.picture+' data-toggle="modal" data-target="#myModal">查看</button>';
+												 return '<button class="btn btn-link" onclick="dobutton(this)" value='+row.picture+' data-toggle="modal" data-target="#myModal"><img style="max-height:120px" src="/images/'+row.picture+'"></button>';
 												;
 											},
 											"targets" :1
@@ -166,20 +204,14 @@
 								}
 
 							});
-
-			$("#search").click(function() {
-				
-				mydatatables.ajax.reload();
-			});
-
-			
-			
-			$("#xxx").keydown(function(e) {
-				if(e.keyCode==13){
-					mydatatables.ajax.reload();
-				}
-			});
-
+				$("#add").click(showedit);
+				$("#uploadModal form").submit(function(e){
+					if($(this).find(":file").length<=1){
+						alert("请上传图片");
+						e.preventDefault&&e.preventDefault();
+						return false;
+					}
+				});
 		});
 		 
 		
@@ -199,8 +231,7 @@
 				    },  
 			    type:'post',  
 				dataType:'json',  
-			    success:function(data) {  
-			    	
+			    success:function(data) {
 			        $(that).attr("loopingnum",data)//给属性赋值
 			        
 			    	if(data==0){
@@ -210,7 +241,7 @@
 				     $(that).text("未轮播")			    		
 			    	}
 			    	
-				      },  
+				 },  
 			     error : function() { 
 			    	 alert("操作成功")
 				  }  
@@ -227,6 +258,44 @@
 							mydatatables.ajax.reload();
 						}
 					});
+			}
+		}
+		
+		function showedit(id,pic){
+			if(typeof id==='number'){
+				$("#carpictureid").val(id);
+				$("#picture").val(pic);
+				$(".up-section").remove();
+				$(".file").val('').parent().show();
+				$("#uploadModal").modal('show');
+			}
+			else{
+				$.ajax({
+					 url:"${path }/carpicture/rest/count.action",// 跳转地址到 action  
+				     data:{  
+				        productid:${productid}
+				    },  
+				    type:'post',  
+					dataType:'json',  
+				    success:function(data) {  
+				    	if(typeof data==='number'){
+				    		if(data<=8){
+								$("#carpictureid").val('');
+								$("#picture").val('');
+								$(".up-section").remove();
+								$(".file").val('').parent().show();
+				    			$("#uploadModal").modal('show');
+				    		}
+				    		else{
+								alert("图片已满8张");
+								mydatatables.ajax.reload();
+				    		}
+				    	}
+					},  
+				     error : function() { 
+				    	 alert("请重试");
+					} 
+				})
 			}
 		}
 	</script>

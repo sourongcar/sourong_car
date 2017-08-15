@@ -1,9 +1,9 @@
 $(function(){
 	var delParent;
-	var limit=8;
+	var limit=1;
 	var defaults = {
 		fileType         : ["jpg","png","bmp","jpeg"],   // 上传文件的类型
-		fileSize         : 1024 * 1024 * 10                  // 上传文件的大小 10M
+		fileSize         : 1024 * 512                 // 上传文件的大小 10M
 	};
 		/*点击图片的文本框*/
 	$(".file").change(function(){
@@ -24,6 +24,8 @@ $(function(){
 		}
 		else if(fileList.length==1){
 			fileList = validateUp(fileList);
+			if(fileList.length<=0)
+				return;
 			var imgUrl = window.URL.createObjectURL(fileList[0]);
 			    imgArr.push(imgUrl);
 			var $section = $("<section class='up-section fl loading'>");
@@ -31,7 +33,7 @@ $(function(){
 			var $span = $("<span class='up-span'>");
 			     $span.appendTo($section);
 			
-		     var $img0 = $("<button class='close-upimg'>&times;</button>").on("click",function(event){
+		     var $img0 = $("<button type='button' class='close-upimg'></button>").on("click",function(event){
 				    event.preventDefault();
 					event.stopPropagation();
 					$(".works-mask").show();
@@ -47,16 +49,16 @@ $(function(){
 		     var $input2 = $("<input id='tags' name='tags' value='' type='hidden'/>");
 		         $input2.appendTo($section);
 		     self.removeClass('file').unbind('change').appendTo($section);
-		     $('<input type="file" name="file" class="file" accept="image/jpg,image/jpeg,image/png,image/bmp">').change(arguments.callee).appendTo(input);
+		     var newfileinput=$('<input type="file" name="file" class="file" accept="image/jpg,image/jpeg,image/png,image/bmp">').change(arguments.callee).appendTo(input);
+			 numUp = imgContainer.find(".up-section").length;
+			 if(numUp >= limit){
+				 newfileinput.parent().hide();
+			 }
 		}
 		setTimeout(function(){
              $(".up-section").removeClass("loading");
 		 	 $(".up-img").removeClass("up-opcity");
 		 },450);
-		 numUp = imgContainer.find(".up-section").length;
-		if(numUp >= limit){
-			$(this).parent().hide();
-		}
 		
 		
 	});
@@ -93,8 +95,7 @@ $(function(){
 						if(jQuery.inArray(type, defaults.fileType) > -1){
 							// 类型符合，可以上传
 							if (file.size >= defaults.fileSize) {
-								alert(file.size);
-								alert('您这个"'+ file.name +'"文件大小过大');	
+								alert('您这个"'+ file.name +'"文件大小超过512k');	
 							} else {
 								// 在这里需要判断当前所有文件中
 								arrFiles.push(file);	

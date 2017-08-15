@@ -26,10 +26,25 @@
 	top:-15px;
 	right:-15px;
     width: 30px;
-    text-align: center;
-    line-height: 30px;
     height: 30px;
-    font-size:25px;
+}
+.imgwrap .close:before,.imgwrap .close:after{
+	content:'';
+	position:absolute;
+	background:white;
+	transform:rotate(45deg);
+}
+.imgwrap .close:before{
+	left:20%;
+	top:47%;
+	width:60%;
+	height:6%;
+}
+.imgwrap .close:after{
+	left:47%;
+	top:20%;
+	width:6%;
+	height:60%;
 }
 .imgwrap:hover .close{
 	display: block;
@@ -78,7 +93,7 @@
 		<div class="modal-dialog">
 		<div class="modal-content">
 		<div class="imgwrap">
-			<div type="button" class="close" data-dismiss="modal" aria-hidden="true">×</div>
+			<div type="button" class="close" data-dismiss="modal" aria-hidden="true"></div>
 	    	<img style="width:100%;">
 	    </div>
 		</div>
@@ -88,7 +103,7 @@
 	    <div class="modal-dialog">
 	        <div class="modal-content">
 	            <div class="modal-header">
-	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 	                <h4 class="modal-title" id="myModalLabel">产品配置</h4>
 	            </div>
 	            <div class="modal-body">
@@ -250,15 +265,15 @@
 										},
 										{
 											"render" : function(data, type, row) {
-												return data+'万';
+												return '<span'+(row.hit==1?' class="red"':'')+'>'+data+'万</span>';
 											},
-											"targets" : 6
+											"targets" : [6,7]
 										},
 										{
 											"render" : function(data, type, row) {
-												return data+'万';
+												return '<span'+(row.hit==1?' class="red"':'')+'>'+data+'</span>';
 											},
-											"targets" : 7
+											"targets" : [1,2,3,5]
 										},
 										{
 											"render" : function(data, type, row) {
@@ -280,7 +295,7 @@
 								"language" : {
 									"url" : "${path }/resources/assets/language/zh_CN.txt"
 								}
-							}).on('draw.dt',function(){onresize();});
+							});
 
 			$("#search").click(function() {
 				mydatatables.ajax.reload();
