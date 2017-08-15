@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link href="${path}/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
 <link href="${path}/resources/assets/css/dataTables.bootstrap4.css" rel="stylesheet" />
+<%@ include file="/WEB-INF/pages/common/rs_css.jsp"%>
 <style type="text/css">
 	table{
 		text-align: center
@@ -26,9 +27,10 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<div>
-				<input type="text" class="form-control" id="username" style="display:inline-block;width:25%"
+				<input type="text" class="form-control-static" id="username"
 					placeholder="请输入客户姓名">
-					
+				<input type="text" class="form-control-static" id="userphone"
+					placeholder="请输入手机号">
 				<button type="button" class="btn btn-primary" id="search">查询</button>
 				
 			</div>
@@ -100,7 +102,7 @@ $(document).ready(function(){
 						"type" : "POST",
 						"data" : function(pdata) {
 							var isRead = ${requestScope.isRead};
-							pdata.searchColumns={"IsreplyEqualTo":isRead,"UsernameLike":$('#username').val()};
+							pdata.searchColumns={"IsreplyEqualTo":isRead,"UsernameLike":$('#username').val(),"UserphoneLike":$("#userphone").val()};
 							var data = JSON.stringify(pdata);
 							return data;
 						},
@@ -146,10 +148,10 @@ $(document).ready(function(){
 					            cell.innerHTML = i + 1;
 					        });
 							if(row.isreply == 1){
-								return "<span>已回复</span>";
+								return '<a href="javascript:void(0)" onclick="del(\''+row.userid+'\')" class="tooltip-error" data-rel="tooltip" title="删除"><span class="red"><i class="icon-trash bigger-150"></i></a>';
 							}else if(row.isreply == 0){
 								return 	"<button onClick=recordContent(this) data-toggle='modal' data-target='#myModal' class='btn btn-info' style=' line-height: 0.5;font-size: 11px;padding: 7px 10px;'>记录咨询结果</button>" +"  "+
-								"<button onClick=mark(this) class='btn btn-success' style=' line-height: 0.5;font-size: 11px;padding: 7px 10px;'>标记为已回复</button>" ; 
+								"<button onClick=mark(this) class='btn btn-success' style=' line-height: 0.5;font-size: 11px;padding: 7px 10px;'>标记为已查看</button>" ; 
 							}
 						},
 						"targets" : 9,
@@ -216,6 +218,18 @@ $(document).ready(function(){
 				}
 			}); 
 		}
+		
+		function del(userid){
+			if(window.confirm("你确定要删除？")){
+				$.getJSON("${path }/consultant/rest/doDelete.action?id="+userid,
+							function(data){
+						alert(data.msg);
+						if(data.status==1){
+							mydatatables.ajax.reload();
+						}
+					});
+			}
+		};
 		
 		 /**
 		   *获取产品列表
