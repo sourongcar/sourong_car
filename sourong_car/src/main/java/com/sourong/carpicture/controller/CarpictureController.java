@@ -54,9 +54,10 @@ public class CarpictureController {
 	}
 
 	// 上传图片并提交数据到数据库
-	@RequestMapping(value = "/doEdit", method = RequestMethod.POST, consumes = { "multipart/form-data" })
-	public String doEdit(MultipartFile file, CarpictureVO entity) {
+	@RequestMapping(value = "/doEdit", method = RequestMethod.POST)
+	public @ResponseBody JsonResult doEdit(MultipartFile file, CarpictureVO entity) {
 		// 图片上传
+		JsonResult result=new JsonResult();
 		if (file != null) {
 			// 判断原来的picture是否为空
 			//if (entity.getPicture() != null || entity.getPicture() != "") {
@@ -66,7 +67,6 @@ public class CarpictureController {
 				//deletefile.delete();
 				//System.out.println("删除成功");
 			//}
-			
 			if (file.getSize() > 0) {
 				String fileName = file.getOriginalFilename();
 				// 打印信息
@@ -95,9 +95,19 @@ public class CarpictureController {
 					entity.setIslooping(1);
 					service.add(entity);
 				}
+				result.setStatus(0);
+				result.setMsg("success");
+			}
+			else{
+				result.setStatus(1);
+				result.setMsg("图片不能为空");
 			}
 		}
-		return "redirect:/carpicture/list.action?productid="+entity.getProductid();// 跳转到列表页面
+		else{
+			result.setStatus(0);
+			result.setMsg("图片不能为空");
+		}
+		return result;// 跳转到列表页面
 
 	}
 

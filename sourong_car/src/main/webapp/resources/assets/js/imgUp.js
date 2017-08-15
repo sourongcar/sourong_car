@@ -42,12 +42,6 @@ $(function(){
 		     var $img = $("<img class='up-img up-opcity'>");
 		         $img.attr("src",imgArr[0]);
 		         $img.appendTo($section);
-		     var $p = $("<p class='img-name-p'>");
-		         $p.html(fileList[0].name).appendTo($section);
-		     var $input = $("<input id='taglocation' name='taglocation' value='' type='hidden'>");
-		         $input.appendTo($section);
-		     var $input2 = $("<input id='tags' name='tags' value='' type='hidden'/>");
-		         $input2.appendTo($section);
 		     self.removeClass('file').unbind('change').appendTo($section);
 		     var newfileinput=$('<input type="file" name="file" class="file" accept="image/jpg,image/jpeg,image/png,image/bmp">').change(arguments.callee).appendTo(input);
 			 numUp = imgContainer.find(".up-section").length;

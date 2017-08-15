@@ -203,14 +203,41 @@
 									"url" : "${path }/resources/assets/language/zh_CN.txt"
 								}
 
-							});
+							}).on("draw.dt",function(){$("#mydatatables_paginate").remove()});
 				$("#add").click(showedit);
 				$("#uploadModal form").submit(function(e){
+					e.preventDefault&&e.preventDefault();
 					if($(this).find(":file").length<=1){
 						alert("请上传图片");
-						e.preventDefault&&e.preventDefault();
-						return false;
 					}
+					else
+					$.ajax({  
+					     url:"${path }/carpicture/doEdit.action",// 跳转地址到 action  
+					     data: new FormData(this) /* {
+					    	 carpictureid:$('#carpictureid').val(),
+					    	 productid:$('#productid').val(),
+					    	 file:$(':file')[0].files[0],
+					    	 picture:$('#picture').val()
+					     } */ ,
+					    type:'post',  
+					    processData:false,
+					    contentType:false,
+						dataType:'json',  
+					    success:function(data) {
+					        if(data&&typeof data.status==="number"){
+					        	if(data.status>0){
+					        		data.msg&&alert(data.msg);
+					        	}
+					        	if(data.status!=1)
+					        		mydatatables.ajax.reload();
+					        }
+					        $('#uploadModal').modal('hide');
+						 },  
+					     error : function() { 
+					    	 alert("请重试")
+						 }  
+					});
+					return false;
 				});
 		});
 		 
@@ -279,7 +306,7 @@
 					dataType:'json',  
 				    success:function(data) {  
 				    	if(typeof data==='number'){
-				    		if(data<=8){
+				    		if(data<8){
 								$("#carpictureid").val('');
 								$("#picture").val('');
 								$(".up-section").remove();
