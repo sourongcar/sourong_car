@@ -186,8 +186,13 @@ public class ProductServiceImp implements ProductService {
 	}
 
 	@Override
-	public int changeVisibility(int id) {
-		return mapperExt.toggledisplay(id);
+	public int changeVisibility(Integer id,Integer isdisplay) {
+		ProductVOExample example = new ProductVOExample();
+		example.createCriteria().andProductidEqualTo(id);
+		ProductVO p=new ProductVO();
+		p.setProductid(id);
+		p.setIsdisplay(isdisplay==1?0:1);
+		return mapper.updateByExampleSelective(p, example);
 	}
 
 	@Override

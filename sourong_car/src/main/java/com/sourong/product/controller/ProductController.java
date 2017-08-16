@@ -140,10 +140,10 @@ public class ProductController {
 	 * 切换是否展示
 	 */
 	@RequestMapping("/toggleVisibility")
-	public @ResponseBody String toggleVisibility(Integer id) {
-		if (id == null)
+	public @ResponseBody String toggleVisibility(Integer id,Integer isdisplay) {
+		if (id == null||isdisplay==null)
 			return null;
-		if (service.changeVisibility(id) == 1) {
+		if (service.changeVisibility(id,isdisplay) == 1) {
 			return "success";
 		}
 		return "fail";

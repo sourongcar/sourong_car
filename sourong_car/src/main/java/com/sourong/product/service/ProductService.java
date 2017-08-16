@@ -46,7 +46,7 @@ public interface ProductService {
 	/**
 	 * 改变是否展示
 	 */
-	int changeVisibility(int id);
+	int changeVisibility(Integer id,Integer isdisplay);
 	
 	int countOfHit(int hit);
 	
