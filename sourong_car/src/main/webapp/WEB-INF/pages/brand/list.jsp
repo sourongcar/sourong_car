@@ -17,6 +17,7 @@
 </style>
 <body style="width:98%">
 	<div class="row">
+	<h2 style="text-align: center;">品牌车型信息管理</h2>
 		<div class="col-xs-12">
 			<div>
 				<input type="text" class="form-control-static" id="brandname"
