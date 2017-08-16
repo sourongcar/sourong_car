@@ -103,7 +103,7 @@
 	    <div class="modal-dialog">
 	        <div class="modal-content">
 	            <div class="modal-header">
-	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	                <h4 class="modal-title" id="myModalLabel">产品配置</h4>
 	            </div>
 	            <div class="modal-body">
@@ -112,63 +112,63 @@
 	            	<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="color">颜  &nbsp; 色 </label>
 						<div class="col-sm-8">
-							<input type="text" id="color" name="color" placeholder="颜    色" class="form-control col-xs-10">
+							<input type="text" id="color" name="color" class="form-control col-xs-10">
 							<span class='red'></span>
 						</div>
 					</div>
 	            	<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="mainoilconsumption">车主油耗 </label>
 						<div class="col-sm-8">
-							<input type="text" id="mainoilconsumption" name='mainoilconsumption' placeholder="车主油耗" class="form-control col-xs-10">
+							<input type="text" id="mainoilconsumption" name='mainoilconsumption' class="form-control col-xs-10">
 							<span class='red'></span>
 						</div>
 					</div>
 	            	<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="comprehensiveoilconsumption">综合油耗 </label>
 						<div class="col-sm-8">
-							<input type="text" id="comprehensiveoilconsumption" name="comprehensiveoilconsumption" placeholder="综合油耗" class="form-control col-xs-10">
+							<input type="text" id="comprehensiveoilconsumption" name="comprehensiveoilconsumption" class="form-control col-xs-10">
 							<span class='red'></span>
 						</div>
 					</div>
 	            	<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="size">车身尺寸</label>
 						<div class="col-sm-8">
-							<input type="text" id="size" name="size" placeholder="车身尺寸" class="form-control col-xs-10">
+							<input type="text" id="size" name="size" class="form-control col-xs-10">
 							<span class='red'></span>
 						</div>
 					</div>
 	            	<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="structure">车身结构 </label>
 						<div class="col-sm-8">
-							<input type="text" id="structure" name="structure" placeholder="车身结构" class="form-control col-xs-10">
+							<input type="text" id="structure" name="structure" class="form-control col-xs-10">
 							<span class='red'></span>
 						</div>
 					</div>
 	            	<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="warranty">整车质保 </label>
 						<div class="col-sm-8">
-							<input type="text" id="warranty" name="warranty" placeholder="整车质保" class="form-control col-xs-10">
+							<input type="text" id="warranty" name="warranty" class="form-control col-xs-10">
 							<span class='red'></span>
 						</div>
 					</div>
 	            	<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="transmissioncase">变 速 箱 </label>
 						<div class="col-sm-8">
-							<input type="text" id="transmissioncase" name="transmissioncase" placeholder="变 速 箱" class="form-control col-xs-10">
+							<input type="text" id="transmissioncase" name="transmissioncase" class="form-control col-xs-10">
 							<span class='red'></span>
 						</div>
 					</div>
 	            	<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="engine">发 动 机 </label>
 						<div class="col-sm-8">
-							<input type="text" id="engine" name="engine" placeholder="发 动 机" class="form-control col-xs-10">
+							<input type="text" id="engine" name="engine" class="form-control col-xs-10">
 							<span class='red'></span>
 						</div>
 					</div>
 	            	<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="driverway">驱动方式 </label>
 						<div class="col-sm-8">
-							<input type="text" id="driverway" name="driverway" placeholder="驱动方式" class="form-control col-xs-10">
+							<input type="text" id="driverway" name="driverway" class="form-control col-xs-10">
 							<span class='red'></span>
 						</div>
 					</div>
@@ -285,7 +285,7 @@
 											"render" : function(data, type, row) {
 												return '<a href="${path }/product/edit.action?id='+data+'" class="tooltip-success" data-rel="tooltip" title="修改"><span class="green"><i class="icon-edit bigger-120"></i></span></a>&nbsp;'
 												+'<a href="javascript:void(0)" onclick="del(\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="删除"><span class="red"><i class="icon-trash bigger-120"></i></span></a>&nbsp;'
-												+'<a href="javascript:void(0)" onclick="toggleshow(this,\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="是否展示"><span class="'+(row.isdisplay==0?'blue':'light-grey')+'"><i class="icon-eye-'+(row.isdisplay==0?'open':'close')+' bigger-120"></i></span></a>&nbsp;'//
+												+'<a href="javascript:void(0)" onclick="toggleshow(this,\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="'+(row.isdisplay==0?'下架产品':'上架产品')+'"><span class="'+(row.isdisplay==0?'blue':'light-grey')+'"><i class="icon-eye-'+(row.isdisplay==0?'open':'close')+' bigger-120"></i></span></a>&nbsp;'//
 												+'<a href="javascript:void(0)" onclick="showConfig(\''+row.configurationid+'\')" class="tooltip-error" data-rel="tooltip" title="查看配置"><span class="orange"><i class="icon-cog bigger-120"></i></a>&nbsp;'
 												+'<a href="${path}/carpicture/list.action?productid='+data+'" class="tooltip-error" data-rel="tooltip" title="展示图片"><span class="grey"><i class="icon-picture bigger-120"></i></span></a>';
 											},
@@ -375,13 +375,15 @@
 		function toggleshow(self,id){
 			var span=$(self).children("span");
 			var i=span.children("i");
-			$.getJSON("${path }/product/toggleVisibility.action?id="+id,
+			$.getJSON("${path }/product/toggleVisibility.action?id="+id+"&isdisplay="+(i.hasClass("icon-eye-open")?0:1),
 				function(data){
 					if(data=="success"){
 						if(i.hasClass("icon-eye-open")){
+							$(self).attr('title','上架产品');
 							span.removeClass("blue").addClass("light-grey");
 							i.removeClass("icon-eye-open").addClass("icon-eye-close");
 						}else{
+							$(self).attr('title','下架产品');
 							span.removeClass("light-grey").addClass("blue");
 							i.removeClass("icon-eye-close").addClass("icon-eye-open");
 						}
