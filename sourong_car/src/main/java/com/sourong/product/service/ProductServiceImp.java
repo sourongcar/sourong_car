@@ -239,10 +239,11 @@ public class ProductServiceImp implements ProductService {
 
 	@Override
 	public List<ProductVO> getlistbydoSearch(String dosearch) {
-		ProductVOExample example=new ProductVOExample();
-		example.createCriteria().andCartypeLessThanOrEqualTo(dosearch);
-		example.or().andBrandnameLessThanOrEqualTo(dosearch);
-		return mapper.selectByExample(example);
+		ProductVOExample example1=new ProductVOExample();
+		ProductVOExample example2=new ProductVOExample();
+		example2.createCriteria().andBrandnameLike("%"+dosearch+"%");
+		example2.or(example1.createCriteria().andCartypeLike("%"+dosearch+"%"));
+		return mapper.selectByExample(example2);
 	}
 
 	@Override

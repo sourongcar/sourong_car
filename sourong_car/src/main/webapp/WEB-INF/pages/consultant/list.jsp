@@ -175,10 +175,10 @@ $(document).ready(function(){
 			
 			var data = $('#mydatatables').DataTable().row($(obj).parent().parent()).data();
 			$('.modal-title').text('客户回复结果');
-			if(data.replyresult==null){				
-				$('.modal-body').html("无回复结果");
+			if(!data.replyresult){				
+				$('.modal-body').text("无回复结果");
 			}else{
-			$('.modal-body').html(data.replyresult);
+			$('.modal-body').text(data.replyresult);
 			}
 			$('.modal-footer').html('<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>')
 		};
@@ -186,7 +186,7 @@ $(document).ready(function(){
 		function recordContent(obj){
 			data = $('#mydatatables').DataTable().row($(obj).parent().parent()).data();
 			$('.modal-title').text('填写客户咨询记录');
-			$('.modal-body').html('<textarea rows="6" cols="50" class="textarea_adapt" placeholder="在此填写记录" id="textArea"> ' + data.replyresult + '</textarea>')
+			$('.modal-body').html('<textarea rows="6" cols="50" class="textarea_adapt" placeholder="在此填写记录" id="textArea"> ' + (data.replyresult||'') + '</textarea>')
 			$('#submit').remove();
 			$('.modal-footer').append('<button id="submit" onclick="saveRecord(data)" type="button" class="btn btn-primary" data-dismiss="modal">提交</button>')
 		}
@@ -211,7 +211,8 @@ $(document).ready(function(){
 				"data":{"consultantId":consultantId},
 				"dataType":"json",
 				"success":function(data){
-					mydatatables.ajax.reload();
+                                     alert("标记为已查看成功")
+				     mydatatables.ajax.reload();
 				},
 				"error":function(data){
 					alert("请求失败，请稍后再试");

@@ -16,13 +16,14 @@
 </style>
 </head>
 <body style="width:98%">
-	<div class="row">
+	<div class="row"> 
+                 <h2 style="text-align:center">详情页展示图管理</h2>
 		<div class="col-xs-12">
 			<div>
 
 				<button class="btn btn-primary" id="add">新增</button>
 				
-			</div>
+			</div>                      
 			<div class="table-responsive">
 				<table id="mydatatables"
 					class="table table-striped table-bordered table-hover">

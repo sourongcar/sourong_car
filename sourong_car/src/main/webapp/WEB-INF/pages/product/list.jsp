@@ -372,10 +372,10 @@
 			}
 		}
 		//切换是否展示
-		function toggleshow(self,id,isdisplay){
+		function toggleshow(self,id){
 			var span=$(self).children("span");
 			var i=span.children("i");
-			$.getJSON("${path }/product/toggleVisibility.action?id="+id+"&isdisplay="+(i.hasClass("icon-eye-open")?0:1),
+			$.getJSON("${path }/product/toggleVisibility.action?id="+id,
 				function(data){
 					if(data=="success"){
 						if(i.hasClass("icon-eye-open")){

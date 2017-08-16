@@ -38,7 +38,7 @@ label.fileup input[type=file] {
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="cartype" class="col-sm-2 control-label">车型</label>
+					<label for="cartype" class="col-sm-2 control-label">系列</label>
 					<div class="col-sm-10">
 						<select type="text" class="form-control" id="cartype" name="cartype" value="${entity.cartype}" required>
 							<c:forEach items="${cartypes }" var="c">

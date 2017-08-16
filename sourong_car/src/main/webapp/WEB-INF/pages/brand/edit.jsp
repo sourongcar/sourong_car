@@ -6,8 +6,8 @@
 <meta charset="utf-8" />
 <title>车型编辑页面</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link href="${path}/resources/css/common.css" type="text/css" rel="stylesheet">
-<link href="${path}/resources/css/index.css" type="text/css" rel="stylesheet">
+<link href="${path}/resources/assets/css/common.css" type="text/css" rel="stylesheet">
+<link href="${path}/resources/assets/css/index.css" type="text/css" rel="stylesheet">
 <link href="${path}/resources/assets/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 
 </head>
