@@ -12,6 +12,7 @@
 </head>
 <body style="width:98%">
 	<div class="row">
+	<h2 style="text-align: center;">车型信息管理</h2>
 		<div class="col-xs-12">
 			<div>
 				<input type="text" class="form-control-static" id="cartypename"
@@ -20,6 +21,8 @@
 				<button type="button" class="btn btn-default" id="search">查询</button>
 				
 				<a class="btn btn-primary" data-toggle="modal" data-target="#add">新增</a>
+				
+				<a href="${path }/brand/list.action" class="btn btn-default">返回上一级</a>
 			</div>
 			
 			<div class="table-responsive">
