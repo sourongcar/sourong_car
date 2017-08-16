@@ -93,7 +93,7 @@ public class CarpictureServiceImp implements CarpictureService {
 			return mapper.selectByExample(example);
 		}
 		else
-			return new ArrayList<CarpictureVO>(1);
+			return null;
 	}
 	
 	@Override
