@@ -221,7 +221,7 @@ public class ProductServiceImp implements ProductService {
 	@Override
 	public List<ProductVO> ofCartype(String name) {
 		ProductVOExample example=new ProductVOExample();
-		example.createCriteria().andCartypeEqualTo(name);
+		example.createCriteria().andCartypeEqualTo(name).andIsdisplayEqualTo(0);
 		return mapper.selectByExample(example);
 	}
 
@@ -233,7 +233,7 @@ public class ProductServiceImp implements ProductService {
 	@Override
 	public List<ProductVO> ofbrandname(String name) {
 		ProductVOExample example=new ProductVOExample();
-		example.createCriteria().andBrandnameEqualTo(name);
+		example.createCriteria().andBrandnameEqualTo(name).andIsdisplayEqualTo(0);
 		return mapper.selectByExample(example);
 	}
 
@@ -242,16 +242,16 @@ public class ProductServiceImp implements ProductService {
 		ProductVOExample example1=new ProductVOExample();
 		ProductVOExample example2=new ProductVOExample();
 		ProductVOExample example3=new ProductVOExample();
-		example2.createCriteria().andBrandnameLike("%"+dosearch+"%");
-		example2.or(example1.createCriteria().andCartypeLike("%"+dosearch+"%"));
-		example2.or(example3.createCriteria().andTitleLike("%"+dosearch+"%"));
+		example2.createCriteria().andBrandnameLike("%"+dosearch+"%").andIsdisplayEqualTo(0);
+		example2.or(example1.createCriteria().andCartypeLike("%"+dosearch+"%").andIsdisplayEqualTo(0));
+		example2.or(example3.createCriteria().andTitleLike("%"+dosearch+"%").andIsdisplayEqualTo(0));
 		return mapper.selectByExample(example2);
 	}
 
 	@Override
 	public List<ProductVO> getAlllist() {
 		ProductVOExample example=new ProductVOExample();
-		example.createCriteria();
+		example.createCriteria().andIsdisplayEqualTo(0);
 		return mapper.selectByExample(example);
 	}
 
