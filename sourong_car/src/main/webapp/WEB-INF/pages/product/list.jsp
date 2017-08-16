@@ -52,6 +52,7 @@
 </style>
 </head>
 <body style="width:98%">
+<h2>产品信息管理</h2>
 	<div class="row">
 		<div class="col-xs-12">
 			<div>
@@ -59,7 +60,8 @@
 					placeholder="请输入品牌">
 				<input type="text" class="form-control-static" id="cartype"
 					placeholder="请输入车型">
-					
+				<input type="text" class="form-control-static" id="title"
+					placeholder="请输入名称">
 				<button type="button" class="btn btn-default" id="search">查询</button>
 				
 				<a  href="${path }/product/edit.action" class="btn btn-primary" id="add">新增</a>
@@ -208,7 +210,8 @@
 										
 										pdata.searchColumns={
 												"BrandnameLike":$("#brand").val(),
-												"CartypeLike":$("#cartype").val()
+												"CartypeLike":$("#cartype").val(),
+												"TitleLike":$("#title").val(),
 										}
 										var data = JSON.stringify(pdata);
 										//JSON.parse();

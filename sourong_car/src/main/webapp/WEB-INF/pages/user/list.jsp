@@ -11,6 +11,7 @@
 </style>
 </head>
 <body style="width:98%">
+	<h2 >管理员信息管理</h2>
 	<div class="row">
 		<div class="col-xs-12">
 			<div>

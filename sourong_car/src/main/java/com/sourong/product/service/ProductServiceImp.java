@@ -241,8 +241,10 @@ public class ProductServiceImp implements ProductService {
 	public List<ProductVO> getlistbydoSearch(String dosearch) {
 		ProductVOExample example1=new ProductVOExample();
 		ProductVOExample example2=new ProductVOExample();
+		ProductVOExample example3=new ProductVOExample();
 		example2.createCriteria().andBrandnameLike("%"+dosearch+"%");
 		example2.or(example1.createCriteria().andCartypeLike("%"+dosearch+"%"));
+		example2.or(example3.createCriteria().andTitleLike("%"+dosearch+"%"));
 		return mapper.selectByExample(example2);
 	}
 

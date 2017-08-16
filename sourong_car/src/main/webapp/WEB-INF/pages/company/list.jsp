@@ -14,7 +14,7 @@
 <body style="width:98%">
 	<div class="row">
 		<div class="col-xs-12">
-		<h1>公司信息管理</h1>
+		<h2>公司信息管理</h2>
 			<div class="table-responsive">
 				<table id="mydatatables"
 					class="table table-striped table-bordered table-hover">

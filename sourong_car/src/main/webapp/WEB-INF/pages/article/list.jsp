@@ -12,7 +12,7 @@
 </style>
 </head>
 <body style="width:98%">
-<h3>介绍页面管理</h3>
+<h2>介绍页面管理</h2>
 	<div class="row">
 		<div class="col-xs-12">
 

@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <%@ include file="/WEB-INF/pages/common/rs_picupload_css.jsp"%>
 <body>
-<h2 style="text-align:center;margin-top:5%">介绍页面管理</h2>
+<h2 style="margin-top:5%">介绍页面管理</h2>
 <div class="container" style="margin-top:5%">
      <div class="row clearfix">
 			<div class="col-md-12 column">
