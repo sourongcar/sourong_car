@@ -19,6 +19,7 @@
 		<div class="col-sm-10">
 			<input type="text" class="form-control" id="title" name="title" value="${entity.title}"
 				   placeholder="请输入标题">
+				   <span style="color:red"></span>
 		</div>
 	</div>
 	<div class="form-group">
@@ -129,6 +130,42 @@
     $("#cancelcontent").click(function(){
     	   UE.getEditor('editor').setContent( $("#content").val());
     })
+    			//表单校验
+			$('form').submit(function(){
+				if(!validate.check())
+					return false;
+			});
+			function validate(data){
+				arguments.callee.list||(arguments.callee.list=[]);
+				arguments.callee.list.push(data);
+				var f=function(){
+					var self=$(this);
+					if(self.val().match("^"+data.pattern+"$"))
+						self.next().text(data.success||"");
+					else
+						self.next().text(data.error||"输入错误").removeClass("green");
+				  }
+				$(data.el).focus(f).blur(f);
+				return arguments.callee;
+			}
+			validate.check=function(){
+				if(this.list)
+				for(var i=0;i<this.list.length||0;i++){
+					var data=this.list[i];
+					if([].join.call($(data.el).map(function(){
+						if($(this).val().match("^"+data.pattern+"$"))
+							return null;
+						else{
+							this.focus();
+							return false;
+						}
+					}),'').length>0)
+					return false;
+				}
+				return true;
+			};
+			validate({el:"#title",pattern:".{3,4}",error:"长度最好为3-4个字，不能不含中文"})
+    
 </script>
 	
 </body>

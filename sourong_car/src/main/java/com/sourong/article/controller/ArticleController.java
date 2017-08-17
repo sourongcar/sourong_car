@@ -1,5 +1,8 @@
 package com.sourong.article.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,6 +85,14 @@ public class ArticleController {
 	@RequestMapping(value="/getArticle")
 	public @ResponseBody ArticleVO forMoreInformation(@RequestParam(required=true) Integer articleid){
 		return service.get(articleid) ;
+	}
+	/**
+	 * 获取介绍页所有
+	 * @return
+	 */
+	@RequestMapping(value="/rest/getArticletitle")
+	public @ResponseBody List<ArticleVO> getAlltitle(){
+		return service.getallTitle();
 	}
 	
 	

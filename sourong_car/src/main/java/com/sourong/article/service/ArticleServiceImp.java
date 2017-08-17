@@ -1,11 +1,14 @@
 package com.sourong.article.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.base.common.util.SearchConditionUtils;
 import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
 import com.sourong.article.dao.ArticleVOMapper;
+import com.sourong.article.dao.ArticleVOMapperExt;
 import com.sourong.article.domain.ArticleVO;
 import com.sourong.article.domain.ArticleVOExample;
 
@@ -14,6 +17,8 @@ import com.sourong.article.domain.ArticleVOExample;
 public class ArticleServiceImp implements ArticleService {
 	@Autowired
 	private ArticleVOMapper mapper;
+	@Autowired
+	private ArticleVOMapperExt mapperExt;
 	/**
 	 * 新增
 	 * @param entity
@@ -67,6 +72,10 @@ public class ArticleServiceImp implements ArticleService {
 	public String getContent(Integer id) {
 		
 		return mapper.selectByPrimaryKey(id).getContent();
+	}
+	@Override
+	public List<ArticleVO> getallTitle() {
+		return mapperExt.getTitle();
 	}
 
 }

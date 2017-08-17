@@ -1,5 +1,7 @@
 package com.sourong.article.service;
 
+import java.util.List;
+
 import com.base.datatables.domain.DataTablesRequest;
 import com.base.datatables.domain.DataTablesResponse;
 import com.sourong.article.domain.ArticleVO;
@@ -38,4 +40,5 @@ public interface ArticleService {
 	public DataTablesResponse<ArticleVO> listByPage(DataTablesRequest request) throws Throwable;
 	
 	public String getContent(Integer id);
-}
+	public List<ArticleVO> getallTitle();
+	}
