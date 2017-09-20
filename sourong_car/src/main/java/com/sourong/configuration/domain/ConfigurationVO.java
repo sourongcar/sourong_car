@@ -30,11 +30,11 @@ public class ConfigurationVO implements Serializable {
     @NotEmpty
     private String structure;
 
-    @Length(max=36)
+    @Length(max=1000)
     @NotEmpty
     private String warranty;
 
-    @Length(max=36)
+    @Length(max=10000)
     @NotEmpty
     private String transmissioncase;
 
