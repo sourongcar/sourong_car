@@ -101,79 +101,87 @@
 		</div>
 		</div>
 	</div>
-	<div class="modal fade" id="configModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade"  id="configModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	    <div class="modal-dialog">
 	        <div class="modal-content">
 	            <div class="modal-header">
 	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	                <h4 class="modal-title" id="myModalLabel">产品配置</h4>
+	                <h4 class="modal-title" id="myModalLabel">产品基本配置</h4>
 	            </div>
 	            <div class="modal-body">
 	            <form class='form-horizontal'>
 	            	<input type="hidden" id="configurationid" name="configurationid">
 	            	<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="comprehensiveoilconsumption">车 &nbsp; 型 </label>
+						<div class="col-sm-8">
+							<input type="text" id="comprehensiveoilconsumption" name="comprehensiveoilconsumption" class="form-control col-xs-10" value="-">
+							<span class='red'></span>
+						</div>
+					</div>
+	            	<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="color">颜  &nbsp; 色 </label>
 						<div class="col-sm-8">
-							<input type="text" id="color" name="color" class="form-control col-xs-10">
+							<input type="text" id="color" name="color" class="form-control col-xs-10" value="-">
 							<span class='red'></span>
 						</div>
 					</div>
 	            	<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="mainoilconsumption">车主油耗 </label>
 						<div class="col-sm-8">
-							<input type="text" id="mainoilconsumption" name='mainoilconsumption' class="form-control col-xs-10">
+							<input type="text" id="mainoilconsumption" name='mainoilconsumption' class="form-control col-xs-10" value="-">
 							<span class='red'></span>
 						</div>
 					</div>
-	            	<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="comprehensiveoilconsumption">综合油耗 </label>
-						<div class="col-sm-8">
-							<input type="text" id="comprehensiveoilconsumption" name="comprehensiveoilconsumption" class="form-control col-xs-10">
-							<span class='red'></span>
-						</div>
-					</div>
+
 	            	<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="size">车身尺寸</label>
 						<div class="col-sm-8">
-							<input type="text" id="size" name="size" class="form-control col-xs-10">
+							<input type="text" id="size" name="size" class="form-control col-xs-10" value="-">
 							<span class='red'></span>
 						</div>
 					</div>
 	            	<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="structure">车身结构 </label>
 						<div class="col-sm-8">
-							<input type="text" id="structure" name="structure" class="form-control col-xs-10">
-							<span class='red'></span>
-						</div>
-					</div>
-	            	<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="warranty">整车质保 </label>
-						<div class="col-sm-8">
-							<input type="text" id="warranty" name="warranty" class="form-control col-xs-10">
-							<span class='red'></span>
-						</div>
-					</div>
-	            	<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="transmissioncase">变 速 箱 </label>
-						<div class="col-sm-8">
-							<input type="text" id="transmissioncase" name="transmissioncase" class="form-control col-xs-10">
+							<input type="text" id="structure" name="structure" class="form-control col-xs-10" value="-">
 							<span class='red'></span>
 						</div>
 					</div>
 	            	<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="engine">发 动 机 </label>
 						<div class="col-sm-8">
-							<input type="text" id="engine" name="engine" class="form-control col-xs-10">
+							<input type="text" id="engine" name="engine" class="form-control col-xs-10" value="-">
 							<span class='red'></span>
 						</div>
 					</div>
 	            	<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="driverway">驱动方式 </label>
 						<div class="col-sm-8">
-							<input type="text" id="driverway" name="driverway" class="form-control col-xs-10">
+							<input type="text" id="driverway" name="driverway" class="form-control col-xs-10" value="-">
 							<span class='red'></span>
 						</div>
 					</div>
+                                         <h4 >产品详细配置</h4>
+	            	<div class="form-group">
+						<label class="col-sm-2 control-label no-padding-right" for="warranty"></label>
+						<div class="col-sm-9">
+							<textarea  id="warranty" name="warranty" class="form-control col-xs-10" value="-">
+                                                                </textarea>
+							<span class='red'></span>
+						</div>
+					</div>
+                                        <h4 >其他汽车配置信息</h4>
+                            <div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="transmissioncase"></label>
+						<div class="col-sm-8">
+							<input type="text" id="transmissioncase" name="transmissioncase" class="form-control col-xs-10" value="-" style="display: none">
+							<span class='red'></span>
+                                                                <button class="btn btn-primary btn-sm" data-toggle="modal"
+								data-target="#myModal" id="checkeditor" style="margin-top:2%">查看并修改</button>
+
+						</div>
+					</div>
+
 	            </form>
 	            </div>
 	            <div class="modal-footer">
@@ -183,9 +191,23 @@
 	        </div>
 	    </div>
 	</div>
+	<!-- 模态框（Modal） -->
+<div class="modal fade" style="z-index:1051" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="left:0px;">
+        <div class="modal-content" style="text-align: center;" >
+           <div class="modal-body" style="text-align: center;">
+					<h1 style="text-align:center;margin-bottom:5%">编辑内容</h1>
+                     <script id="editor" type="text/plain" ></script>             
+			<div class="modal-footer" >
+					<button class="btn btn-primary btn-sm" style="margin-top:10px;margin-left:40%" data-dismiss="modal" id="savecontent">保存</button>
+					<button class="btn btn-primary btn-sm" style="margin-top:10px" data-dismiss="modal" id="cancelcontent">取消</button>
+			</div>
+				</div>           
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
 	
 	<%@ include file="/WEB-INF/pages/common/rs_js.jsp"%>
-
 	<script type="text/javascript">
 		jQuery(function($) {
 		
@@ -360,14 +382,14 @@
 				return true;
 				}
 			};
-			validate({el:"#configModal input[type=text][id!=color]",pattern:".{1,36}",error:"长度为1到36字符"})({el:"#configModal #color",pattern:".{1,10}",error:"长度为1到10字符"});
+			validate({el:"#configModal input[type=text][id!=color][id!=warranty][id!=transmissioncase]",pattern:".{1,36}",error:"长度为1到36字符"})({el:"#configModal #color",pattern:".{1,10}",error:"长度为1到10字符"})({el:"#configModal #warranty",pattern:".{1,255}",error:"长度为1到255字符"});
 		});
 		
 		function del(id){
 			if(window.confirm("你确定要删除？")){
 				$.getJSON("${path }/product/rest/doDelete.action?id="+id,
 							function(data){
-						alert(data.msg);
+						alert("删除成功");
 						if(data.status==1){
 							mydatatables.ajax.reload();
 						}
@@ -419,6 +441,42 @@
 				}
 			});
 		}
+
+               			//实例化编辑器
+		    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+			 var ue = UE.getEditor('editor', {
+			    toolbars: [
+			        ['forecolor','bold','|','fontsize', 'fontfamily','|','undo', 'redo', '|']
+			    ],
+			    autoHeightEnabled: true,
+			    autoFloatEnabled: true,
+			    initialFrameHeight:300,
+			    scaleEnabled:true,       //不自动调整高度   
+			     wordCount:true          //是否开启字数统计
+			    , elementPathEnabled : false,//不显示元素路径
+		              maximumWords:5000       //允许的最大字符数
+                             ,zIndex :1052
+		        //字数统计提示，{#count}代表当前字数，{#leave}代表还可以输入多少字符数,留空支持多语言自动切换，否则按此配置显示
+		        ,wordCountMsg:'<span style="color:red;">当前已输入 {#count} 个字符，您还可以输入{#leave} 个字符</span>'   
+		        ,wordOverFlowMsg:'<span style="color:red;">你输入的字符个数已经超出最大允许值 ，服务器可能会拒绝保存！</span>'    
+			});
+          var contentsetnum =0
+	$("#checkeditor").click(function(){
+		 var widt =$(".modal-body").height();
+		 var width =document.getElementsByClassName("modal-body").offsetWidth;
+		 if( contentsetnum==0){
+		//将数据库的content内容获取到编辑器中	
+		  UE.getEditor('editor').setContent( $("#transmissioncase").val());
+		 }
+		    contentsetnum =1;
+	})    
+          $("#savecontent").click(function(){
+    	     $("#transmissioncase").val(UE.getEditor('editor').getContent()); 	
+          })
+          $("#cancelcontent").click(function(){
+    	   UE.getEditor('editor').setContent( $("#transmissioncase").val());
+    })
+
 	</script>
 </body>
 </html>

@@ -40,3 +40,5 @@
 	<script src="${path}/resources/assets/js/ace.min.js"></script>
 	<script src="${path}/resources/assets/js/handlebars.min.js"></script>
 	<!-- inline scripts related to this page -->
+     <script type="text/javascript" charset="utf-8" src="${path}/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${path}/ueditor/ueditor.all.min.js"> </script>
