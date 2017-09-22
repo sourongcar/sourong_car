@@ -82,9 +82,8 @@ $(function(){
 			var arrFiles = [];//替换的文件数组
 			for(var i = 0, file; file = files[i]; i++){
 				//获取文件上传的后缀名
-				var newStr = file.name.split("").reverse().join("");
 				if(newStr.split(".")[0] != null){
-						var type = newStr.split(".")[0].split("").reverse().join("");
+						var type = file.type.split("/")[1];
 			
 						if(jQuery.inArray(type, defaults.fileType) > -1){
 							// 类型符合，可以上传
